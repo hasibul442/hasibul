@@ -9,22 +9,10 @@ import Home from "./Page/Home";
 function Master() {
     return (
         <>
-            <Router>
-                <div id="wrapper">
-                    <NavBar />
-                    <SideBar />
-                    <div className="content-page">
-                        <div className="content">
-                            <div className="container-fluid">
-                                <Routes>
-                                    <Route path="/" element={<Home />} />
-                                </Routes>
-                            </div>
-                        </div>
-                    </div>
-                    <Footer />
-                </div>
-            </Router>
+            
+                <SideBar />
+                {/* <NavBar /> */}
+            
         </>
     );
 }
