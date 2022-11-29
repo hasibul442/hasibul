@@ -10,7 +10,7 @@ import Home from "./Page/Home";
 function Master() {
     return (
         <>
-        <div className="flex">
+        <div className="flex h-full">
                 <SideBar />
 
                 <div className="flex-1 h-screen">
