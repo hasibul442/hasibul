@@ -70,7 +70,7 @@
 /**
 * Mobile Navigation 
 */
-.mobile-nav-toggle {
+.mobile_nav_toggle {
   color: #fff;
   font-size: 28px;
   cursor: pointer;
@@ -83,7 +83,7 @@
 }
 
 @media (max-width: 991px) {
-  .mobile-nav-toggle {
+  .mobile_nav_toggle {
     display: block;
   }
 
