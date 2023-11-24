@@ -1,0 +1,59 @@
+.navBar_Background{
+    background-color: #1a1a1a;
+    height: 60px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 999;
+    transition: 0.5s;
+}
+/* .navbar1 {
+    
+} */
+
+  .navbar1 li+li {
+    margin-left: 30px;
+  }
+  
+  .navbar1 ul li a,
+  .navbar1 ul li a:focus {
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: space-between; */
+    /* padding: 0; */
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
+    white-space: nowrap;
+    transition: 0.3s;
+  }
+  
+
+  
+
+  
+  /**
+  * Mobile Navigation 
+  */
+  /* .mobile-nav-toggle {
+    color: #fff;
+    font-size: 28px;
+    cursor: pointer;
+    display: none;
+    line-height: 0;
+    transition: 0.5s;
+    position: fixed;
+    right: 15px;
+    top: 15px;
+  } */
+  
+  /* @media (max-width: 991px) {
+    .mobile-nav-toggle {
+      display: block;
+    }
+  
+    .navbar1 ul {
+      display: none;
+    }
+  } */
