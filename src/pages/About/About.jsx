@@ -22,7 +22,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import { SiAdobexd, SiFirebase, SiMysql } from "react-icons/si";
 import { TbApi, TbBrandJavascript } from "react-icons/tb";
 import TopBar2 from "../NavBar/TopBar2";
-import style from "./About.module.css";
+import style from "./about.module.css";
 
 function About() {
   const data = [
