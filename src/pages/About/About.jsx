@@ -1,9 +1,154 @@
 import React from "react";
-import TopBar from "../NavBar/TopBar";
+import { BiLogoSpringBoot } from "react-icons/bi";
+import { DiJqueryLogo } from "react-icons/di";
+import {
+  FaBirthdayCake,
+  FaBootstrap,
+  FaCss3Alt,
+  FaDatabase,
+  FaEnvelope,
+  FaFigma,
+  FaGit,
+  FaHtml5,
+  FaJava,
+  FaLaravel,
+  FaPhoneSquare,
+  FaPhp,
+  FaPython,
+  FaReact,
+  FaWhatsapp,
+} from "react-icons/fa";
+import { FaLocationDot } from "react-icons/fa6";
+import { SiAdobexd, SiFirebase, SiMysql } from "react-icons/si";
+import { TbApi, TbBrandJavascript } from "react-icons/tb";
 import TopBar2 from "../NavBar/TopBar2";
 import style from "./About.module.css";
 
 function About() {
+  const data = [
+    {
+      id: 1,
+      title: "HTML",
+      value: 100,
+      icon: <FaHtml5 size={30} />,
+    },
+    {
+      id: 2,
+      title: "CSS",
+      value: 90,
+      icon: <FaCss3Alt size={30} />,
+    },
+    {
+      id: 3,
+      title: "Bootstrap",
+      value: 90,
+      icon: <FaBootstrap size={30} />,
+    },
+    {
+      id: 4,
+      title: "JavaScript",
+      value: 80,
+      icon: <TbBrandJavascript size={30} />,
+    },
+    {
+      id: 5,
+      title: "Jquery",
+      value: 70,
+      icon: <DiJqueryLogo size={30} />,
+    },
+    {
+      id: 6,
+      title: "React",
+      value: 70,
+      icon: <FaReact size={30} />,
+    },
+    {
+      id: 7,
+      title: "React Native",
+      value: 60,
+      icon: <FaReact size={30} />,
+    },
+    {
+      id: 8,
+      title: "Java",
+      value: 70,
+      icon: <FaJava size={30} />,
+    },
+    {
+      id: 9,
+      title: "Spring Boot",
+      value: 60,
+      icon: <BiLogoSpringBoot size={30} />,
+    },
+    {
+      id: 10,
+      title: "PHP",
+      value: 80,
+      icon: <FaPhp size={30} />,
+    },
+    {
+      id: 11,
+      title: "Laravel",
+      value: 70,
+      icon: <FaLaravel size={30} />,
+    },
+    {
+      id: 12,
+      title: "MySQL",
+      value: 80,
+      icon: <SiMysql size={30} />,
+    },
+    {
+      id: 13,
+      title: "Firebase",
+      value: 70,
+      icon: <SiFirebase size={30} />,
+    },
+    {
+      id: 14,
+      title: "Relational Database",
+      value: 80,
+      icon: <FaDatabase size={30} />,
+    },
+    {
+      id: 15,
+      title: "API",
+      value: 80,
+      icon: <TbApi size={30} />,
+    },
+    {
+      id: 16,
+      title: "Git",
+      value: 80,
+      icon: <FaGit size={30} />,
+    },
+    {
+      id: 17,
+      title: "Python",
+      value: 70,
+      icon: <FaPython size={30} />,
+    },
+    {
+      id: 18,
+      title: "AJAX",
+      value: 70,
+      icon: null,
+    },
+    {
+      id: 19,
+      title: "Adobe XD",
+      value: 85,
+      icon: <SiAdobexd size={30} />,
+    },
+    {
+      id: 20,
+      title: "Figma",
+      value: 85,
+      icon: <FaFigma size={30} />,
+    },
+  
+  ];
+
   return (
     <>
       <div>
@@ -26,14 +171,16 @@ function About() {
             >
               <h3>Full Stack Software Developer</h3>
               <p className="fst-italic">
-              To acquire a dignified position where I can effectively contribute my skills as a Computer Engineer, Processing computer technical skills.
+                To acquire a dignified position where I can effectively
+                contribute my skills as a Computer Engineer, Processing computer
+                technical skills.
               </p>
               <div className="row">
                 <div className="col-lg-6">
                   <ul>
                     <li>
-                      <i className="bi bi-chevron-right"></i>{" "}
-                      <strong>Birthday:</strong> <span>1 January 1997</span>
+                      <i className="bi bi-chevron-right"></i> <FaBirthdayCake />{" "}
+                      <span>&nbsp;&nbsp; 11 January 1997</span>
                     </li>
                     {/* <li>
                       <i className="bi bi-chevron-right"></i>{" "}
@@ -41,12 +188,12 @@ function About() {
                       <span>www.hasibulhasan.web.app</span>
                     </li> */}
                     <li>
-                      <i className="bi bi-chevron-right"></i>{" "}
-                      <strong>Phone:</strong> <span>(+880) 1311210119</span>
+                      <i className="bi bi-chevron-right"></i> <FaPhoneSquare />{" "}
+                      <span>&nbsp;&nbsp;(+880) 1311210119</span>
                     </li>
                     <li>
-                      <i className="bi bi-chevron-right"></i>{" "}
-                      <strong>City:</strong> <span>Dhaka, Bangladesh</span>
+                      <i className="bi bi-chevron-right"></i> <FaLocationDot />{" "}
+                      <span>&nbsp;&nbsp;Dhaka, Bangladesh</span>
                     </li>
                   </ul>
                 </div>
@@ -55,30 +202,25 @@ function About() {
                     {/* <li><i className="bi bi-chevron-right"></i> <strong>Age:</strong> <span>30</span></li>
                                         <li><i className="bi bi-chevron-right"></i> <strong>Degree:</strong> <span>Master</span></li> */}
                     <li>
-                      <i className="bi bi-chevron-right"></i>{" "}
-                      <strong>Email:</strong>{" "}
-                      <span>hasibulhasan442@gmail.com</span>
+                      <i className="bi bi-chevron-right"></i> <FaEnvelope />{" "}
+                      <span>&nbsp;&nbsp;hasibulhasan442@gmail.com</span>
                     </li>
                     <li>
-                      <i className="bi bi-chevron-right"></i>{" "}
-                      <strong>WhatsApp:</strong>{" "}
-                      <span>+8801311210119</span>
+                      <i className="bi bi-chevron-right"></i> <FaWhatsapp />{" "}
+                      <span>&nbsp;&nbsp;+8801311210119</span>
                     </li>
-                    <li>
+                    {/* <li>
                       <i className="bi bi-chevron-right"></i>{" "}
                       <strong>Freelance:</strong> <span>Available</span>
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
               </div>
               <p>
-              I believe I can do everything if I try
-                my best. I'm a decent timekeeper,
-                always willing to find out new skills
-                & technology. I am ready to work
-                with independently in busy
-                environments and also within a
-                team setting.
+                I believe I can do everything if I try my best. I'm a decent
+                timekeeper, always willing to find out new skills & technology.
+                I am ready to work with independently in busy environments and
+                also within a team setting.
               </p>
             </div>
           </div>
@@ -146,103 +288,33 @@ function About() {
           </div>
 
           <div className="row skills-content">
-            <div className="col-lg-6">
-              <div className="progress">
-                <span className="skill">
-                  HTML <i className="val">100%</i>
-                </span>
-                <div className="progress-bar-wrap">
+            {data.map((item) => (
+              <div className="col-lg-4">
+                <div className="progress">
+                  <span className="skill">
+                    {item.icon} {item.title}{" "}
+                    <i className="val">{item.value}%</i>
+                  </span>
                   <div
-                    className="progress-bar"
+                    className="progress-bar-wrap"
                     role="progressbar"
+                    aria-label="Html progress bar"
                     aria-valuenow="100"
                     aria-valuemin="0"
                     aria-valuemax="100"
-                  ></div>
+                  >
+                    <div
+                      className="progress-bar"
+                      style={{ width: `${item.value}%` }}
+                    ></div>
+                  </div>
                 </div>
               </div>
-
-              <div className="progress">
-                <span className="skill">
-                  CSS <i className="val">90%</i>
-                </span>
-                <div className="progress-bar-wrap">
-                  <div
-                    className="progress-bar"
-                    role="progressbar"
-                    aria-valuenow="90"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                  ></div>
-                </div>
-              </div>
-
-              <div className="progress">
-                <span className="skill">
-                  JavaScript <i className="val">75%</i>
-                </span>
-                <div className="progress-bar-wrap">
-                  <div
-                    className="progress-bar"
-                    role="progressbar"
-                    aria-valuenow="75"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                  ></div>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-lg-6">
-              <div className="progress">
-                <span className="skill">
-                  PHP <i className="val">80%</i>
-                </span>
-                <div className="progress-bar-wrap">
-                  <div
-                    className="progress-bar"
-                    role="progressbar"
-                    aria-valuenow="80"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                  ></div>
-                </div>
-              </div>
-
-              <div className="progress">
-                <span className="skill">
-                  WordPress/CMS <i className="val">90%</i>
-                </span>
-                <div className="progress-bar-wrap">
-                  <div
-                    className="progress-bar"
-                    role="progressbar"
-                    aria-valuenow="90"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                  ></div>
-                </div>
-              </div>
-
-              <div className="progress">
-                <span className="skill">
-                  Photoshop <i className="val">55%</i>
-                </span>
-                <div className="progress-bar-wrap">
-                  <div
-                    className="progress-bar"
-                    role="progressbar"
-                    aria-valuenow="55"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                  ></div>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
 
-        <div className="interests container">
+        <div className="interests container mt-5">
           <div className="section-title">
             <h2>Interests</h2>
           </div>
@@ -350,7 +422,7 @@ function About() {
           </div>
         </div>
 
-        <div className="testimonials container">
+        <div className="testimonials container mt-5">
           <div className="section-title">
             <h2>Testimonials</h2>
           </div>

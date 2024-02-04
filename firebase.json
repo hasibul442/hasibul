@@ -1,7 +1,6 @@
 {
   "hosting": {
     "public": "dist",
-    "site": "hasibulhasan",
     "ignore": [
       "firebase.json",
       "**/.*",

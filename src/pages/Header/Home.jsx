@@ -18,9 +18,9 @@ function Home() {
 
           <div className="social-links">
             <a href="https://github.com/hasibul442" className="github"><i className="bi bi-github"></i></a>
-            <a href="#" className="facebook"><i className="bi bi-facebook"></i></a>
+            <a href="https://www.facebook.com/hasibul.hasan.77582/" className="facebook"><i className="bi bi-facebook"></i></a>
             <a href="#" className="instagram"><i className="bi bi-instagram"></i></a>
-            <a href="#" className="linkedin"><i className="bi bi-linkedin"></i></a>
+            <a href="https://www.linkedin.com/in/mohammad-hasibul-hasan/" className="linkedin"><i className="bi bi-linkedin"></i></a>
           </div>
 
         </div>
