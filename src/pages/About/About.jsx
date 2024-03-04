@@ -23,6 +23,8 @@ import { SiAdobexd, SiFirebase, SiMysql } from "react-icons/si";
 import { TbApi, TbBrandJavascript } from "react-icons/tb";
 import TopBar2 from "../NavBar/TopBar2";
 import style from "./about.module.css";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
 function About() {
   const data = [
@@ -146,7 +148,6 @@ function About() {
       value: 85,
       icon: <FaFigma size={30} />,
     },
-  
   ];
 
   return (
@@ -323,7 +324,7 @@ function About() {
             <div className="col-lg-3 col-md-4">
               <div className="icon-box">
                 <i className="ri-store-line" style={{ color: "#ffbb2c" }}></i>
-                <h3>Lorem Ipsum</h3>
+                <h3>Gadget</h3>
               </div>
             </div>
             <div className="col-lg-3 col-md-4 mt-4 mt-md-0">
@@ -332,7 +333,7 @@ function About() {
                   className="ri-bar-chart-box-line"
                   style={{ color: "#5578ff" }}
                 ></i>
-                <h3>Dolor Sitema</h3>
+                <h3>New Technology</h3>
               </div>
             </div>
             <div className="col-lg-3 col-md-4 mt-4 mt-md-0">
@@ -350,7 +351,7 @@ function About() {
                   className="ri-paint-brush-line"
                   style={{ color: "#e361ff" }}
                 ></i>
-                <h3>Magni Dolores</h3>
+                <h3>Artificial Intelligence</h3>
               </div>
             </div>
             <div className="col-lg-3 col-md-4 mt-4">
@@ -359,7 +360,7 @@ function About() {
                   className="ri-database-2-line"
                   style={{ color: "#47aeff" }}
                 ></i>
-                <h3>Nemo Enim</h3>
+                <h3>Cloud Computing</h3>
               </div>
             </div>
             <div className="col-lg-3 col-md-4 mt-4">
@@ -368,7 +369,7 @@ function About() {
                   className="ri-gradienter-line"
                   style={{ color: "#ffa76e" }}
                 ></i>
-                <h3>Eiusmod Tempor</h3>
+                <h3>Natural Language Processing </h3>
               </div>
             </div>
             <div className="col-lg-3 col-md-4 mt-4">
@@ -377,10 +378,10 @@ function About() {
                   className="ri-file-list-3-line"
                   style={{ color: "#11dbcf" }}
                 ></i>
-                <h3>Midela Teren</h3>
+                <h3>DevOps</h3>
               </div>
             </div>
-            <div className="col-lg-3 col-md-4 mt-4">
+            {/* <div className="col-lg-3 col-md-4 mt-4">
               <div className="icon-box">
                 <i
                   className="ri-price-tag-2-line"
@@ -388,17 +389,17 @@ function About() {
                 ></i>
                 <h3>Pira Neve</h3>
               </div>
-            </div>
-            <div className="col-lg-3 col-md-4 mt-4">
+            </div> */}
+            {/* <div className="col-lg-3 col-md-4 mt-4">
               <div className="icon-box">
                 <i className="ri-anchor-line" style={{ color: "#b2904f" }}></i>
                 <h3>Dirada Pack</h3>
               </div>
-            </div>
+            </div> */}
             <div className="col-lg-3 col-md-4 mt-4">
               <div className="icon-box">
                 <i className="ri-disc-line" style={{ color: "#b20969" }}></i>
-                <h3>Moton Ideal</h3>
+                <h3>Listening Music</h3>
               </div>
             </div>
             <div className="col-lg-3 col-md-4 mt-4">
@@ -407,10 +408,10 @@ function About() {
                   className="ri-base-station-line"
                   style={{ color: "#ff5828" }}
                 ></i>
-                <h3>Verdo Park</h3>
+                <h3>Fish Aquarium</h3>
               </div>
             </div>
-            <div className="col-lg-3 col-md-4 mt-4">
+            {/* <div className="col-lg-3 col-md-4 mt-4">
               <div className="icon-box">
                 <i
                   className="ri-fingerprint-line"
@@ -418,7 +419,7 @@ function About() {
                 ></i>
                 <h3>Flavor Nivelanda</h3>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -427,115 +428,118 @@ function About() {
             <h2>Testimonials</h2>
           </div>
 
-          <div
+          {/* <div
             className="testimonials-slider swiper"
             data-aos="fade-up"
             data-aos-delay="100"
+          > */}
+          <Swiper
+            spaceBetween={50}
+            slidesPerView={1}
+            centeredSlides={true}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
+            modules={[Autoplay]}
           >
-            <div className="swiper-wrapper">
-              <div className="swiper-slide">
-                <div className="testimonial-item">
-                  <p>
-                    <i className="bx bxs-quote-alt-left quote-icon-left"></i>
-                    Proin iaculis purus consequat sem cure digni ssim donec
-                    porttitora entum suscipit rhoncus. Accusantium quam,
-                    ultricies eget id, aliquam eget nibh et. Maecen aliquam,
-                    risus at semper.
-                    <i className="bx bxs-quote-alt-right quote-icon-right"></i>
-                  </p>
-                  <img
-                    src="assets/img/testimonials/testimonials-1.jpg"
-                    className="testimonial-img"
-                    alt=""
-                  />
-                  <h3>Saul Goodman</h3>
-                  <h4>Ceo &amp; Founder</h4>
-                </div>
+            <SwiperSlide>
+              <div className="testimonial-item">
+                <p>
+                  <i className="bx bxs-quote-alt-left quote-icon-left"></i>
+                  I highly recommend Hasibul as an exceptional project member. His programming and engineering skills are outstanding, and his dedication to every task is commendable. Hasibul consistently delivers high-quality work, showing great problem-solving abilities and an eagerness to learn and improve. His positive attitude and collaborative nature make him a valuable asset to any team. I have full confidence in his ability to excel in any project and believe he will continue to achieve great success in his career. Keep up the fantastic work, Hasibul!
+                  <i className="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+                <img
+                  src="assets/img/testimonials/testimonials-1.jpg"
+                  className="testimonial-img"
+                  alt=""
+                />
+                <h3>Zawadul Kawum</h3>
+                <h4>Head of Development <br /> Nexdecade Technology Pvt. Ltd.</h4>
               </div>
+            </SwiperSlide>
 
-              <div className="swiper-slide">
-                <div className="testimonial-item">
-                  <p>
-                    <i className="bx bxs-quote-alt-left quote-icon-left"></i>
-                    Export tempor illum tamen malis malis eram quae irure esse
-                    labore quem cillum quid cillum eram malis quorum velit fore
-                    eram velit sunt aliqua noster fugiat irure amet legam anim
-                    culpa.
-                    <i className="bx bxs-quote-alt-right quote-icon-right"></i>
-                  </p>
-                  <img
-                    src="assets/img/testimonials/testimonials-2.jpg"
-                    className="testimonial-img"
-                    alt=""
-                  />
-                  <h3>Sara Wilsson</h3>
-                  <h4>Designer</h4>
-                </div>
+            <SwiperSlide>
+              <div className="testimonial-item">
+                <p>
+                  <i className="bx bxs-quote-alt-left quote-icon-left"></i>
+                  I highly recommend Mohammad Hasibul Hasan. Their exceptional skills, dedication, and positive attitude make them an invaluable asset. They consistently deliver outstanding results, demonstrate strong teamwork, and excel in challenging environments. Mohammad Hasibul Hasan is a top-tier professional who will undoubtedly contribute significantly to any team or project.
+                  <i className="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+                <img
+                  src="assets/img/testimonials/testimonials-2.jpg"
+                  className="testimonial-img"
+                  alt=""
+                />
+                <h3>Pranto Kumar</h3>
+                <h4>Full Stack Software Developer</h4>
               </div>
+            </SwiperSlide>
 
-              <div className="swiper-slide">
-                <div className="testimonial-item">
-                  <p>
-                    <i className="bx bxs-quote-alt-left quote-icon-left"></i>
-                    Enim nisi quem export duis labore cillum quae magna enim
-                    sint quorum nulla quem veniam duis minim tempor labore quem
-                    eram duis noster aute amet eram fore quis sint minim.
-                    <i className="bx bxs-quote-alt-right quote-icon-right"></i>
-                  </p>
-                  <img
-                    src="assets/img/testimonials/testimonials-3.jpg"
-                    className="testimonial-img"
-                    alt=""
-                  />
-                  <h3>Jena Karlis</h3>
-                  <h4>Store Owner</h4>
-                </div>
+            {/* <SwiperSlide>
+              <div className="testimonial-item">
+                <p>
+                  <i className="bx bxs-quote-alt-left quote-icon-left"></i>
+                  Enim nisi quem export duis labore cillum quae magna enim sint
+                  quorum nulla quem veniam duis minim tempor labore quem eram
+                  duis noster aute amet eram fore quis sint minim.
+                  <i className="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+                <img
+                  src="assets/img/testimonials/testimonials-3.jpg"
+                  className="testimonial-img"
+                  alt=""
+                />
+                <h3>Jena Karlis</h3>
+                <h4>Store Owner</h4>
               </div>
+            </SwiperSlide>
 
-              <div className="swiper-slide">
-                <div className="testimonial-item">
-                  <p>
-                    <i className="bx bxs-quote-alt-left quote-icon-left"></i>
-                    Fugiat enim eram quae cillum dolore dolor amet nulla culpa
-                    multos export minim fugiat minim velit minim dolor enim duis
-                    veniam ipsum anim magna sunt elit fore quem dolore labore
-                    illum veniam.
-                    <i className="bx bxs-quote-alt-right quote-icon-right"></i>
-                  </p>
-                  <img
-                    src="assets/img/testimonials/testimonials-4.jpg"
-                    className="testimonial-img"
-                    alt=""
-                  />
-                  <h3>Matt Brandon</h3>
-                  <h4>Freelancer</h4>
-                </div>
+            <SwiperSlide>
+              <div className="testimonial-item">
+                <p>
+                  <i className="bx bxs-quote-alt-left quote-icon-left"></i>
+                  Fugiat enim eram quae cillum dolore dolor amet nulla culpa
+                  multos export minim fugiat minim velit minim dolor enim duis
+                  veniam ipsum anim magna sunt elit fore quem dolore labore
+                  illum veniam.
+                  <i className="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+                <img
+                  src="assets/img/testimonials/testimonials-4.jpg"
+                  className="testimonial-img"
+                  alt=""
+                />
+                <h3>Matt Brandon</h3>
+                <h4>Freelancer</h4>
               </div>
+            </SwiperSlide>
 
-              <div className="swiper-slide">
-                <div className="testimonial-item">
-                  <p>
-                    <i className="bx bxs-quote-alt-left quote-icon-left"></i>
-                    Quis quorum aliqua sint quem legam fore sunt eram irure
-                    aliqua veniam tempor noster veniam enim culpa labore duis
-                    sunt culpa nulla illum cillum fugiat legam esse veniam culpa
-                    fore nisi cillum quid.
-                    <i className="bx bxs-quote-alt-right quote-icon-right"></i>
-                  </p>
-                  <img
-                    src="assets/img/testimonials/testimonials-5.jpg"
-                    className="testimonial-img"
-                    alt=""
-                  />
-                  <h3>John Larson</h3>
-                  <h4>Entrepreneur</h4>
-                </div>
+            <SwiperSlide>
+              <div className="testimonial-item">
+                <p>
+                  <i className="bx bxs-quote-alt-left quote-icon-left"></i>
+                  Quis quorum aliqua sint quem legam fore sunt eram irure aliqua
+                  veniam tempor noster veniam enim culpa labore duis sunt culpa
+                  nulla illum cillum fugiat legam esse veniam culpa fore nisi
+                  cillum quid.
+                  <i className="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+                <img
+                  src="assets/img/testimonials/testimonials-5.jpg"
+                  className="testimonial-img"
+                  alt=""
+                />
+                <h3>John Larson</h3>
+                <h4>Entrepreneur</h4>
               </div>
-            </div>
-            <div className="swiper-pagination"></div>
-          </div>
+            </SwiperSlide> */}
+          </Swiper>
+          {/* <div className="swiper-pagination"></div> */}
+          {/* </div> */}
 
-          <div className="owl-carousel testimonials-carousel"></div>
+          {/* <div className="owl-carousel testimonials-carousel"></div> */}
         </div>
       </div>
     </>
