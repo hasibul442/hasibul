@@ -441,8 +441,16 @@ function About() {
             <SwiperSlide>
               <div className="testimonial-item">
                 <p>
-                  <i className="bx bxs-quote-alt-left quote-icon-left"></i>
-                  I highly recommend Hasibul as an exceptional project member. His programming and engineering skills are outstanding, and his dedication to every task is commendable. Hasibul consistently delivers high-quality work, showing great problem-solving abilities and an eagerness to learn and improve. His positive attitude and collaborative nature make him a valuable asset to any team. I have full confidence in his ability to excel in any project and believe he will continue to achieve great success in his career. Keep up the fantastic work, Hasibul!
+                  <i className="bx bxs-quote-alt-left quote-icon-left"></i>I
+                  highly recommend Hasibul as an exceptional project member. His
+                  programming and engineering skills are outstanding, and his
+                  dedication to every task is commendable. Hasibul consistently
+                  delivers high-quality work, showing great problem-solving
+                  abilities and an eagerness to learn and improve. His positive
+                  attitude and collaborative nature make him a valuable asset to
+                  any team. I have full confidence in his ability to excel in
+                  any project and believe he will continue to achieve great
+                  success in his career. Keep up the fantastic work, Hasibul!
                   <i className="bx bxs-quote-alt-right quote-icon-right"></i>
                 </p>
                 <img
@@ -451,15 +459,23 @@ function About() {
                   alt=""
                 />
                 <h3>Zawadul Kawum</h3>
-                <h4>Head of Development <br /> Nexdecade Technology Pvt. Ltd.</h4>
+                <h4>
+                  Head of Development <br /> Nexdecade Technology Pvt. Ltd.
+                </h4>
               </div>
             </SwiperSlide>
 
             <SwiperSlide>
               <div className="testimonial-item">
                 <p>
-                  <i className="bx bxs-quote-alt-left quote-icon-left"></i>
-                  I highly recommend Mohammad Hasibul Hasan. Their exceptional skills, dedication, and positive attitude make them an invaluable asset. They consistently deliver outstanding results, demonstrate strong teamwork, and excel in challenging environments. Mohammad Hasibul Hasan is a top-tier professional who will undoubtedly contribute significantly to any team or project.
+                  <i className="bx bxs-quote-alt-left quote-icon-left"></i>I
+                  highly recommend Mohammad Hasibul Hasan. Their exceptional
+                  skills, dedication, and positive attitude make them an
+                  invaluable asset. They consistently deliver outstanding
+                  results, demonstrate strong teamwork, and excel in challenging
+                  environments. Mohammad Hasibul Hasan is a top-tier
+                  professional who will undoubtedly contribute significantly to
+                  any team or project.
                   <i className="bx bxs-quote-alt-right quote-icon-right"></i>
                 </p>
                 <img
