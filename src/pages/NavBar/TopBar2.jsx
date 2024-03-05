@@ -5,8 +5,8 @@ function TopBar2() {
     return (
        <div className={style.navBar_Background}>
          <div className='container'>
-            <nav className={`${style.navbar1} navbar navbar-expand-lg`}>
-                <h1><a className="navbar-brand" href="/">Hasibul Hasan</a></h1>
+            <nav className={`${style.navbar1} navbar navbar-expand-lg`} id="navbar">
+                <h1><a className="navbar-brand text-light" href="/">Hasibul Hasan</a></h1>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>

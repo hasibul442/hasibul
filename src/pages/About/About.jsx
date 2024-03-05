@@ -31,7 +31,7 @@ function About() {
     {
       id: 1,
       title: "HTML",
-      value: 100,
+      value: 90,
       icon: <FaHtml5 size={30} />,
     },
     {
