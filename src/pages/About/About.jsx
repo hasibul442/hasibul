@@ -423,16 +423,11 @@ function About() {
           </div>
         </div>
 
-        <div className="testimonials container mt-5">
+        <div className="testimonials container mt-5 mb-5">
           <div className="section-title">
             <h2>Testimonials</h2>
           </div>
 
-          {/* <div
-            className="testimonials-slider swiper"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          > */}
           <Swiper
             spaceBetween={50}
             slidesPerView={1}
@@ -476,70 +471,7 @@ function About() {
                 <h4>Full Stack Software Developer</h4>
               </div>
             </SwiperSlide>
-
-            {/* <SwiperSlide>
-              <div className="testimonial-item">
-                <p>
-                  <i className="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Enim nisi quem export duis labore cillum quae magna enim sint
-                  quorum nulla quem veniam duis minim tempor labore quem eram
-                  duis noster aute amet eram fore quis sint minim.
-                  <i className="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img
-                  src="assets/img/testimonials/testimonials-3.jpg"
-                  className="testimonial-img"
-                  alt=""
-                />
-                <h3>Jena Karlis</h3>
-                <h4>Store Owner</h4>
-              </div>
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <div className="testimonial-item">
-                <p>
-                  <i className="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Fugiat enim eram quae cillum dolore dolor amet nulla culpa
-                  multos export minim fugiat minim velit minim dolor enim duis
-                  veniam ipsum anim magna sunt elit fore quem dolore labore
-                  illum veniam.
-                  <i className="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img
-                  src="assets/img/testimonials/testimonials-4.jpg"
-                  className="testimonial-img"
-                  alt=""
-                />
-                <h3>Matt Brandon</h3>
-                <h4>Freelancer</h4>
-              </div>
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <div className="testimonial-item">
-                <p>
-                  <i className="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Quis quorum aliqua sint quem legam fore sunt eram irure aliqua
-                  veniam tempor noster veniam enim culpa labore duis sunt culpa
-                  nulla illum cillum fugiat legam esse veniam culpa fore nisi
-                  cillum quid.
-                  <i className="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img
-                  src="assets/img/testimonials/testimonials-5.jpg"
-                  className="testimonial-img"
-                  alt=""
-                />
-                <h3>John Larson</h3>
-                <h4>Entrepreneur</h4>
-              </div>
-            </SwiperSlide> */}
           </Swiper>
-          {/* <div className="swiper-pagination"></div> */}
-          {/* </div> */}
-
-          {/* <div className="owl-carousel testimonials-carousel"></div> */}
         </div>
       </div>
     </>
