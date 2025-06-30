@@ -12,7 +12,7 @@ function Home() {
 
           <h1><a href="/">Mohammad Hasibul Hasan</a></h1>
           {/* <a href="index.html" className="mr-auto"><img src="assets/img/logo.png" alt="" className="img-fluid"></a>  */}
-          <h2>I'm a passionate <span>Softwar Developer</span> from Bangladesh</h2>
+          <h2>I'm a passionate <span>Full Stack Software Developer</span> from Bangladesh</h2>
 
           <TopBar />
 
