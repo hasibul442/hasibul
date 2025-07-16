@@ -1,10 +1,10 @@
 import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 import React from 'react'
 
-function Animation({src}) {
+function Animation({ src }) {
   return (
     <>
-    <DotLottieReact
+      <DotLottieReact
         src={src}
         autoplay
         loop
