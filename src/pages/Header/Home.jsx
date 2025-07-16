@@ -7,7 +7,11 @@ function Home() {
   return (
     <>
 
-      <header id="header">
+      <header id="header"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.76), rgba(0, 0, 0, 0.8)), url("../assets/img/bg.jpg")`,
+          backgroundSize: "cover"
+        }}>
         <div className="container">
 
           <h1><a href="/">Mohammad Hasibul Hasan</a></h1>
