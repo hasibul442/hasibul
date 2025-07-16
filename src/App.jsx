@@ -11,6 +11,7 @@ import Resume from "./pages/Resume/Resume";
 import Portfolio from "./pages/Portfolio/Portfolio";
 import Contact from "./pages/Contact/Contact";
 import Blog from "./pages/Blog/Blog";
+import Experience from "./pages/Experience/Experience";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/resume" element={<Resume />} />
           {/* <Route path="/services" element={<Service />} /> */}
+          <Route path="/experience" element={<Experience />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/blogs" element={<Blog />} />
