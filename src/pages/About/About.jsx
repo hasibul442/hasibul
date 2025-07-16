@@ -4,6 +4,7 @@ import style from "./about.module.css";
 import Skill from "../../components/Skill";
 import Animation from "../../components/Animation";
 import Testimonials from "../../components/Testimonials";
+import Counts from "../../components/Counts";
 
 function About() {
   return (
@@ -22,14 +23,11 @@ function About() {
                   <h2>About</h2>
                 </div>
                 <p className="fst-italic">
-                  A Senior Software Engineer proficient in developing diverse
-                  microservice APIs, leading software development teams, and
-                  designing robust software architecture. Eager to acquire new
-                  skills and familiar with emerging technologies, prepared to work
-                  independently in fast-paced environments and collaboratively
-                  within a team setting. Objective is to secure a respected
-                  position to effectively utilize skills as a Computer Engineer,
-                  leveraging technical expertise in computer systems.
+                  A Senior Software Engineer with 5+ years of experience, proficient in developing diverse microservice
+                  APIs, leading software development teams, and designing robust software architecture. Eager to acquire
+                  new skills and familiar with emerging technologies, prepared to work independently in fast-paced
+                  environments and collaboratively within a team setting. Objective is to secure a respected position to
+                  effectively utilize skills as a Computer Engineer, leveraging technical expertise in computer systems.
                 </p>
               </div>
               <div
@@ -40,61 +38,7 @@ function About() {
             </div>
           </div>
 
-          <div className="counts container">
-            <div className="row">
-              <div className="col-lg-3 col-md-6">
-                <div className="count-box">
-                  <i className="bi bi-emoji-smile"></i>
-                  <span
-                    data-purecounter-start="0"
-                    data-purecounter-end="232"
-                    data-purecounter-duration="1"
-                    className="purecounter"
-                  ></span>
-                  <p>Happy Clients</p>
-                </div>
-              </div>
-
-              <div className="col-lg-3 col-md-6 mt-5 mt-md-0">
-                <div className="count-box">
-                  <i className="bi bi-journal-richtext"></i>
-                  <span
-                    data-purecounter-start="0"
-                    data-purecounter-end="521"
-                    data-purecounter-duration="1"
-                    className="purecounter"
-                  ></span>
-                  <p>Projects</p>
-                </div>
-              </div>
-
-              <div className="col-lg-3 col-md-6 mt-5 mt-lg-0">
-                <div className="count-box">
-                  <i className="bi bi-headset"></i>
-                  <span
-                    data-purecounter-start="0"
-                    data-purecounter-end="1463"
-                    data-purecounter-duration="1"
-                    className="purecounter"
-                  ></span>
-                  <p>Hours of Support</p>
-                </div>
-              </div>
-
-              <div className="col-lg-3 col-md-6 mt-5 mt-lg-0">
-                <div className="count-box">
-                  <i className="bi bi-award"></i>
-                  <span
-                    data-purecounter-start="0"
-                    data-purecounter-end="24"
-                    data-purecounter-duration="1"
-                    className="purecounter"
-                  ></span>
-                  <p>Awards</p>
-                </div>
-              </div>
-            </div>
-          </div>
+          {/* <Counts /> */}
 
           <div className="skills container">
             <div className="section-title">
