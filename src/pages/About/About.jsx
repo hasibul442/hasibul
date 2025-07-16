@@ -1,30 +1,6 @@
 import React from "react";
-import { BiLogoSpringBoot } from "react-icons/bi";
-import { DiJqueryLogo } from "react-icons/di";
-import {
-  FaBirthdayCake,
-  FaBootstrap,
-  FaCss3Alt,
-  FaDatabase,
-  FaEnvelope,
-  FaFigma,
-  FaGit,
-  FaHtml5,
-  FaJava,
-  FaLaravel,
-  FaPhoneSquare,
-  FaPhp,
-  FaPython,
-  FaReact,
-  FaWhatsapp,
-} from "react-icons/fa";
-import { FaLocationDot } from "react-icons/fa6";
-import { SiAdobexd, SiFirebase, SiMysql, SiNextdotjs } from "react-icons/si";
-import { TbApi, TbBrandJavascript } from "react-icons/tb";
 import TopBar2 from "../NavBar/TopBar2";
 import style from "./about.module.css";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import Skill from "../../components/Skill";
 import Animation from "../../components/Animation";
 import Testimonials from "../../components/Testimonials";
@@ -36,16 +12,14 @@ function About() {
         <TopBar2 />
       </div>
       <div id="about" className="about mt-5">
-        <div className="about-me container">
-          <div className={style.section_title}>
-            <h2>About</h2>
-          </div>
-
-          <div className="row">
+        <div className="container">
+          <div className="row pt-5">
             <div
-              className="col-lg-6 pt-4 pt-lg-0 content"
-              data-aos="fade-left"
+              className="col-lg-6 content"
             >
+              <div className={style.section_title}>
+                <h2>About</h2>
+              </div>
               <p className="fst-italic">
                 A Senior Software Engineer proficient in developing diverse
                 microservice APIs, leading software development teams, and
@@ -59,7 +33,6 @@ function About() {
             </div>
             <div
               className="col-lg-6"
-              data-aos="fade-left"
             >
               <Animation src="./lottie/file_1.lottie" />
             </div>
@@ -103,7 +76,7 @@ function About() {
                   data-purecounter-duration="1"
                   className="purecounter"
                 ></span>
-                <p>Hours Of Support</p>
+                <p>Hours of Support</p>
               </div>
             </div>
 
