@@ -7,6 +7,12 @@ function Blog() {
             <div>
                 <TopBar2 />
             </div>
+
+            <div className="about mt-5 bg_1">
+                <div style={{ height: "100vh" }}>
+                    fgdfgdfgdfg
+                </div>
+            </div>
         </>
     )
 }
