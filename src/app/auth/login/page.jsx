@@ -1,6 +1,21 @@
-import React from 'react'
+'use client'
+import { auth } from '@/lib/firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import Cookies from 'js-cookie';
+import Link from 'next/link';
+import React, { useState } from 'react'
 
-function page() {
+function Page() {
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+
+	const handleLogin = async () => {
+		const userCredential = await signInWithEmailAndPassword(auth, email, password);
+		const token = await userCredential.user.getIdToken();
+
+		// Save token to cookie
+		Cookies.set("token", token, { expires: 1 }); // 1 day
+	};
 	return (
 		<>
 			<main className="main-content  mt-0">
@@ -15,28 +30,42 @@ function page() {
 											<p className="mb-0">Enter your email and password to sign in</p>
 										</div>
 										<div className="card-body">
-											<form role="form">
+											<form>
 												<label>Email</label>
 												<div className="mb-3">
-													<input type="email" className="form-control" placeholder="Email" aria-label="Email" aria-describedby="email-addon" />
+													<input
+														type="email"
+														className="form-control"
+														placeholder="Email"
+														aria-label="Email"
+														value={email}
+														onChange={(e) => setEmail(e.target.value)}
+													/>
 												</div>
 												<label>Password</label>
 												<div className="mb-3">
-													<input type="email" className="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon" />
+													<input
+														type="password"
+														className="form-control"
+														placeholder="Password"
+														aria-label="Password"
+														value={password}
+														onChange={(e) => setPassword(e.target.value)}
+													/>
 												</div>
-												<div className="form-check form-switch">
+												{/* <div className="form-check form-switch">
 													<input className="form-check-input" type="checkbox" id="rememberMe" defaultChecked />
 													<label className="form-check-label" htmlFor="rememberMe">Remember me</label>
-												</div>
+												</div> */}
 												<div className="text-center">
-													<button type="button" className="btn bg-gradient-info w-100 mt-4 mb-0">Sign in</button>
+													<button type="button" className="btn bg-gradient-info w-100 mt-4 mb-0" onClick={handleLogin}>Sign in</button>
 												</div>
 											</form>
 										</div>
 										<div className="card-footer text-center pt-0 px-lg-2 px-1">
 											<p className="mb-4 text-sm mx-auto">
 												Don't have an account?
-												<a href="javascript:;" className="text-info text-gradient font-weight-bold">Sign up</a>
+												<Link href="/auth/register" className="text-info text-gradient font-weight-bold">Sign up</Link>
 											</p>
 										</div>
 									</div>
@@ -55,4 +84,4 @@ function page() {
 	)
 }
 
-export default page
+export default Page
