@@ -1,7 +1,9 @@
-import { Geist, Geist_Mono } from "next/font/google";
+
 import "./globals.css";
 import { Suspense } from "react";
 import Script from 'next/script';
+import Navbar from "./include/Navbar";
+// import { isAuthPath } from "@/Helper/CurrentPathHelper";
 
 export const metadata = {
   title: "Admin Dashboard",
@@ -10,6 +12,8 @@ export const metadata = {
 
 
 export default function RootLayout({ children }) {
+  // const pathname = isAuthPath();
+
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <head>
@@ -25,9 +29,8 @@ export default function RootLayout({ children }) {
         {/* <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script> */}
       </head>
       <body suppressHydrationWarning={true}>
-        <Suspense>
-          {children}
-        </Suspense>
+
+        {children}
 
         {/* Common JS */}
         <Script src="/assets/js/core/popper.min.js" async />
