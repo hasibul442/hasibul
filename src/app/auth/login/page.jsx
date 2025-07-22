@@ -16,6 +16,7 @@ function Page() {
 		// Save token to cookie
 		Cookies.set("token", token, { expires: 1 }); // 1 day
 	};
+
 	return (
 		<>
 			<main className="main-content  mt-0">
