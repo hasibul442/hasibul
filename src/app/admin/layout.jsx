@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import Sidebar from "./include/Sidebar";
 import Navbar from "./include/Navbar";
+import Footer from "./include/Footer";
 
 export default function AppLayout({ children }) {
   return (
@@ -10,7 +11,10 @@ export default function AppLayout({ children }) {
           <Sidebar />
           <main className="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
             <Navbar />
-            {children}
+            <div className="container-fluid py-4">
+              {children}
+              <Footer />
+            </div>
           </main>
         </Suspense>
       </body>
