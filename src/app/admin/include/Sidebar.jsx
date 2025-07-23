@@ -3,7 +3,7 @@ import React from 'react'
 import * as FaIcons from "react-icons/fa6";
 import { FaSignOutAlt } from "react-icons/fa";
 
-function Navbar() {
+function Sidebar() {
     return (
         <>
             <aside className="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
@@ -104,4 +104,4 @@ function Navbar() {
     )
 }
 
-export default Navbar
+export default Sidebar
