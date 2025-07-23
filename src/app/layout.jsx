@@ -2,7 +2,6 @@
 import "./globals.css";
 import { Suspense } from "react";
 import Script from 'next/script';
-import Navbar from "./include/Navbar";
 // import { isAuthPath } from "@/Helper/CurrentPathHelper";
 
 export const metadata = {
