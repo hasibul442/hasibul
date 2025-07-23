@@ -14,10 +14,8 @@ function Footer() {
                 <Link
                   href="/"
                   className="font-weight-bold"
-                >
-                  Hasibul Hasan
-                </Link>
-                for a better web.
+                > Hasibul Hasan </Link>
+                 for a better web.
               </div>
             </div>
           </div>
