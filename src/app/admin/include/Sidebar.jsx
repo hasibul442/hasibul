@@ -1,9 +1,12 @@
+"use client";
 import Link from 'next/link';
 import React from 'react'
 import * as FaIcons from "react-icons/fa6";
 import { FaSignOutAlt } from "react-icons/fa";
+import { usePathname } from 'next/navigation';
 
 function Sidebar() {
+    const pathname = usePathname() || "";
     return (
         <>
             <aside className="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
@@ -18,7 +21,7 @@ function Sidebar() {
                 <div className="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <Link className="nav-link  active" href="/admin">
+                            <Link className={`nav-link ${pathname === "/admin" ? "active" : ""}`} href="/admin">
                                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                                     <FaIcons.FaBuffer size={16} />
                                 </div>
@@ -26,7 +29,7 @@ function Sidebar() {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link  " href="/admin/skills">
+                            <Link className={`nav-link ${pathname === "/admin/skills" ? "active" : ""}`} href="/admin/skills">
                                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                                     <FaIcons.FaHive size={16} />
                                 </div>
@@ -34,7 +37,7 @@ function Sidebar() {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link  " href="/admin/interests">
+                            <Link className={`nav-link ${pathname === "/admin/interests" ? "active" : ""}`} href="/admin/interests">
                                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                                     <FaIcons.FaRocket size={16} />
                                 </div>
@@ -42,7 +45,7 @@ function Sidebar() {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link  " href="/admin/experiences">
+                            <Link className={`nav-link ${pathname === "/admin/experiences" ? "active" : ""}`} href="/admin/experiences">
                                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                                     <FaIcons.FaArrowsTurnRight size={16} />
                                 </div>
@@ -50,7 +53,7 @@ function Sidebar() {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link  " href="/admin/educations">
+                            <Link className={`nav-link ${pathname === "/admin/educations" ? "active" : ""}`} href="/admin/educations">
                                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                                     <FaIcons.FaBook size={16} />
                                 </div>
@@ -58,7 +61,7 @@ function Sidebar() {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link  " href="/admin/projects">
+                            <Link className={`nav-link ${pathname === "/admin/projects" ? "active" : ""}`} href="/admin/projects">
                                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                                     <FaIcons.FaAtom size={16} />
                                 </div>
@@ -66,7 +69,7 @@ function Sidebar() {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link  " href="/admin/testimonials">
+                            <Link className={`nav-link ${pathname === "/admin/testimonials" ? "active" : ""}`} href="/admin/testimonials">
                                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                                     <FaIcons.FaAward size={16} />
                                 </div>
@@ -74,7 +77,7 @@ function Sidebar() {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link  " href="/admin/blogs">
+                            <Link className={`nav-link ${pathname === "/admin/blogs" ? "active" : ""}`} href="/admin/blogs">
                                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                                     <FaIcons.FaBlog size={16} />
                                 </div>
