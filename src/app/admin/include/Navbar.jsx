@@ -31,27 +31,9 @@ function Navbar() {
             id="navbar"
           >
             <div className="ms-md-auto pe-md-3 d-flex align-items-center">
-              <div className="input-group">
-                <span className="input-group-text text-body">
-                  <i className="fas fa-search" aria-hidden="true"></i>
-                </span>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Type here..."
-                />
-              </div>
+              
             </div>
             <ul className="navbar-nav  justify-content-end">
-              <li className="nav-item d-flex align-items-center">
-                <a
-                  className="btn btn-outline-primary btn-sm mb-0 me-3"
-                  target="_blank"
-                  href="https://www.creative-tim.com/builder?ref=navbar-soft-ui-dashboard"
-                >
-                  Online Builder
-                </a>
-              </li>
               <li className="nav-item d-flex align-items-center">
                 <a
                   href="javascript:;"
