@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React from 'react'
-import { FaBuffer } from "react-icons/fa6";
+import * as FaIcons from "react-icons/fa6";
+import { FaSignOutAlt } from "react-icons/fa";
 
 function Navbar() {
     return (
@@ -10,7 +11,7 @@ function Navbar() {
                     <i className="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
                     <a className="navbar-brand m-0" href=" https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html " target="_blank">
                         <img src="../assets/img/logo-ct-dark.png" className="navbar-brand-img h-100" alt="main_logo" />
-                        <span className="ms-1 font-weight-bold">Soft UI Dashboard 3</span>
+                        <span className="ms-1 font-weight-bold">Hasibul Hasan</span>
                     </a>
                 </div>
                 <hr className="horizontal dark mt-0" />
@@ -19,69 +20,82 @@ function Navbar() {
                         <li className="nav-item">
                             <Link className="nav-link  active" href="/">
                                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <FaBuffer size={20} />
+                                    <FaIcons.FaBuffer size={16} />
                                 </div>
                                 <span className="nav-link-text ms-1">Dashboard</span>
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link  " href="../pages/tables.html">
+                            <Link className="nav-link  " href="../pages/billing.html">
                                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <FaBuffer size={20} />
+                                    <FaIcons.FaHive size={16} />
                                 </div>
-                                <span className="nav-link-text ms-1">Tables</span>
+                                <span className="nav-link-text ms-1">Skills</span>
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link  " href="../pages/billing.html">
+                            <Link className="nav-link  " href="../pages/virtual-reality.html">
                                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <FaBuffer size={20} />
+                                    <FaIcons.FaRocket size={16} />
                                 </div>
-                                <span className="nav-link-text ms-1">Billing</span>
-                            </a>
+                                <span className="nav-link-text ms-1">Interests</span>
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link  " href="../pages/virtual-reality.html">
+                            <Link className="nav-link  " href="../pages/rtl.html">
                                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <FaBuffer size={20} />
+                                    <FaIcons.FaArrowsTurnRight size={16} />
                                 </div>
-                                <span className="nav-link-text ms-1">Virtual Reality</span>
-                            </a>
+                                <span className="nav-link-text ms-1">Expriences</span>
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link  " href="../pages/rtl.html">
+                            <Link className="nav-link  " href="../pages/rtl.html">
                                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <FaBuffer size={20} />
+                                    <FaIcons.FaBook size={16} />
                                 </div>
-                                <span className="nav-link-text ms-1">RTL</span>
-                            </a>
-                        </li>
-                        <li className="nav-item mt-3">
-                            <h6 className="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
+                                <span className="nav-link-text ms-1">Education</span>
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link  " href="../pages/profile.html">
+                            <Link className="nav-link  " href="../pages/rtl.html">
                                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <FaBuffer size={20} />
+                                    <FaIcons.FaAtom size={16} />
+                                </div>
+                                <span className="nav-link-text ms-1">Projects</span>
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link  " href="../pages/rtl.html">
+                                <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <FaIcons.FaAward size={16} />
+                                </div>
+                                <span className="nav-link-text ms-1">Testimonials</span>
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link  " href="../pages/rtl.html">
+                                <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <FaIcons.FaBlog size={16} />
+                                </div>
+                                <span className="nav-link-text ms-1">Blogs</span>
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" href="../pages/profile.html">
+                                <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <FaIcons.FaUser size={16} />
                                 </div>
                                 <span className="nav-link-text ms-1">Profile</span>
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link  " href="../pages/sign-in.html">
+                            <Link className="nav-link  " href="../pages/sign-in.html">
                                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <FaBuffer size={20} />
+                                    <FaSignOutAlt size={16}/>
                                 </div>
-                                <span className="nav-link-text ms-1">Sign In</span>
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link  " href="../pages/sign-up.html">
-                                <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <FaBuffer size={20} />
-                                </div>
-                                <span className="nav-link-text ms-1">Sign Up</span>
-                            </a>
+                                <span className="nav-link-text ms-1">Log Out</span>
+                            </Link>
                         </li>
                     </ul>
                 </div>
