@@ -26,7 +26,7 @@ function Sidebar() {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link  " href="/admin">
+                            <Link className="nav-link  " href="/admin/skills">
                                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                                     <FaIcons.FaHive size={16} />
                                 </div>
@@ -34,7 +34,7 @@ function Sidebar() {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link  " href="/admin">
+                            <Link className="nav-link  " href="/admin/interests">
                                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                                     <FaIcons.FaRocket size={16} />
                                 </div>
@@ -42,7 +42,7 @@ function Sidebar() {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link  " href="/admin">
+                            <Link className="nav-link  " href="/admin/experiences">
                                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                                     <FaIcons.FaArrowsTurnRight size={16} />
                                 </div>
@@ -50,7 +50,7 @@ function Sidebar() {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link  " href="/admin">
+                            <Link className="nav-link  " href="/admin/educations">
                                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                                     <FaIcons.FaBook size={16} />
                                 </div>
@@ -58,7 +58,7 @@ function Sidebar() {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link  " href="/admin">
+                            <Link className="nav-link  " href="/admin/projects">
                                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                                     <FaIcons.FaAtom size={16} />
                                 </div>
@@ -66,7 +66,7 @@ function Sidebar() {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link  " href="/admin">
+                            <Link className="nav-link  " href="/admin/testimonials">
                                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                                     <FaIcons.FaAward size={16} />
                                 </div>
@@ -74,7 +74,7 @@ function Sidebar() {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link  " href="/admin">
+                            <Link className="nav-link  " href="/admin/blogs">
                                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                                     <FaIcons.FaBlog size={16} />
                                 </div>
