@@ -3,94 +3,88 @@ import React from "react";
 function GithubOverView() {
   return (
     <>
-      <div className="card h-100">
-        <div className="card-header pb-0">
-          <h6>Github overview</h6>
-          <p className="text-sm">
-            <i className="fa fa-arrow-up text-success" aria-hidden="true"></i>
-            <span className="font-weight-bold">24%</span> this month
-          </p>
+      <div className="card shadow h-100">
+        <div className="card-header pb-0 p-3">
+          <h6 className="mb-0">Reviews</h6>
         </div>
-        <div className="card-body p-3">
-          <div className="timeline timeline-one-side">
-            <div className="timeline-block mb-3">
-              <span className="timeline-step">
-                <i className="ni ni-bell-55 text-success text-gradient"></i>
-              </span>
-              <div className="timeline-content">
-                <h6 className="text-dark text-sm font-weight-bold mb-0">
-                  $2400, Design changes
-                </h6>
-                <p className="text-secondary font-weight-bold text-xs mt-1 mb-0">
-                  22 DEC 7:20 PM
-                </p>
+        <div className="card-body pb-0 p-3">
+          <ul className="list-group">
+            <li className="list-group-item border-0 d-flex align-items-center px-0 mb-0">
+              <div className="w-100">
+                <div className="d-flex mb-2">
+                  <span className="me-2 text-sm font-weight-bold text-dark">
+                    Positive Reviews
+                  </span>
+                  <span className="ms-auto text-sm font-weight-bold">80%</span>
+                </div>
+                <div>
+                  <div className="progress progress-md">
+                    <div
+                      className="progress-bar bg-primary w-80"
+                      role="progressbar"
+                      aria-valuenow="60"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="timeline-block mb-3">
-              <span className="timeline-step">
-                <i className="ni ni-html5 text-danger text-gradient"></i>
-              </span>
-              <div className="timeline-content">
-                <h6 className="text-dark text-sm font-weight-bold mb-0">
-                  New order #1832412
-                </h6>
-                <p className="text-secondary font-weight-bold text-xs mt-1 mb-0">
-                  21 DEC 11 PM
-                </p>
+            </li>
+            <li className="list-group-item border-0 d-flex align-items-center px-0 mb-2">
+              <div className="w-100">
+                <div className="d-flex mb-2">
+                  <span className="me-2 text-sm font-weight-bold text-dark">
+                    Neutral Reviews
+                  </span>
+                  <span className="ms-auto text-sm font-weight-bold">17%</span>
+                </div>
+                <div>
+                  <div className="progress progress-md">
+                    <div
+                      className="progress-bar bg-primary w-10"
+                      role="progressbar"
+                      aria-valuenow="10"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="timeline-block mb-3">
-              <span className="timeline-step">
-                <i className="ni ni-cart text-info text-gradient"></i>
-              </span>
-              <div className="timeline-content">
-                <h6 className="text-dark text-sm font-weight-bold mb-0">
-                  Server payments for April
-                </h6>
-                <p className="text-secondary font-weight-bold text-xs mt-1 mb-0">
-                  21 DEC 9:34 PM
-                </p>
+            </li>
+            <li className="list-group-item border-0 d-flex align-items-center px-0 mb-2">
+              <div className="w-100">
+                <div className="d-flex mb-2">
+                  <span className="me-2 text-sm font-weight-bold text-dark">
+                    Negative Reviews
+                  </span>
+                  <span className="ms-auto text-sm font-weight-bold">3%</span>
+                </div>
+                <div>
+                  <div className="progress progress-md">
+                    <div
+                      className="progress-bar bg-primary w-5"
+                      role="progressbar"
+                      aria-valuenow="5"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="timeline-block mb-3">
-              <span className="timeline-step">
-                <i className="ni ni-credit-card text-warning text-gradient"></i>
-              </span>
-              <div className="timeline-content">
-                <h6 className="text-dark text-sm font-weight-bold mb-0">
-                  New card added for order #4395133
-                </h6>
-                <p className="text-secondary font-weight-bold text-xs mt-1 mb-0">
-                  20 DEC 2:20 AM
-                </p>
-              </div>
-            </div>
-            <div className="timeline-block mb-3">
-              <span className="timeline-step">
-                <i className="ni ni-key-25 text-primary text-gradient"></i>
-              </span>
-              <div className="timeline-content">
-                <h6 className="text-dark text-sm font-weight-bold mb-0">
-                  Unlock packages for development
-                </h6>
-                <p className="text-secondary font-weight-bold text-xs mt-1 mb-0">
-                  18 DEC 4:54 AM
-                </p>
-              </div>
-            </div>
-            <div className="timeline-block">
-              <span className="timeline-step">
-                <i className="ni ni-money-coins text-dark text-gradient"></i>
-              </span>
-              <div className="timeline-content">
-                <h6 className="text-dark text-sm font-weight-bold mb-0">
-                  New order #9583120
-                </h6>
-                <p className="text-secondary font-weight-bold text-xs mt-1 mb-0">
-                  17 DEC
-                </p>
-              </div>
-            </div>
+            </li>
+          </ul>
+        </div>
+        <div className="card-footer pt-0 p-3 d-flex align-items-center">
+          <div className="w-60">
+            <p className="text-sm">
+              More than <b>1,500,000</b> developers used Creative Tim's products
+              and over <b>700,000</b> projects were created.
+            </p>
+          </div>
+          <div className="w-40 text-end">
+            <a className="btn btn-dark mb-0 text-end" href="javascript:;">
+              View all reviews
+            </a>
           </div>
         </div>
       </div>
