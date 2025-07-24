@@ -37,6 +37,8 @@ function Page() {
         title: "Success!",
         text: "Experience created successfully.",
         icon: "success",
+        showConfirmButton: false,
+        timer: 1500
       }).then(() => {
         router.push("/admin/experiences");
         setOrgName("");
