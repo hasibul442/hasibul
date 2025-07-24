@@ -1,10 +1,10 @@
 "use client";
 import { removespace } from "@/Helper/Helper";
 import { db } from "@/lib/firebase";
-import { doc, setDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
 function Page() {
@@ -13,7 +13,24 @@ function Page() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [description, setDescription] = useState("");
+  const [status, setStatus] = useState(1);
   const router = useRouter();
+  const params = useParams();
+
+  const getExperiencesData = async () => {
+    const querySnapshot = await getDoc(doc(db, "experiences", params?.id));
+    if (querySnapshot.exists()) {
+      const data = querySnapshot.data();
+      setOrgName(data.org_name);
+      setPosition(data.position);
+      setStartDate(data.start_date ? new Date(data.start_date).toISOString().split('T')[0] : "");
+      setEndDate(data.end_date ? new Date(data.end_date).toISOString().split('T')[0] : "");
+      setDescription(data.description);
+      setStatus(data.status);
+    } else {
+      console.log("No such document!");
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,7 +45,7 @@ function Page() {
       position: position,
       start_date: new Date(startDate).toISOString(),
       end_date: endDate ? new Date(endDate).toISOString() : null,
-      status: 1,
+      status: status,
       description: description,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
@@ -52,13 +69,16 @@ function Page() {
     });
   };
 
+  useEffect(() => {
+    getExperiencesData();
+  }, []);
   return (
     <>
       <div className="row">
         <div className="col-12">
           <div className="card mb-4">
             <div className="card-header text-center pt-4">
-              <h5>Create Experience</h5>
+              <h5>Update Experience</h5>
             </div>
             <div className="card-body px-5">
               <div className="row">
@@ -111,6 +131,15 @@ function Page() {
                       value={endDate}
                       onChange={(e) => setEndDate(e.target.value)}
                     />
+                  </div>
+                </div>
+
+                <div className="col-md-12">
+                  <div className="mb-3">
+                    <select className="form-control" value={status} onChange={(e) => setStatus(Number(e.target.value))}>
+                      <option value="1">Active</option>
+                      <option value="0">Inactive</option>
+                    </select>
                   </div>
                 </div>
 

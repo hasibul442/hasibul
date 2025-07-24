@@ -6,33 +6,57 @@ import {
 import { calculateDateDifference } from "@/Helper/Helper";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
+import { MdDelete, MdModeEdit } from "react-icons/md";
 
 function Page() {
   const [experiences, setExperiences] = useState([]);
 
   const getExperiences = async () => {
     const data = await getListDataFromDatabase("experiences");
-    setExperiences(data);
+    const sortedData = data.sort((a, b) => new Date(b.start_date) - new Date(a.start_date));
+    setExperiences(sortedData);
   };
 
   const deleteExperience = async (id) => {
-    if (confirm("Are you sure you want to delete this experience?")) {
-      deleteDataFromDatabase("experiences", id)
-        .then(() => {
-          getExperiences();
-        })
-        .catch((error) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteDataFromDatabase("experiences", id).then(() => {
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your experience has been deleted.",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1500
+          }).then(() => {
+            getExperiences();
+          });
+        }).catch((error) => {
           console.error("Error deleting experience:", error);
+          Swal.fire({
+            title: "Error!",
+            text: "There was an error deleting the experience.",
+            icon: "error",
+            showConfirmButton: false,
+            timer: 1500
+          });
         });
-      console.log("Experience deleted successfully.");
-    }
+      }
+    });
   };
 
   useEffect(() => {
     getExperiences();
   }, []);
 
-  console.log(experiences);
   return (
     <>
       <div className="row">
@@ -41,7 +65,7 @@ function Page() {
             <div className="card-header pb-0">
               <div className="d-flex justify-content-between align-items-center">
                 <div>
-                  <h6>Expriences</h6>
+                  <h6>Experiences</h6>
                 </div>
                 <div>
                   <Link
@@ -86,7 +110,7 @@ function Page() {
                     {experiences.map((experience, index) => (
                       <tr key={experience.id}>
                         <td>
-                          <p className="text-xs font-weight-bold mb-0">
+                          <p className="text-xs font-weight-bold mb-0 text-center">
                             {index + 1}
                           </p>
                         </td>
@@ -104,14 +128,17 @@ function Page() {
                               experience.start_date
                             ).toLocaleDateString()}{" "}
                             -{" "}
-                            {new Date(experience.end_date).toLocaleDateString()}
+                            {experience.end_date
+                              ? new Date(experience.end_date).toLocaleDateString()
+                              : "Present"
+                            }
                           </span>
                         </td>
                         <td className="align-middle text-center">
                           <span className="text-secondary text-xs font-weight-bold">
                             {calculateDateDifference(
                               experience?.start_date,
-                              experience?.end_date
+                              experience?.end_date || new Date().toISOString()
                             )}
                           </span>
                         </td>
@@ -141,20 +168,19 @@ function Page() {
                           </span>
                         </td>
                         <td className="align-middle">
-                          <button
-                            className="btn btn-xs text-secondary font-weight-bold text-xs"
-                            data-toggle="tooltip"
-                            data-original-title="Edit user"
+                          <Link
+                            className="btn btn-sm bg-gradient-info"
+                            href={`/admin/experiences/${experience.id}`}
                           >
-                            Edit
-                          </button>
+                            <MdModeEdit size={15} />
+                          </Link>
                           <button
-                            className="btn btn-xs text-secondary font-weight-bold text-xs"
+                            className="btn btn-sm bg-gradient-danger ms-2"
                             data-toggle="tooltip"
                             data-original-title="Delete"
                             onClick={() => deleteExperience(experience.id)}
                           >
-                            Delete
+                            <MdDelete size={15} />
                           </button>
                         </td>
                       </tr>
