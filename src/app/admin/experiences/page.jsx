@@ -7,6 +7,7 @@ import { calculateDateDifference } from "@/Helper/Helper";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import { MdDelete, MdModeEdit } from "react-icons/md";
 
 function Page() {
   const [experiences, setExperiences] = useState([]);
@@ -106,7 +107,7 @@ function Page() {
                     {experiences.map((experience, index) => (
                       <tr key={experience.id}>
                         <td>
-                          <p className="text-xs font-weight-bold mb-0">
+                          <p className="text-xs font-weight-bold mb-0 text-center">
                             {index + 1}
                           </p>
                         </td>
@@ -165,19 +166,19 @@ function Page() {
                         </td>
                         <td className="align-middle">
                           <button
-                            className="btn btn-xs text-secondary font-weight-bold text-xs"
+                            className="btn btn-sm bg-gradient-info"
                             data-toggle="tooltip"
                             data-original-title="Edit user"
                           >
-                            Edit
+                            <MdModeEdit size={15}/>
                           </button>
                           <button
-                            className="btn btn-xs text-secondary font-weight-bold text-xs"
+                            className="btn btn-sm bg-gradient-danger ms-2"
                             data-toggle="tooltip"
                             data-original-title="Delete"
                             onClick={() => deleteExperience(experience.id)}
                           >
-                            Delete
+                            <MdDelete size={15}/>
                           </button>
                         </td>
                       </tr>
