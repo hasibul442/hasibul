@@ -15,7 +15,7 @@ function Page() {
     const handleRegisterButton = async (e) => {
         e.preventDefault();
         try {
-            createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
+            await createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
                 const user = userCredential.user;
                 return setDoc(doc(db, 'users', user.uid), {
                     id : user.uid,
