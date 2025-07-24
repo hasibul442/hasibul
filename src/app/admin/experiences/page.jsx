@@ -12,7 +12,9 @@ function Page() {
 
   const getExperiences = async () => {
     const data = await getListDataFromDatabase("experiences");
-    setExperiences(data);
+    // Sort by start_date in descending order (newest first)
+    const sortedData = data.sort((a, b) => new Date(b.start_date) - new Date(a.start_date));
+    setExperiences(sortedData);
   };
 
   const deleteExperience = async (id) => {
@@ -32,7 +34,6 @@ function Page() {
     getExperiences();
   }, []);
 
-  console.log(experiences);
   return (
     <>
       <div className="row">
@@ -41,7 +42,7 @@ function Page() {
             <div className="card-header pb-0">
               <div className="d-flex justify-content-between align-items-center">
                 <div>
-                  <h6>Expriences</h6>
+                  <h6>Experiences</h6>
                 </div>
                 <div>
                   <Link
@@ -104,14 +105,17 @@ function Page() {
                               experience.start_date
                             ).toLocaleDateString()}{" "}
                             -{" "}
-                            {new Date(experience.end_date).toLocaleDateString()}
+                            {experience.end_date
+                              ? new Date(experience.end_date).toLocaleDateString()
+                              : "Present"
+                            }
                           </span>
                         </td>
                         <td className="align-middle text-center">
                           <span className="text-secondary text-xs font-weight-bold">
                             {calculateDateDifference(
                               experience?.start_date,
-                              experience?.end_date
+                              experience?.end_date || new Date().toISOString()
                             )}
                           </span>
                         </td>
