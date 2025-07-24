@@ -5,6 +5,7 @@ import { doc, setDoc } from "firebase/firestore";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 
 function Page() {
   const [orgname, setOrgName] = useState("");
@@ -16,6 +17,9 @@ function Page() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    //Validation add
+    // console.log(endDate);
     const sanitizedOrgName = removespace(orgname);
     const sanitizedPosition = removespace(position);
     return setDoc(doc(db, "experiences", `${sanitizedOrgName}-${sanitizedPosition}`), {
@@ -23,19 +27,24 @@ function Page() {
       org_name: orgname,
       position: position,
       start_date: new Date(startDate).toISOString(),
-      end_date: new Date(endDate).toISOString(),
+      end_date: endDate ? new Date(endDate).toISOString() : null,
       status: 1,
       description: description,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     }).then(() => {
-        console.log("Experience created successfully.");
+      Swal.fire({
+        title: "Success!",
+        text: "Experience created successfully.",
+        icon: "success",
+      }).then(() => {
         router.push("/admin/experiences");
         setOrgName("");
         setPosition("");
         setStartDate("");
         setEndDate("");
         setDescription("");
+      });
     }).catch((error) => {
       console.error("Error creating experience:", error);
     });
