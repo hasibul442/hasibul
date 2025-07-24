@@ -1,8 +1,6 @@
 
 import "./globals.css";
-import { Suspense } from "react";
 import Script from 'next/script';
-// import { isAuthPath } from "@/Helper/CurrentPathHelper";
 
 export const metadata = {
   title: "Admin Dashboard",
