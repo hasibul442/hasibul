@@ -14,7 +14,6 @@ function Page() {
 
   const getExperiences = async () => {
     const data = await getListDataFromDatabase("experiences");
-    // Sort by start_date in descending order (newest first)
     const sortedData = data.sort((a, b) => new Date(b.start_date) - new Date(a.start_date));
     setExperiences(sortedData);
   };
@@ -35,6 +34,8 @@ function Page() {
             title: "Deleted!",
             text: "Your experience has been deleted.",
             icon: "success",
+            showConfirmButton: false,
+            timer: 1500
           }).then(() => {
             getExperiences();
           });
@@ -44,6 +45,8 @@ function Page() {
             title: "Error!",
             text: "There was an error deleting the experience.",
             icon: "error",
+            showConfirmButton: false,
+            timer: 1500
           });
         });
       }
@@ -165,20 +168,19 @@ function Page() {
                           </span>
                         </td>
                         <td className="align-middle">
-                          <button
+                          <Link
                             className="btn btn-sm bg-gradient-info"
-                            data-toggle="tooltip"
-                            data-original-title="Edit user"
+                            href={`/admin/experiences/${experience.id}`}
                           >
-                            <MdModeEdit size={15}/>
-                          </button>
+                            <MdModeEdit size={15} />
+                          </Link>
                           <button
                             className="btn btn-sm bg-gradient-danger ms-2"
                             data-toggle="tooltip"
                             data-original-title="Delete"
                             onClick={() => deleteExperience(experience.id)}
                           >
-                            <MdDelete size={15}/>
+                            <MdDelete size={15} />
                           </button>
                         </td>
                       </tr>
