@@ -107,84 +107,92 @@ function Page() {
                     </tr>
                   </thead>
                   <tbody>
-                    {experiences.map((experience, index) => (
-                      <tr key={experience.id}>
-                        <td>
-                          <p className="text-xs font-weight-bold mb-0 text-center">
-                            {index + 1}
-                          </p>
-                        </td>
-                        <td>
-                          <p className="text-xs font-weight-bold mb-0">
-                            {experience.org_name}
-                          </p>
-                          <p className="text-xs text-secondary mb-0">
-                            {experience.position}
-                          </p>
-                        </td>
-                        <td className="align-middle text-center">
-                          <span className="text-secondary text-xs font-weight-bold">
-                            {new Date(
-                              experience.start_date
-                            ).toLocaleDateString()}{" "}
-                            -{" "}
-                            {experience.end_date
-                              ? new Date(experience.end_date).toLocaleDateString()
-                              : "Present"
-                            }
-                          </span>
-                        </td>
-                        <td className="align-middle text-center">
-                          <span className="text-secondary text-xs font-weight-bold">
-                            {calculateDateDifference(
-                              experience?.start_date,
-                              experience?.end_date || new Date().toISOString()
+                    {experiences.length > 0 ? (
+                      experiences.map((experience, index) => (
+                        <tr key={experience.id}>
+                          <td>
+                            <p className="text-xs font-weight-bold mb-0 text-center">
+                              {index + 1}
+                            </p>
+                          </td>
+                          <td>
+                            <p className="text-xs font-weight-bold mb-0">
+                              {experience.org_name}
+                            </p>
+                            <p className="text-xs text-secondary mb-0">
+                              {experience.position}
+                            </p>
+                          </td>
+                          <td className="align-middle text-center">
+                            <span className="text-secondary text-xs font-weight-bold">
+                              {new Date(
+                                experience.start_date
+                              ).toLocaleDateString()}{" "}
+                              -{" "}
+                              {experience.end_date
+                                ? new Date(experience.end_date).toLocaleDateString()
+                                : "Present"
+                              }
+                            </span>
+                          </td>
+                          <td className="align-middle text-center">
+                            <span className="text-secondary text-xs font-weight-bold">
+                              {calculateDateDifference(
+                                experience?.start_date,
+                                experience?.end_date || new Date().toISOString()
+                              )}
+                            </span>
+                          </td>
+                          <td className="align-middle text-center text-sm">
+                            {experience.status === 1 ? (
+                              <span className="badge badge-sm bg-gradient-success">
+                                Active
+                              </span>
+                            ) : (
+                              <span className="badge badge-sm bg-gradient-danger">
+                                Inactive
+                              </span>
                             )}
-                          </span>
-                        </td>
-                        <td className="align-middle text-center text-sm">
-                          {experience.status === 1 ? (
-                            <span className="badge badge-sm bg-gradient-success">
-                              Active
+                          </td>
+                          <td className="align-middle text-center">
+                            <span className="text-secondary text-xs font-weight-bold">
+                              {new Date(
+                                experience.createdAt
+                              ).toLocaleDateString()}
                             </span>
-                          ) : (
-                            <span className="badge badge-sm bg-gradient-danger">
-                              Inactive
+                          </td>
+                          <td className="align-middle text-center">
+                            <span className="text-secondary text-xs font-weight-bold">
+                              {new Date(
+                                experience.updatedAt
+                              ).toLocaleDateString()}
                             </span>
-                          )}
-                        </td>
-                        <td className="align-middle text-center">
-                          <span className="text-secondary text-xs font-weight-bold">
-                            {new Date(
-                              experience.createdAt
-                            ).toLocaleDateString()}
-                          </span>
-                        </td>
-                        <td className="align-middle text-center">
-                          <span className="text-secondary text-xs font-weight-bold">
-                            {new Date(
-                              experience.updatedAt
-                            ).toLocaleDateString()}
-                          </span>
-                        </td>
-                        <td className="align-middle">
-                          <Link
-                            className="btn btn-sm bg-gradient-info"
-                            href={`/admin/experiences/${experience.id}`}
-                          >
-                            <MdModeEdit size={15} />
-                          </Link>
-                          <button
-                            className="btn btn-sm bg-gradient-danger ms-2"
-                            data-toggle="tooltip"
-                            data-original-title="Delete"
-                            onClick={() => deleteExperience(experience.id)}
-                          >
-                            <MdDelete size={15} />
-                          </button>
+                          </td>
+                          <td className="align-middle">
+                            <Link
+                              className="btn btn-sm bg-gradient-info"
+                              href={`/admin/experiences/${experience.id}`}
+                            >
+                              <MdModeEdit size={15} />
+                            </Link>
+                            <button
+                              className="btn btn-sm bg-gradient-danger ms-2"
+                              data-toggle="tooltip"
+                              data-original-title="Delete"
+                              onClick={() => deleteExperience(experience.id)}
+                            >
+                              <MdDelete size={15} />
+                            </button>
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan="8" className="text-center py-4">
+                          <p className="text-secondary mb-0">No data available</p>
                         </td>
                       </tr>
-                    ))}
+                    )}
                   </tbody>
                 </table>
               </div>
