@@ -1,0 +1,430 @@
+/* Keyframe Animations */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-20px) rotate(5deg);
+    }
+}
+
+@keyframes floatReverse {
+
+    0%,
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(20px) rotate(-5deg);
+    }
+}
+
+@keyframes pulseGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(88, 166, 255, 0.3), 0 0 40px rgba(88, 166, 255, 0.1);
+        transform: scale(1);
+    }
+
+    50% {
+        box-shadow: 0 0 30px rgba(88, 166, 255, 0.5), 0 0 60px rgba(88, 166, 255, 0.2);
+        transform: scale(1.02);
+    }
+}
+
+@keyframes codeRain {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes blinkCursor {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes rotateSlow {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes morph {
+
+    0%,
+    100% {
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+
+    50% {
+        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    }
+}
+
+@keyframes shine {
+    0% {
+        transform: translateX(-100%) rotate(45deg);
+    }
+
+    100% {
+        transform: translateX(100%) rotate(45deg);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Header Container */
+.header {
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow-x: hidden;
+    padding: 60px 0;
+}
+
+.gradientBgAnimated {
+    background: linear-gradient(-45deg, #0d1117, #161b22, #1c2128, #0d1117);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+}
+
+/* Floating Tech Icons */
+.floatingIcon {
+    position: absolute;
+    animation: float 6s ease-in-out infinite;
+    filter: drop-shadow(0 0 10px currentColor);
+    opacity: 0.6;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.floatingIcon:hover {
+    opacity: 1;
+    transform: scale(1.3) !important;
+}
+
+/* Terminal Glow Effect */
+.terminalGlow {
+    animation: pulseGlow 3s ease-in-out infinite;
+}
+
+/* Cursor Blink */
+.cursorBlink {
+    animation: blinkCursor 1s step-end infinite;
+}
+
+/* Slide Up Animation */
+.slideUp {
+    animation: slideUp 0.8s ease forwards;
+}
+
+/* Scale In Animation */
+.scaleIn {
+    animation: scaleIn 0.6s ease forwards;
+}
+
+/* Morph Shape */
+.morphShape {
+    animation: morph 8s ease-in-out infinite;
+}
+
+/* Code Rain Particles */
+.codeParticle {
+    position: absolute;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--accent-primary);
+    opacity: 0.15;
+    animation: codeRain 10s linear infinite;
+    pointer-events: none;
+}
+
+/* Glow Text */
+.glowText {
+    text-shadow: 0 0 10px rgba(88, 166, 255, 0.5), 0 0 20px rgba(88, 166, 255, 0.3);
+}
+
+/* Animated Button */
+.btnAnimated {
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btnAnimated::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(transparent,
+            rgba(255, 255, 255, 0.1),
+            transparent);
+    transform: rotate(45deg);
+    animation: shine 3s infinite;
+}
+
+/* Social Icon Animation */
+.socialIconAnimated {
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.socialIconAnimated:hover {
+    transform: translateY(-8px) scale(1.1);
+    box-shadow: 0 10px 30px rgba(88, 166, 255, 0.4);
+}
+
+/* Parallax Element */
+.parallaxElement {
+    transition: transform 0.1s ease-out;
+}
+
+/* Gradient Orbs */
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.4;
+    animation: float 8s ease-in-out infinite;
+}
+
+.orbPrimary {
+    width: 400px;
+    height: 400px;
+    background: var(--accent-primary);
+    top: -100px;
+    right: -100px;
+    animation-delay: 0s;
+}
+
+.orbTertiary {
+    width: 300px;
+    height: 300px;
+    background: var(--accent-tertiary);
+    bottom: -50px;
+    left: -50px;
+    animation-delay: 2s;
+}
+
+.orbSecondary {
+    width: 200px;
+    height: 200px;
+    background: var(--accent-secondary);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-delay: 4s;
+}
+
+/* Grid Background */
+.gridBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        linear-gradient(rgba(88, 166, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(88, 166, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+}
+
+/* Container */
+.container {
+    position: relative;
+    z-index: 2;
+    margin-top: auto;
+}
+
+/* Terminal Container */
+.terminalContainer {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Terminal Body */
+.terminalBody {
+    text-align: left;
+}
+
+/* Code Text Styles */
+.codeText {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.codeTextMuted {
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+.codeTextSecondary {
+    color: var(--text-secondary);
+    padding-left: 20px;
+}
+
+.codeKeyword {
+    color: var(--accent-tertiary);
+}
+
+.codeProp {
+    color: var(--accent-primary);
+}
+
+.codeString {
+    color: var(--accent-secondary);
+}
+
+.codeNumber {
+    color: var(--accent-warning);
+}
+
+/* Main Heading */
+.mainHeading {
+    font-size: clamp(2.5rem, 6vw, 2.5rem);
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.nameGradient {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary), var(--accent-secondary));
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 3s ease infinite;
+}
+
+/* Subheading / Role */
+.subHeading {
+    font-size: clamp(1.0rem, 3vw, 1.0rem);
+    font-weight: 400;
+    color: var(--text-secondary);
+    margin-bottom: 30px;
+    font-family: var(--font-mono);
+}
+
+/* Cursor */
+.cursor {
+    border-right: 3px solid var(--accent-primary);
+    margin-left: 2px;
+}
+
+/* Scroll Indicator */
+.scrollIndicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.scrollMouse {
+    width: 30px;
+    height: 50px;
+    border: 2px solid var(--border-color);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    padding-top: 8px;
+    animation: float 2s ease-in-out infinite;
+}
+
+.scrollDot {
+    width: 4px;
+    height: 10px;
+    background: var(--accent-primary);
+    border-radius: 2px;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.scrollText {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 10px;
+    font-family: var(--font-mono);
+}

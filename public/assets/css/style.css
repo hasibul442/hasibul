@@ -1,20 +1,31 @@
 /**
-* Template Name: Personal
-* Updated: Sep 18 2023 with Bootstrap v5.3.2
-* Template URL: https://bootstrapmade.com/personal-free-resume-bootstrap-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
+* Template Name: Personal - Developer Theme
+* Modern Dark Theme for Software Developer Portfolio
 */
 
 /*--------------------------------------------------------------
-# General
+# General - Developer Theme Colors
 --------------------------------------------------------------*/
+:root {
+  --bg-primary: #0d1117;
+  --bg-secondary: #161b22;
+  --bg-tertiary: #21262d;
+  --bg-card: #1c2128;
+  --accent-primary: #58a6ff;
+  --accent-secondary: #7ee787;
+  --accent-tertiary: #d2a8ff;
+  --accent-warning: #ffa657;
+  --text-primary: #f0f6fc;
+  --text-secondary: #8b949e;
+  --text-muted: #6e7681;
+  --border-color: #30363d;
+}
+
 body {
-  font-family: "Open Sans", sans-serif;
-  /* background-color: #040404; */
-  /* color: #fff; */
+  font-family: 'Inter', "Open Sans", sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   position: relative;
-  /* background: transparent; */
   height: 100%;
   margin: 0;
   padding: 0;
@@ -23,9 +34,7 @@ body {
 body::before {
   content: "";
   position: fixed;
-  /* background: #fff; */
-  /* background-image:linear-gradient(#000000c4, #000000cd), url("../img/bg.jpg"); */
-  /* background-size: cover; */
+  background: var(--bg-primary);
   left: 0;
   right: 0;
   top: 0;
@@ -40,12 +49,12 @@ body::before {
 }
 
 a {
-  color: #18d26e;
+  color: var(--accent-primary);
   text-decoration: none;
 }
 
 a:hover {
-  color: #35e888;
+  color: var(--accent-secondary);
   text-decoration: none;
 }
 
@@ -55,7 +64,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Raleway", sans-serif;
+  font-family: 'Inter', "Raleway", sans-serif;
+  color: var(--text-primary);
 }
 
 /*--------------------------------------------------------------
@@ -81,12 +91,12 @@ h6 {
   padding: 0;
   line-height: 1;
   font-weight: 700;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Inter', "Poppins", sans-serif;
 }
 
 #header h1 a,
 #header h1 a:hover {
-  color: #fff;
+  color: var(--text-primary);
   line-height: 1;
   display: inline-block;
 }
@@ -94,7 +104,7 @@ h6 {
 #header h2 {
   font-size: 24px;
   margin-top: 20px;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-secondary);
 }
 
 #header h2 span {
@@ -380,23 +390,29 @@ section .container {
 
 .section-title h2 {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   padding: 0;
-  line-height: 1px;
+  line-height: 1;
   margin: 0 0 40px 0;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   text-transform: uppercase;
-  color: #aaaaaa;
-  font-family: "Poppins", sans-serif;
+  color: var(--accent-primary);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.section-title h2::before {
+  content: "// ";
+  color: var(--text-muted);
 }
 
 .section-title h2::after {
   content: "";
-  width: 120px;
-  height: 1px;
+  width: 100px;
+  height: 2px;
   display: inline-block;
-  background: #4ceb95;
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-tertiary) 100%);
   margin: 4px 10px;
+  border-radius: 2px;
 }
 
 .section-title p {
@@ -405,8 +421,8 @@ section .container {
   font-size: 36px;
   font-weight: 700;
   text-transform: uppercase;
-  font-family: "Poppins", sans-serif;
-  color: #fff;
+  font-family: 'Inter', "Poppins", sans-serif;
+  color: var(--text-primary);
 }
 
 /*--------------------------------------------------------------
@@ -502,24 +518,29 @@ section .container {
   text-transform: uppercase;
   display: block;
   font-weight: 600;
-  font-family: "Poppins", sans-serif;
-  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--text-primary);
 }
 
 .skills .progress .skill .val {
   float: right;
   font-style: normal;
+  color: var(--accent-primary);
 }
 
 .skills .progress-bar-wrap {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--bg-tertiary);
+  border-radius: 4px;
+  overflow: hidden;
 }
 
 .skills .progress-bar {
   width: 1px;
   height: 10px;
   transition: 0.9s;
-  background-color: #18d26e;
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-tertiary) 100%);
+  border-radius: 4px;
 }
 
 /*--------------------------------------------------------------
@@ -529,27 +550,30 @@ section .container {
   display: flex;
   align-items: center;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.08);
-  transition: ease-in-out 0.3s;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  transition: all 0.3s ease;
 }
 
 .interests .icon-box i {
-  font-size: 32px;
-  padding-right: 10px;
+  font-size: 28px;
+  padding-right: 16px;
   line-height: 1;
 }
 
 .interests .icon-box h3 {
-  font-weight: 700;
+  font-weight: 500;
   margin: 0;
   padding: 0;
-  line-height: 1;
-  font-size: 16px;
-  color: #fff;
+  line-height: 1.4;
+  font-size: 15px;
+  color: var(--text-primary);
 }
 
 .interests .icon-box:hover {
-  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--accent-primary);
+  transform: translateX(8px);
 }
 
 /*--------------------------------------------------------------
@@ -1194,8 +1218,8 @@ section .container {
 }
 
 
-.bg_1{
-  background-image:linear-gradient(#000000c4, #000000cd), url("../img/bg.jpg");
+.bg_1 {
+  background-image: linear-gradient(#000000c4, #000000cd), url("../img/bg.jpg");
   background-size: cover;
   background-color: #040404;
   color: #fff;

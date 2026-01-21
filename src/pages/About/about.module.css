@@ -1,30 +1,36 @@
 .section_title h2 {
-    font-size: 16px;
-    font-weight: 500;
-    padding: 0;
-    line-height: 1px;
-    margin: 80px 0 20px 0;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #aaaaaa;
-    font-family: "Poppins", sans-serif;
-  }
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0;
+  line-height: 1;
+  margin: 80px 0 20px 0;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #58a6ff;
+  font-family: 'JetBrains Mono', monospace;
+}
 
-  .section_title h2::after {
-    content: "";
-    width: 120px;
-    height: 1px;
-    display: inline-block;
-    background: #4ceb95;
-    margin: 4px 10px;
-  }
+.section_title h2::before {
+  content: "// ";
+  color: #6e7681;
+}
 
-  .section_title p {
-    margin: 0;
-    margin: 0px 0 15px 0;
-    font-size: 26px;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-family: "Poppins", sans-serif;
-    color: #fff;
-  }
+.section_title h2::after {
+  content: "";
+  width: 100px;
+  height: 2px;
+  display: inline-block;
+  background: linear-gradient(135deg, #58a6ff 0%, #d2a8ff 100%);
+  margin: 4px 10px;
+  border-radius: 2px;
+}
+
+.section_title p {
+  margin: 0;
+  margin: 0px 0 15px 0;
+  font-size: 32px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+  color: #f0f6fc;
+}

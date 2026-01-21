@@ -1,36 +1,48 @@
-.navBar_Background{
-    background-color: #1a1a1a;
-    height: 60px;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    z-index: 999;
-    transition: 0.5s;
+.navBar_Background {
+  background: rgba(13, 17, 23, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid #30363d;
+  height: 70px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
+
 .navbar1 ul {
   margin: 0;
   padding: 0;
   display: flex;
   list-style: none;
   align-items: center;
+  gap: 8px;
 }
+
 .navbar1 li {
   position: relative;
 }
-  .navbar1 li+li {
-    margin-left: 30px;
-  }
-  
-  .navbar1 ul a,
-  .navbar1 ul a:focus {
-    font-family: "Poppins", sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.7);
-    white-space: nowrap;
-    transition: 0.3s;
-  }
-  .navbar1 ul a i,
+
+.navbar1 li+li {
+  margin-left: 0;
+}
+
+.navbar1 ul a,
+.navbar1 ul a:focus {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  color: #8b949e;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  padding: 8px 16px;
+  border-radius: 20px;
+  position: relative;
+}
+
+.navbar1 ul a i,
 .navbar1 ul a:focus i {
   font-size: 12px;
   line-height: 0;
@@ -40,26 +52,26 @@
 .navbar1 ul a:before {
   content: "";
   position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: 5px;
-  left: 2px;
-  background-color: #18d26e;
-  visibility: hidden;
-  width: 0px;
-  transition: all 0.3s ease-in-out 0s;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: linear-gradient(135deg, #58a6ff 0%, #d2a8ff 100%);
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: -1;
+  border-radius: 20px;
 }
 
 .navbar1 ul a:hover:before,
 .navbar1 ul li:hover>ul a:before,
 .navbar1 ul .active:before {
-  visibility: visible;
-  width: 50%;
+  opacity: 1;
 }
 
 .navbar1 ul a:hover,
 .navbar1 ul .active,
 .navbar1 ul .active:focus,
 .navbar1 ul li:hover>a {
-  color: #fff;
+  color: #0d1117;
 }
