@@ -5,12 +5,70 @@
     box-sizing: border-box;
 }
 
+/* CSS Variables for Theme */
+:root[data-theme="dark"] {
+    --bg-primary: #0d1117;
+    --bg-secondary: rgba(22, 27, 34, 0.9);
+    --bg-tertiary: #21262d;
+    --bg-card: #1c2128;
+    --text-primary: #f0f6fc;
+    --text-secondary: #8b949e;
+    --text-muted: #6e7681;
+    --border-color: #30363d;
+    --border-highlight: #58a6ff;
+    --shadow: rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --shadow-card: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    --accent-from: #58a6ff;
+    --accent-to: #d2a8ff;
+    --accent-primary: #58a6ff;
+    --accent-secondary: #7ee787;
+    --accent-tertiary: #d2a8ff;
+    --accent-warning: #ffa657;
+    --hover-text: #0d1117;
+    --card-bg: #fff;
+    --card-text: #616161;
+    --code-keyword: #d2a8ff;
+    --code-string: #7ee787;
+    --code-prop: #79c0ff;
+    --code-comment: #8b949e;
+}
+
+:root[data-theme="light"] {
+    --bg-primary: #FCF8F8;
+    --bg-secondary: rgba(248, 249, 250, 0.95);
+    --bg-tertiary: #f6f8fa;
+    --bg-card: #f8f9fa;
+    --text-primary: #24292f;
+    --text-secondary: #57606a;
+    --text-muted: #6e7681;
+    --border-color: #d0d7de;
+    --border-highlight: #0969da;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-card: rgba(0, 0, 0, 0.08) 0px 10px 20px, rgba(0, 0, 0, 0.04) 0px 6px 6px;
+    --accent-from: #0969da;
+    --accent-to: #8250df;
+    --accent-primary: #0969da;
+    --accent-secondary: #1a7f37;
+    --accent-tertiary: #8250df;
+    --accent-warning: #bc4c00;
+    --hover-text: #ffffff;
+    --card-bg: #ffffff;
+    --card-text: #24292f;
+    --code-keyword: #8250df;
+    --code-string: #0a3069;
+    --code-prop: #6639ba;
+    --code-comment: #57606a;
+}
+
 body {
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #0d1117;
-    color: #f0f6fc;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 code {
