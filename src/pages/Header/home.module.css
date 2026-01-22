@@ -163,7 +163,7 @@
 }
 
 .gradientBgAnimated {
-    background: linear-gradient(-45deg, #0d1117, #161b22, #1c2128, #0d1117);
+    background: linear-gradient(-45deg, var(--bg-primary), var(--bg-secondary), var(--bg-card), var(--bg-primary));
     background-size: 400% 400%;
     animation: gradientShift 15s ease infinite;
 }
@@ -349,15 +349,15 @@
 }
 
 .codeKeyword {
-    color: var(--accent-tertiary);
+    color: var(--code-keyword);
 }
 
 .codeProp {
-    color: var(--accent-primary);
+    color: var(--code-prop);
 }
 
 .codeString {
-    color: var(--accent-secondary);
+    color: var(--code-string) !important;
 }
 
 .codeNumber {
