@@ -122,3 +122,332 @@
   margin: 0;
   text-align: center;
 }
+
+/* Solar System Styles */
+.solar_system_container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  overflow: hidden;
+}
+
+.solar_system {
+  position: relative;
+  width: 900px;
+  height: 900px;
+  max-width: 95vw;
+  max-height: 95vw;
+  margin: 0 auto;
+}
+
+/* Central Sun */
+.sun {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  z-index: 100;
+}
+
+.sun_core {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #ffd700, #ff8c00, #ff6347);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 0 40px rgba(255, 215, 0, 0.8),
+    0 0 80px rgba(255, 140, 0, 0.5),
+    inset 0 0 20px rgba(255, 255, 255, 0.3);
+  animation: sunPulse 3s ease-in-out infinite;
+}
+
+.sun_text {
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+@keyframes sunPulse {
+
+  0%,
+  100% {
+    box-shadow:
+      0 0 40px rgba(255, 215, 0, 0.8),
+      0 0 80px rgba(255, 140, 0, 0.5),
+      inset 0 0 20px rgba(255, 255, 255, 0.3);
+  }
+
+  50% {
+    box-shadow:
+      0 0 60px rgba(255, 215, 0, 1),
+      0 0 100px rgba(255, 140, 0, 0.7),
+      inset 0 0 30px rgba(255, 255, 255, 0.5);
+  }
+}
+
+/* Orbits */
+.orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+
+.orbit_ring {
+  width: 100%;
+  height: 100%;
+  border: 1px dashed rgba(88, 166, 255, 0.2);
+  border-radius: 50%;
+  position: absolute;
+}
+
+.orbit_1 {
+  width: 300px;
+  height: 300px;
+  animation: rotateOrbit 30s linear infinite;
+  --orbit-radius: 150px;
+}
+
+.orbit_2 {
+  width: 450px;
+  height: 450px;
+  animation: rotateOrbit 40s linear infinite;
+  --orbit-radius: 225px;
+}
+
+.orbit_3 {
+  width: 600px;
+  height: 600px;
+  animation: rotateOrbit 50s linear infinite;
+  --orbit-radius: 300px;
+}
+
+.orbit_4 {
+  width: 750px;
+  height: 750px;
+  animation: rotateOrbit 60s linear infinite;
+  --orbit-radius: 375px;
+}
+
+@keyframes rotateOrbit {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Orbit Items (Skills) */
+.orbit_item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+}
+
+.skill_planet {
+  position: relative;
+  background: var(--bg-card, #1e1e1e);
+  border: 2px solid var(--border-color, #333);
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.skill_planet:hover {
+  transform: translate(-50%, -50%) scale(1.2);
+  border-color: var(--accent-primary, #58a6ff);
+  box-shadow: 0 0 25px rgba(88, 166, 255, 0.4);
+  z-index: 10;
+}
+
+.skill_name {
+  font-size: 9px;
+  font-weight: 500;
+  color: var(--text-secondary, #8b949e);
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  white-space: nowrap;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .solar_system {
+    width: 650px;
+    height: 650px;
+  }
+
+  .sun {
+    width: 100px;
+    height: 100px;
+  }
+
+  .sun_text {
+    font-size: 16px;
+  }
+
+  .orbit_1 {
+    width: 220px;
+    height: 220px;
+    --orbit-radius: 110px;
+  }
+
+  .orbit_2 {
+    width: 340px;
+    height: 340px;
+    --orbit-radius: 170px;
+  }
+
+  .orbit_3 {
+    width: 460px;
+    height: 460px;
+    --orbit-radius: 230px;
+  }
+
+  .orbit_4 {
+    width: 580px;
+    height: 580px;
+    --orbit-radius: 290px;
+  }
+
+  .skill_planet {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+@media (max-width: 768px) {
+  .solar_system {
+    width: 480px;
+    height: 480px;
+  }
+
+  .sun {
+    width: 70px;
+    height: 70px;
+  }
+
+  .sun_text {
+    font-size: 12px;
+  }
+
+  .orbit_1 {
+    width: 140px;
+    height: 140px;
+    --orbit-radius: 70px;
+  }
+
+  .orbit_2 {
+    width: 220px;
+    height: 220px;
+    --orbit-radius: 110px;
+  }
+
+  .orbit_3 {
+    width: 300px;
+    height: 300px;
+    --orbit-radius: 150px;
+  }
+
+  .orbit_4 {
+    width: 380px;
+    height: 380px;
+    --orbit-radius: 190px;
+  }
+
+  .skill_planet {
+    width: 60px;
+    height: 60px;
+  }
+
+  .skill_planet svg {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  .skill_name {
+    font-size: 7px;
+  }
+}
+
+@media (max-width: 576px) {
+  .solar_system_container {
+    min-height: 80vh;
+    padding: 20px 10px;
+  }
+
+  .solar_system {
+    width: 360px;
+    height: 360px;
+  }
+
+  .sun {
+    width: 50px;
+    height: 50px;
+  }
+
+  .sun_text {
+    font-size: 9px;
+  }
+
+  .orbit_1 {
+    width: 110px;
+    height: 110px;
+    --orbit-radius: 55px;
+  }
+
+  .orbit_2 {
+    width: 170px;
+    height: 170px;
+    --orbit-radius: 85px;
+  }
+
+  .orbit_3 {
+    width: 230px;
+    height: 230px;
+    --orbit-radius: 115px;
+  }
+
+  .orbit_4 {
+    width: 290px;
+    height: 290px;
+    --orbit-radius: 145px;
+  }
+
+  .skill_planet {
+    width: 50px;
+    height: 50px;
+  }
+
+  .skill_planet svg {
+    width: 22px !important;
+    height: 22px !important;
+  }
+
+  .skill_name {
+    font-size: 6px;
+  }
+}
