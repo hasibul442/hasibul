@@ -1,12 +1,11 @@
 .card_wrap {
   width: 220px;
-  background: #fff;
+  background: var(--card-bg);
   border-radius: 20px;
-  border: 5px solid #fff;
+  border: 5px solid var(--card-bg);
   overflow: hidden;
-  color: #616161;
-  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
-    rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  color: var(--card-text);
+  box-shadow: var(--shadow-card);
   cursor: pointer;
   transition: all .2s ease-in-out;
 }
@@ -96,8 +95,8 @@
 
 /* Skill Icon Box - Developer Theme */
 .icon_box {
-  background: #1c2128;
-  border: 1px solid #30363d;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 16px 8px;
   display: flex;
@@ -110,7 +109,7 @@
 }
 
 .icon_box:hover {
-  border-color: #58a6ff;
+  border-color: var(--accent-primary);
   transform: translateY(-4px);
   box-shadow: 0 0 20px rgba(88, 166, 255, 0.2);
 }
@@ -119,7 +118,7 @@
   font-family: 'JetBrains Mono', monospace;
   font-size: 10px;
   font-weight: 500;
-  color: #8b949e;
+  color: var(--text-secondary);
   margin: 0;
   text-align: center;
 }
