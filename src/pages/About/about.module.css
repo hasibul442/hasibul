@@ -6,13 +6,13 @@
   margin: 80px 0 20px 0;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: #58a6ff;
+  color: var(--accent-primary);
   font-family: 'JetBrains Mono', monospace;
 }
 
 .section_title h2::before {
   content: "// ";
-  color: #6e7681;
+  color: var(--text-muted);
 }
 
 .section_title h2::after {
@@ -20,7 +20,7 @@
   width: 100px;
   height: 2px;
   display: inline-block;
-  background: linear-gradient(135deg, #58a6ff 0%, #d2a8ff 100%);
+  background: linear-gradient(135deg, var(--accent-from) 0%, var(--accent-to) 100%);
   margin: 4px 10px;
   border-radius: 2px;
 }
@@ -32,5 +32,5 @@
   font-weight: 700;
   text-transform: uppercase;
   font-family: 'Inter', sans-serif;
-  color: #f0f6fc;
+  color: var(--text-primary);
 }
