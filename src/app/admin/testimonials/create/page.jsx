@@ -1,7 +1,5 @@
 "use client";
-import { removespace } from "@/Helper/Helper";
-import { db } from "@/lib/firebase";
-import { doc, setDoc } from "firebase/firestore";
+import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -11,29 +9,43 @@ function Page() {
 	const [name, setName] = useState("");
 	const [company, setCompany] = useState("");
 	const [position, setPosition] = useState("");
-	const [description, setDescription] = useState("");
-	const [image, setImage] = useState("");
+	const [testimonial, setTestimonial] = useState("");
+	const [avatar, setAvatar] = useState("");
+	const [rating, setRating] = useState(5);
 
 	const router = useRouter();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		const sanitizedName = removespace(name);
-		const sanitizedCompany = removespace(company);
-		const sanitizedPosition = removespace(position);
+		try {
+			const response = await axios.post("/api/v1/testimonial", {
+				name,
+				company,
+				position,
+				testimonial,
+				avatar,
+				rating: parseInt(rating)
+			});
 
-		return setDoc(doc(db, "testimonials", `${sanitizedName}-${sanitizedCompany}-${sanitizedPosition}`), {
-			id: `${sanitizedName}-${sanitizedCompany}-${sanitizedPosition}`,
-			name: name,
-			company: company,
-			position: position,
-			image: image,
-			description: description,
-			status: 1,
-			createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-		});
+			if (response.data.success) {
+				await Swal.fire({
+					title: "Success!",
+					text: "Testimonial created successfully.",
+					icon: "success",
+					showConfirmButton: false,
+					timer: 1500
+				});
+				router.push("/admin/testimonials");
+			}
+		} catch (error) {
+			console.error("Error creating testimonial:", error);
+			await Swal.fire({
+				title: "Error!",
+				text: error.response?.data?.error || "Failed to create testimonial",
+				icon: "error"
+			});
+		}
 	};
 
 	return (
@@ -90,10 +102,25 @@ function Page() {
 										<input
 											type="url"
 											className="form-control"
-											placeholder="Image URL"
-											aria-label="Image URL"
-											value={image}
-											onChange={(e) => setImage(e.target.value)}
+											placeholder="Avatar URL"
+											aria-label="Avatar URL"
+											value={avatar}
+											onChange={(e) => setAvatar(e.target.value)}
+										/>
+									</div>
+								</div>
+
+								<div className="col-md-6">
+									<div className="mb-3">
+										<input
+											type="number"
+											className="form-control"
+											placeholder="Rating (1-5)"
+											aria-label="Rating"
+											min="1"
+											max="5"
+											value={rating}
+											onChange={(e) => setRating(e.target.value)}
 										/>
 									</div>
 								</div>
@@ -102,11 +129,11 @@ function Page() {
 									<div className="mb-3">
 										<textarea
 											className="form-control"
-											placeholder="Description"
-											aria-label="Description"
+											placeholder="Testimonial"
+											aria-label="Testimonial"
 											rows="4"
-											value={description}
-											onChange={(e) => setDescription(e.target.value)}
+											value={testimonial}
+											onChange={(e) => setTestimonial(e.target.value)}
 										/>
 									</div>
 								</div>
