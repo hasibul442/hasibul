@@ -1,42 +1,33 @@
 import connectDB from '@/lib/mongodb';
-import Blog from '@/models/Blog';
+import Project from '@/models/Project';
 
-// GET all blogs or single blog by ID
+// GET all projects or single project by ID
 export async function GET(request) {
     try {
         await connectDB();
 
         const { searchParams } = new URL(request.url);
         const id = searchParams.get('id');
-        const slug = searchParams.get('slug');
+        const featured = searchParams.get('featured');
 
         if (id) {
-            const blog = await Blog.findById(id);
-            if (!blog) {
+            const project = await Project.findById(id);
+            if (!project) {
                 return Response.json(
-                    { success: false, error: 'Blog not found' },
+                    { success: false, error: 'Project not found' },
                     { status: 404 }
                 );
             }
-            return Response.json({ success: true, data: blog });
+            return Response.json({ success: true, data: project });
         }
 
-        if (slug) {
-            const blog = await Blog.findOne({ slug });
-            if (!blog) {
-                return Response.json(
-                    { success: false, error: 'Blog not found' },
-                    { status: 404 }
-                );
-            }
-            // Increment views
-            blog.views += 1;
-            await blog.save();
-            return Response.json({ success: true, data: blog });
+        let query = {};
+        if (featured === 'true') {
+            query.featured = true;
         }
 
-        const blogs = await Blog.find({}).sort({ createdAt: -1 });
-        return Response.json({ success: true, data: blogs });
+        const projects = await Project.find(query).sort({ order: 1, createdAt: -1 });
+        return Response.json({ success: true, data: projects });
     } catch (error) {
         return Response.json(
             { success: false, error: error.message },
@@ -45,16 +36,16 @@ export async function GET(request) {
     }
 }
 
-// POST create new blog
+// POST create new project
 export async function POST(request) {
     try {
         await connectDB();
 
         const body = await request.json();
-        const blog = await Blog.create(body);
+        const project = await Project.create(body);
 
         return Response.json(
-            { success: true, data: blog },
+            { success: true, data: project },
             { status: 201 }
         );
     } catch (error) {
@@ -65,7 +56,7 @@ export async function POST(request) {
     }
 }
 
-// PUT update blog
+// PUT update project
 export async function PUT(request) {
     try {
         await connectDB();
@@ -81,19 +72,19 @@ export async function PUT(request) {
         }
 
         const body = await request.json();
-        const blog = await Blog.findByIdAndUpdate(id, body, {
+        const project = await Project.findByIdAndUpdate(id, body, {
             new: true,
             runValidators: true,
         });
 
-        if (!blog) {
+        if (!project) {
             return Response.json(
-                { success: false, error: 'Blog not found' },
+                { success: false, error: 'Project not found' },
                 { status: 404 }
             );
         }
 
-        return Response.json({ success: true, data: blog });
+        return Response.json({ success: true, data: project });
     } catch (error) {
         return Response.json(
             { success: false, error: error.message },
@@ -102,7 +93,7 @@ export async function PUT(request) {
     }
 }
 
-// DELETE blog
+// DELETE project
 export async function DELETE(request) {
     try {
         await connectDB();
@@ -117,11 +108,11 @@ export async function DELETE(request) {
             );
         }
 
-        const blog = await Blog.findByIdAndDelete(id);
+        const project = await Project.findByIdAndDelete(id);
 
-        if (!blog) {
+        if (!project) {
             return Response.json(
-                { success: false, error: 'Blog not found' },
+                { success: false, error: 'Project not found' },
                 { status: 404 }
             );
         }

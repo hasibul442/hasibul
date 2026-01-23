@@ -1,42 +1,27 @@
 import connectDB from '@/lib/mongodb';
-import Blog from '@/models/Blog';
+import Interest from '@/models/Interest';
 
-// GET all blogs or single blog by ID
+// GET all interests or single interest by ID
 export async function GET(request) {
     try {
         await connectDB();
 
         const { searchParams } = new URL(request.url);
         const id = searchParams.get('id');
-        const slug = searchParams.get('slug');
 
         if (id) {
-            const blog = await Blog.findById(id);
-            if (!blog) {
+            const interest = await Interest.findById(id);
+            if (!interest) {
                 return Response.json(
-                    { success: false, error: 'Blog not found' },
+                    { success: false, error: 'Interest not found' },
                     { status: 404 }
                 );
             }
-            return Response.json({ success: true, data: blog });
+            return Response.json({ success: true, data: interest });
         }
 
-        if (slug) {
-            const blog = await Blog.findOne({ slug });
-            if (!blog) {
-                return Response.json(
-                    { success: false, error: 'Blog not found' },
-                    { status: 404 }
-                );
-            }
-            // Increment views
-            blog.views += 1;
-            await blog.save();
-            return Response.json({ success: true, data: blog });
-        }
-
-        const blogs = await Blog.find({}).sort({ createdAt: -1 });
-        return Response.json({ success: true, data: blogs });
+        const interests = await Interest.find({}).sort({ order: 1, title: 1 });
+        return Response.json({ success: true, data: interests });
     } catch (error) {
         return Response.json(
             { success: false, error: error.message },
@@ -45,16 +30,16 @@ export async function GET(request) {
     }
 }
 
-// POST create new blog
+// POST create new interest
 export async function POST(request) {
     try {
         await connectDB();
 
         const body = await request.json();
-        const blog = await Blog.create(body);
+        const interest = await Interest.create(body);
 
         return Response.json(
-            { success: true, data: blog },
+            { success: true, data: interest },
             { status: 201 }
         );
     } catch (error) {
@@ -65,7 +50,7 @@ export async function POST(request) {
     }
 }
 
-// PUT update blog
+// PUT update interest
 export async function PUT(request) {
     try {
         await connectDB();
@@ -81,19 +66,19 @@ export async function PUT(request) {
         }
 
         const body = await request.json();
-        const blog = await Blog.findByIdAndUpdate(id, body, {
+        const interest = await Interest.findByIdAndUpdate(id, body, {
             new: true,
             runValidators: true,
         });
 
-        if (!blog) {
+        if (!interest) {
             return Response.json(
-                { success: false, error: 'Blog not found' },
+                { success: false, error: 'Interest not found' },
                 { status: 404 }
             );
         }
 
-        return Response.json({ success: true, data: blog });
+        return Response.json({ success: true, data: interest });
     } catch (error) {
         return Response.json(
             { success: false, error: error.message },
@@ -102,7 +87,7 @@ export async function PUT(request) {
     }
 }
 
-// DELETE blog
+// DELETE interest
 export async function DELETE(request) {
     try {
         await connectDB();
@@ -117,11 +102,11 @@ export async function DELETE(request) {
             );
         }
 
-        const blog = await Blog.findByIdAndDelete(id);
+        const interest = await Interest.findByIdAndDelete(id);
 
-        if (!blog) {
+        if (!interest) {
             return Response.json(
-                { success: false, error: 'Blog not found' },
+                { success: false, error: 'Interest not found' },
                 { status: 404 }
             );
         }

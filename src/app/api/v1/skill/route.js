@@ -1,42 +1,33 @@
 import connectDB from '@/lib/mongodb';
-import Blog from '@/models/Blog';
+import Skill from '@/models/Skill';
 
-// GET all blogs or single blog by ID
+// GET all skills or single skill by ID
 export async function GET(request) {
     try {
         await connectDB();
 
         const { searchParams } = new URL(request.url);
         const id = searchParams.get('id');
-        const slug = searchParams.get('slug');
+        const category = searchParams.get('category');
 
         if (id) {
-            const blog = await Blog.findById(id);
-            if (!blog) {
+            const skill = await Skill.findById(id);
+            if (!skill) {
                 return Response.json(
-                    { success: false, error: 'Blog not found' },
+                    { success: false, error: 'Skill not found' },
                     { status: 404 }
                 );
             }
-            return Response.json({ success: true, data: blog });
+            return Response.json({ success: true, data: skill });
         }
 
-        if (slug) {
-            const blog = await Blog.findOne({ slug });
-            if (!blog) {
-                return Response.json(
-                    { success: false, error: 'Blog not found' },
-                    { status: 404 }
-                );
-            }
-            // Increment views
-            blog.views += 1;
-            await blog.save();
-            return Response.json({ success: true, data: blog });
+        let query = {};
+        if (category) {
+            query.category = category;
         }
 
-        const blogs = await Blog.find({}).sort({ createdAt: -1 });
-        return Response.json({ success: true, data: blogs });
+        const skills = await Skill.find(query).sort({ order: 1, name: 1 });
+        return Response.json({ success: true, data: skills });
     } catch (error) {
         return Response.json(
             { success: false, error: error.message },
@@ -45,16 +36,16 @@ export async function GET(request) {
     }
 }
 
-// POST create new blog
+// POST create new skill
 export async function POST(request) {
     try {
         await connectDB();
 
         const body = await request.json();
-        const blog = await Blog.create(body);
+        const skill = await Skill.create(body);
 
         return Response.json(
-            { success: true, data: blog },
+            { success: true, data: skill },
             { status: 201 }
         );
     } catch (error) {
@@ -65,7 +56,7 @@ export async function POST(request) {
     }
 }
 
-// PUT update blog
+// PUT update skill
 export async function PUT(request) {
     try {
         await connectDB();
@@ -81,19 +72,19 @@ export async function PUT(request) {
         }
 
         const body = await request.json();
-        const blog = await Blog.findByIdAndUpdate(id, body, {
+        const skill = await Skill.findByIdAndUpdate(id, body, {
             new: true,
             runValidators: true,
         });
 
-        if (!blog) {
+        if (!skill) {
             return Response.json(
-                { success: false, error: 'Blog not found' },
+                { success: false, error: 'Skill not found' },
                 { status: 404 }
             );
         }
 
-        return Response.json({ success: true, data: blog });
+        return Response.json({ success: true, data: skill });
     } catch (error) {
         return Response.json(
             { success: false, error: error.message },
@@ -102,7 +93,7 @@ export async function PUT(request) {
     }
 }
 
-// DELETE blog
+// DELETE skill
 export async function DELETE(request) {
     try {
         await connectDB();
@@ -117,11 +108,11 @@ export async function DELETE(request) {
             );
         }
 
-        const blog = await Blog.findByIdAndDelete(id);
+        const skill = await Skill.findByIdAndDelete(id);
 
-        if (!blog) {
+        if (!skill) {
             return Response.json(
-                { success: false, error: 'Blog not found' },
+                { success: false, error: 'Skill not found' },
                 { status: 404 }
             );
         }

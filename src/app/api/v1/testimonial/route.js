@@ -1,42 +1,27 @@
 import connectDB from '@/lib/mongodb';
-import Blog from '@/models/Blog';
+import Testimonial from '@/models/Testimonial';
 
-// GET all blogs or single blog by ID
+// GET all testimonials or single testimonial by ID
 export async function GET(request) {
     try {
         await connectDB();
 
         const { searchParams } = new URL(request.url);
         const id = searchParams.get('id');
-        const slug = searchParams.get('slug');
 
         if (id) {
-            const blog = await Blog.findById(id);
-            if (!blog) {
+            const testimonial = await Testimonial.findById(id);
+            if (!testimonial) {
                 return Response.json(
-                    { success: false, error: 'Blog not found' },
+                    { success: false, error: 'Testimonial not found' },
                     { status: 404 }
                 );
             }
-            return Response.json({ success: true, data: blog });
+            return Response.json({ success: true, data: testimonial });
         }
 
-        if (slug) {
-            const blog = await Blog.findOne({ slug });
-            if (!blog) {
-                return Response.json(
-                    { success: false, error: 'Blog not found' },
-                    { status: 404 }
-                );
-            }
-            // Increment views
-            blog.views += 1;
-            await blog.save();
-            return Response.json({ success: true, data: blog });
-        }
-
-        const blogs = await Blog.find({}).sort({ createdAt: -1 });
-        return Response.json({ success: true, data: blogs });
+        const testimonials = await Testimonial.find({}).sort({ order: 1, createdAt: -1 });
+        return Response.json({ success: true, data: testimonials });
     } catch (error) {
         return Response.json(
             { success: false, error: error.message },
@@ -45,16 +30,16 @@ export async function GET(request) {
     }
 }
 
-// POST create new blog
+// POST create new testimonial
 export async function POST(request) {
     try {
         await connectDB();
 
         const body = await request.json();
-        const blog = await Blog.create(body);
+        const testimonial = await Testimonial.create(body);
 
         return Response.json(
-            { success: true, data: blog },
+            { success: true, data: testimonial },
             { status: 201 }
         );
     } catch (error) {
@@ -65,7 +50,7 @@ export async function POST(request) {
     }
 }
 
-// PUT update blog
+// PUT update testimonial
 export async function PUT(request) {
     try {
         await connectDB();
@@ -81,19 +66,19 @@ export async function PUT(request) {
         }
 
         const body = await request.json();
-        const blog = await Blog.findByIdAndUpdate(id, body, {
+        const testimonial = await Testimonial.findByIdAndUpdate(id, body, {
             new: true,
             runValidators: true,
         });
 
-        if (!blog) {
+        if (!testimonial) {
             return Response.json(
-                { success: false, error: 'Blog not found' },
+                { success: false, error: 'Testimonial not found' },
                 { status: 404 }
             );
         }
 
-        return Response.json({ success: true, data: blog });
+        return Response.json({ success: true, data: testimonial });
     } catch (error) {
         return Response.json(
             { success: false, error: error.message },
@@ -102,7 +87,7 @@ export async function PUT(request) {
     }
 }
 
-// DELETE blog
+// DELETE testimonial
 export async function DELETE(request) {
     try {
         await connectDB();
@@ -117,11 +102,11 @@ export async function DELETE(request) {
             );
         }
 
-        const blog = await Blog.findByIdAndDelete(id);
+        const testimonial = await Testimonial.findByIdAndDelete(id);
 
-        if (!blog) {
+        if (!testimonial) {
             return Response.json(
-                { success: false, error: 'Blog not found' },
+                { success: false, error: 'Testimonial not found' },
                 { status: 404 }
             );
         }
