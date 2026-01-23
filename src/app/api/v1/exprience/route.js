@@ -1,5 +1,6 @@
 import connectDB from '@/lib/mongodb';
 import Experience from '@/models/Experience';
+import { NextResponse } from 'next/server';
 
 // GET all experiences
 export async function GET(request) {
@@ -12,18 +13,18 @@ export async function GET(request) {
         if (id) {
             const experience = await Experience.findById(id);
             if (!experience) {
-                return Response.json(
+                return NextResponse.json(
                     { success: false, error: 'Experience not found' },
                     { status: 404 }
                 );
             }
-            return Response.json({ success: true, data: experience });
+            return NextResponse.json({ success: true, data: experience });
         }
 
         const experiences = await Experience.find({}).sort({ order: 1, startDate: -1 });
-        return Response.json({ success: true, data: experiences });
+        return NextResponse.json({ success: true, data: experiences });
     } catch (error) {
-        return Response.json(
+        return NextResponse.json(
             { success: false, error: error.message },
             { status: 500 }
         );
@@ -38,12 +39,12 @@ export async function POST(request) {
         const body = await request.json();
         const experience = await Experience.create(body);
 
-        return Response.json(
+        return NextResponse.json(
             { success: true, data: experience },
             { status: 201 }
         );
     } catch (error) {
-        return Response.json(
+        return NextResponse.json(
             { success: false, error: error.message },
             { status: 400 }
         );
@@ -59,7 +60,7 @@ export async function PUT(request) {
         const id = searchParams.get('id');
 
         if (!id) {
-            return Response.json(
+            return NextResponse.json(
                 { success: false, error: 'ID is required' },
                 { status: 400 }
             );
@@ -72,15 +73,15 @@ export async function PUT(request) {
         });
 
         if (!experience) {
-            return Response.json(
+            return NextResponse.json(
                 { success: false, error: 'Experience not found' },
                 { status: 404 }
             );
         }
 
-        return Response.json({ success: true, data: experience });
+        return NextResponse.json({ success: true, data: experience });
     } catch (error) {
-        return Response.json(
+        return NextResponse.json(
             { success: false, error: error.message },
             { status: 400 }
         );
@@ -96,7 +97,7 @@ export async function DELETE(request) {
         const id = searchParams.get('id');
 
         if (!id) {
-            return Response.json(
+            return NextResponse.json(
                 { success: false, error: 'ID is required' },
                 { status: 400 }
             );
@@ -105,15 +106,15 @@ export async function DELETE(request) {
         const experience = await Experience.findByIdAndDelete(id);
 
         if (!experience) {
-            return Response.json(
+            return NextResponse.json(
                 { success: false, error: 'Experience not found' },
                 { status: 404 }
             );
         }
 
-        return Response.json({ success: true, data: {} });
+        return NextResponse.json({ success: true, data: {} });
     } catch (error) {
-        return Response.json(
+        return NextResponse.json(
             { success: false, error: error.message },
             { status: 500 }
         );

@@ -1,5 +1,6 @@
 import connectDB from '@/lib/mongodb';
 import Github from '@/models/Github';
+import { NextResponse } from 'next/server';
 
 // GET github data
 export async function GET(request) {
@@ -8,14 +9,14 @@ export async function GET(request) {
 
         const githubData = await Github.findOne({});
         if (!githubData) {
-            return Response.json(
+            return NextResponse.json(
                 { success: false, error: 'Github data not found' },
                 { status: 404 }
             );
         }
-        return Response.json({ success: true, data: githubData });
+        return NextResponse.json({ success: true, data: githubData });
     } catch (error) {
-        return Response.json(
+        return NextResponse.json(
             { success: false, error: error.message },
             { status: 500 }
         );
@@ -41,12 +42,12 @@ export async function POST(request) {
             githubData = await Github.create(body);
         }
 
-        return Response.json(
+        return NextResponse.json(
             { success: true, data: githubData },
             { status: 201 }
         );
     } catch (error) {
-        return Response.json(
+        return NextResponse.json(
             { success: false, error: error.message },
             { status: 400 }
         );

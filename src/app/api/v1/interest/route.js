@@ -1,5 +1,6 @@
 import connectDB from '@/lib/mongodb';
 import Interest from '@/models/Interest';
+import { NextResponse } from 'next/server';
 
 // GET all interests or single interest by ID
 export async function GET(request) {
@@ -12,18 +13,18 @@ export async function GET(request) {
         if (id) {
             const interest = await Interest.findById(id);
             if (!interest) {
-                return Response.json(
+                return NextResponse.json(
                     { success: false, error: 'Interest not found' },
                     { status: 404 }
                 );
             }
-            return Response.json({ success: true, data: interest });
+            return NextResponse.json({ success: true, data: interest });
         }
 
         const interests = await Interest.find({}).sort({ order: 1, title: 1 });
-        return Response.json({ success: true, data: interests });
+        return NextResponse.json({ success: true, data: interests });
     } catch (error) {
-        return Response.json(
+        return NextResponse.json(
             { success: false, error: error.message },
             { status: 500 }
         );
@@ -38,12 +39,12 @@ export async function POST(request) {
         const body = await request.json();
         const interest = await Interest.create(body);
 
-        return Response.json(
+        return NextResponse.json(
             { success: true, data: interest },
             { status: 201 }
         );
     } catch (error) {
-        return Response.json(
+        return NextResponse.json(
             { success: false, error: error.message },
             { status: 400 }
         );
@@ -59,7 +60,7 @@ export async function PUT(request) {
         const id = searchParams.get('id');
 
         if (!id) {
-            return Response.json(
+            return NextResponse.json(
                 { success: false, error: 'ID is required' },
                 { status: 400 }
             );
@@ -72,15 +73,15 @@ export async function PUT(request) {
         });
 
         if (!interest) {
-            return Response.json(
+            return NextResponse.json(
                 { success: false, error: 'Interest not found' },
                 { status: 404 }
             );
         }
 
-        return Response.json({ success: true, data: interest });
+        return NextResponse.json({ success: true, data: interest });
     } catch (error) {
-        return Response.json(
+        return NextResponse.json(
             { success: false, error: error.message },
             { status: 400 }
         );
@@ -96,7 +97,7 @@ export async function DELETE(request) {
         const id = searchParams.get('id');
 
         if (!id) {
-            return Response.json(
+            return NextResponse.json(
                 { success: false, error: 'ID is required' },
                 { status: 400 }
             );
@@ -105,15 +106,15 @@ export async function DELETE(request) {
         const interest = await Interest.findByIdAndDelete(id);
 
         if (!interest) {
-            return Response.json(
+            return NextResponse.json(
                 { success: false, error: 'Interest not found' },
                 { status: 404 }
             );
         }
 
-        return Response.json({ success: true, data: {} });
+        return NextResponse.json({ success: true, data: {} });
     } catch (error) {
-        return Response.json(
+        return NextResponse.json(
             { success: false, error: error.message },
             { status: 500 }
         );

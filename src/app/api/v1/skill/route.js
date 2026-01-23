@@ -1,5 +1,6 @@
 import connectDB from '@/lib/mongodb';
 import Skill from '@/models/Skill';
+import { NextResponse } from 'next/server';
 
 // GET all skills or single skill by ID
 export async function GET(request) {
@@ -13,12 +14,12 @@ export async function GET(request) {
         if (id) {
             const skill = await Skill.findById(id);
             if (!skill) {
-                return Response.json(
+                return NextResponse.json(
                     { success: false, error: 'Skill not found' },
                     { status: 404 }
                 );
             }
-            return Response.json({ success: true, data: skill });
+            return NextResponse.json({ success: true, data: skill });
         }
 
         let query = {};
@@ -27,9 +28,9 @@ export async function GET(request) {
         }
 
         const skills = await Skill.find(query).sort({ order: 1, name: 1 });
-        return Response.json({ success: true, data: skills });
+        return NextResponse.json({ success: true, data: skills });
     } catch (error) {
-        return Response.json(
+        return NextResponse.json(
             { success: false, error: error.message },
             { status: 500 }
         );
@@ -44,12 +45,12 @@ export async function POST(request) {
         const body = await request.json();
         const skill = await Skill.create(body);
 
-        return Response.json(
+        return NextResponse.json(
             { success: true, data: skill },
             { status: 201 }
         );
     } catch (error) {
-        return Response.json(
+        return NextResponse.json(
             { success: false, error: error.message },
             { status: 400 }
         );
@@ -65,7 +66,7 @@ export async function PUT(request) {
         const id = searchParams.get('id');
 
         if (!id) {
-            return Response.json(
+            return NextResponse.json(
                 { success: false, error: 'ID is required' },
                 { status: 400 }
             );
@@ -78,15 +79,15 @@ export async function PUT(request) {
         });
 
         if (!skill) {
-            return Response.json(
+            return NextResponse.json(
                 { success: false, error: 'Skill not found' },
                 { status: 404 }
             );
         }
 
-        return Response.json({ success: true, data: skill });
+        return NextResponse.json({ success: true, data: skill });
     } catch (error) {
-        return Response.json(
+        return NextResponse.json(
             { success: false, error: error.message },
             { status: 400 }
         );
@@ -102,7 +103,7 @@ export async function DELETE(request) {
         const id = searchParams.get('id');
 
         if (!id) {
-            return Response.json(
+            return NextResponse.json(
                 { success: false, error: 'ID is required' },
                 { status: 400 }
             );
@@ -111,15 +112,15 @@ export async function DELETE(request) {
         const skill = await Skill.findByIdAndDelete(id);
 
         if (!skill) {
-            return Response.json(
+            return NextResponse.json(
                 { success: false, error: 'Skill not found' },
                 { status: 404 }
             );
         }
 
-        return Response.json({ success: true, data: {} });
+        return NextResponse.json({ success: true, data: {} });
     } catch (error) {
-        return Response.json(
+        return NextResponse.json(
             { success: false, error: error.message },
             { status: 500 }
         );

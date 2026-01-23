@@ -1,5 +1,6 @@
 import connectDB from '@/lib/mongodb';
 import Testimonial from '@/models/Testimonial';
+import { NextResponse } from 'next/server';
 
 // GET all testimonials or single testimonial by ID
 export async function GET(request) {
@@ -12,18 +13,18 @@ export async function GET(request) {
         if (id) {
             const testimonial = await Testimonial.findById(id);
             if (!testimonial) {
-                return Response.json(
+                return NextResponse.json(
                     { success: false, error: 'Testimonial not found' },
                     { status: 404 }
                 );
             }
-            return Response.json({ success: true, data: testimonial });
+            return NextResponse.json({ success: true, data: testimonial });
         }
 
         const testimonials = await Testimonial.find({}).sort({ order: 1, createdAt: -1 });
-        return Response.json({ success: true, data: testimonials });
+        return NextResponse.json({ success: true, data: testimonials });
     } catch (error) {
-        return Response.json(
+        return NextResponse.json(
             { success: false, error: error.message },
             { status: 500 }
         );
@@ -38,12 +39,12 @@ export async function POST(request) {
         const body = await request.json();
         const testimonial = await Testimonial.create(body);
 
-        return Response.json(
+        return NextResponse.json(
             { success: true, data: testimonial },
             { status: 201 }
         );
     } catch (error) {
-        return Response.json(
+        return NextResponse.json(
             { success: false, error: error.message },
             { status: 400 }
         );
@@ -59,7 +60,7 @@ export async function PUT(request) {
         const id = searchParams.get('id');
 
         if (!id) {
-            return Response.json(
+            return NextResponse.json(
                 { success: false, error: 'ID is required' },
                 { status: 400 }
             );
@@ -72,15 +73,15 @@ export async function PUT(request) {
         });
 
         if (!testimonial) {
-            return Response.json(
+            return NextResponse.json(
                 { success: false, error: 'Testimonial not found' },
                 { status: 404 }
             );
         }
 
-        return Response.json({ success: true, data: testimonial });
+        return NextResponse.json({ success: true, data: testimonial });
     } catch (error) {
-        return Response.json(
+        return NextResponse.json(
             { success: false, error: error.message },
             { status: 400 }
         );
@@ -96,7 +97,7 @@ export async function DELETE(request) {
         const id = searchParams.get('id');
 
         if (!id) {
-            return Response.json(
+            return NextResponse.json(
                 { success: false, error: 'ID is required' },
                 { status: 400 }
             );
@@ -105,15 +106,15 @@ export async function DELETE(request) {
         const testimonial = await Testimonial.findByIdAndDelete(id);
 
         if (!testimonial) {
-            return Response.json(
+            return NextResponse.json(
                 { success: false, error: 'Testimonial not found' },
                 { status: 404 }
             );
         }
 
-        return Response.json({ success: true, data: {} });
+        return NextResponse.json({ success: true, data: {} });
     } catch (error) {
-        return Response.json(
+        return NextResponse.json(
             { success: false, error: error.message },
             { status: 500 }
         );

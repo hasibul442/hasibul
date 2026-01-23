@@ -1,5 +1,6 @@
 import connectDB from '@/lib/mongodb';
 import Project from '@/models/Project';
+import { NextResponse } from 'next/server';
 
 // GET all projects or single project by ID
 export async function GET(request) {
@@ -13,12 +14,12 @@ export async function GET(request) {
         if (id) {
             const project = await Project.findById(id);
             if (!project) {
-                return Response.json(
+                return NextResponse.json(
                     { success: false, error: 'Project not found' },
                     { status: 404 }
                 );
             }
-            return Response.json({ success: true, data: project });
+            return NextResponse.json({ success: true, data: project });
         }
 
         let query = {};
@@ -27,9 +28,9 @@ export async function GET(request) {
         }
 
         const projects = await Project.find(query).sort({ order: 1, createdAt: -1 });
-        return Response.json({ success: true, data: projects });
+        return NextResponse.json({ success: true, data: projects });
     } catch (error) {
-        return Response.json(
+        return NextResponse.json(
             { success: false, error: error.message },
             { status: 500 }
         );
@@ -44,12 +45,12 @@ export async function POST(request) {
         const body = await request.json();
         const project = await Project.create(body);
 
-        return Response.json(
+        return NextResponse.json(
             { success: true, data: project },
             { status: 201 }
         );
     } catch (error) {
-        return Response.json(
+        return NextResponse.json(
             { success: false, error: error.message },
             { status: 400 }
         );
@@ -65,7 +66,7 @@ export async function PUT(request) {
         const id = searchParams.get('id');
 
         if (!id) {
-            return Response.json(
+            return NextResponse.json(
                 { success: false, error: 'ID is required' },
                 { status: 400 }
             );
@@ -78,15 +79,15 @@ export async function PUT(request) {
         });
 
         if (!project) {
-            return Response.json(
+            return NextResponse.json(
                 { success: false, error: 'Project not found' },
                 { status: 404 }
             );
         }
 
-        return Response.json({ success: true, data: project });
+        return NextResponse.json({ success: true, data: project });
     } catch (error) {
-        return Response.json(
+        return NextResponse.json(
             { success: false, error: error.message },
             { status: 400 }
         );
@@ -102,7 +103,7 @@ export async function DELETE(request) {
         const id = searchParams.get('id');
 
         if (!id) {
-            return Response.json(
+            return NextResponse.json(
                 { success: false, error: 'ID is required' },
                 { status: 400 }
             );
@@ -111,15 +112,15 @@ export async function DELETE(request) {
         const project = await Project.findByIdAndDelete(id);
 
         if (!project) {
-            return Response.json(
+            return NextResponse.json(
                 { success: false, error: 'Project not found' },
                 { status: 404 }
             );
         }
 
-        return Response.json({ success: true, data: {} });
+        return NextResponse.json({ success: true, data: {} });
     } catch (error) {
-        return Response.json(
+        return NextResponse.json(
             { success: false, error: error.message },
             { status: 500 }
         );

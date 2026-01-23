@@ -1,6 +1,7 @@
 import connectDB from '@/lib/mongodb';
 import User from '@/models/User';
 import bcrypt from 'bcryptjs';
+import { NextResponse } from 'next/server';
 
 // POST register new user
 export async function POST(request) {
@@ -12,7 +13,7 @@ export async function POST(request) {
         // Check if user already exists
         const existingUser = await User.findOne({ email });
         if (existingUser) {
-            return Response.json(
+            return NextResponse.json(
                 { success: false, error: 'User already exists with this email' },
                 { status: 400 }
             );
@@ -38,12 +39,12 @@ export async function POST(request) {
             createdAt: user.createdAt,
         };
 
-        return Response.json(
+        return NextResponse.json(
             { success: true, data: userResponse },
             { status: 201 }
         );
     } catch (error) {
-        return Response.json(
+        return NextResponse.json(
             { success: false, error: error.message },
             { status: 400 }
         );

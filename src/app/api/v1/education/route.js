@@ -1,5 +1,6 @@
 import connectDB from '@/lib/mongodb';
 import Education from '@/models/Education';
+import { NextResponse } from 'next/server';
 
 // GET all educations or single education by ID
 export async function GET(request) {
@@ -12,18 +13,18 @@ export async function GET(request) {
         if (id) {
             const education = await Education.findById(id);
             if (!education) {
-                return Response.json(
+                return NextResponse.json(
                     { success: false, error: 'Education not found' },
                     { status: 404 }
                 );
             }
-            return Response.json({ success: true, data: education });
+            return NextResponse.json({ success: true, data: education });
         }
 
         const educations = await Education.find({}).sort({ order: 1, startDate: -1 });
-        return Response.json({ success: true, data: educations });
+        return NextResponse.json({ success: true, data: educations });
     } catch (error) {
-        return Response.json(
+        return NextResponse.json(
             { success: false, error: error.message },
             { status: 500 }
         );
@@ -38,12 +39,12 @@ export async function POST(request) {
         const body = await request.json();
         const education = await Education.create(body);
 
-        return Response.json(
+        return NextResponse.json(
             { success: true, data: education },
             { status: 201 }
         );
     } catch (error) {
-        return Response.json(
+        return NextResponse.json(
             { success: false, error: error.message },
             { status: 400 }
         );
@@ -59,7 +60,7 @@ export async function PUT(request) {
         const id = searchParams.get('id');
 
         if (!id) {
-            return Response.json(
+            return NextResponse.json(
                 { success: false, error: 'ID is required' },
                 { status: 400 }
             );
@@ -72,15 +73,15 @@ export async function PUT(request) {
         });
 
         if (!education) {
-            return Response.json(
+            return NextResponse.json(
                 { success: false, error: 'Education not found' },
                 { status: 404 }
             );
         }
 
-        return Response.json({ success: true, data: education });
+        return NextResponse.json({ success: true, data: education });
     } catch (error) {
-        return Response.json(
+        return NextResponse.json(
             { success: false, error: error.message },
             { status: 400 }
         );
@@ -96,7 +97,7 @@ export async function DELETE(request) {
         const id = searchParams.get('id');
 
         if (!id) {
-            return Response.json(
+            return NextResponse.json(
                 { success: false, error: 'ID is required' },
                 { status: 400 }
             );
@@ -105,15 +106,15 @@ export async function DELETE(request) {
         const education = await Education.findByIdAndDelete(id);
 
         if (!education) {
-            return Response.json(
+            return NextResponse.json(
                 { success: false, error: 'Education not found' },
                 { status: 404 }
             );
         }
 
-        return Response.json({ success: true, data: {} });
+        return NextResponse.json({ success: true, data: {} });
     } catch (error) {
-        return Response.json(
+        return NextResponse.json(
             { success: false, error: error.message },
             { status: 500 }
         );

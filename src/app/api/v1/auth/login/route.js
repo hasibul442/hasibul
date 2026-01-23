@@ -1,6 +1,7 @@
 import connectDB from '@/lib/mongodb';
 import User from '@/models/User';
 import bcrypt from 'bcryptjs';
+import { NextResponse } from 'next/server';
 
 // POST login user
 export async function POST(request) {
@@ -10,7 +11,7 @@ export async function POST(request) {
         const { email, password } = await request.json();
 
         if (!email || !password) {
-            return Response.json(
+            return NextResponse.json(
                 { success: false, error: 'Please provide email and password' },
                 { status: 400 }
             );
@@ -20,7 +21,7 @@ export async function POST(request) {
         const user = await User.findOne({ email }).select('+password');
 
         if (!user) {
-            return Response.json(
+            return NextResponse.json(
                 { success: false, error: 'Invalid credentials' },
                 { status: 401 }
             );
@@ -30,7 +31,7 @@ export async function POST(request) {
         const isPasswordValid = await bcrypt.compare(password, user.password);
 
         if (!isPasswordValid) {
-            return Response.json(
+            return NextResponse.json(
                 { success: false, error: 'Invalid credentials' },
                 { status: 401 }
             );
@@ -45,13 +46,13 @@ export async function POST(request) {
             createdAt: user.createdAt,
         };
 
-        return Response.json({
+        return NextResponse.json({
             success: true,
             data: userResponse,
             message: 'Login successful',
         });
     } catch (error) {
-        return Response.json(
+        return NextResponse.json(
             { success: false, error: error.message },
             { status: 500 }
         );
