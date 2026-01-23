@@ -6,7 +6,7 @@ import Footer from "./include/Footer";
 export default function AppLayout({ children }) {
   return (
     <>
-      <body className="g-sidenav-show bg-gray-100">
+      <div className="g-sidenav-show bg-gray-100">
         <Suspense>
           <Sidebar />
           <main className="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
@@ -17,7 +17,7 @@ export default function AppLayout({ children }) {
             </div>
           </main>
         </Suspense>
-      </body>
+      </div>
     </>
   );
 }
