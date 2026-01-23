@@ -1,10 +1,9 @@
 'use client'
-import { auth, db } from '@/lib/firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
+import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
+import Swal from 'sweetalert2';
 
 function Page() {
     const [email, setEmail] = useState('');
@@ -15,26 +14,27 @@ function Page() {
     const handleRegisterButton = async (e) => {
         e.preventDefault();
         try {
-            await createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
-                const user = userCredential.user;
-                return setDoc(doc(db, 'users', user.uid), {
-                    id : user.uid,
-                    username: user.displayName || name,
-                    uid: user.uid,
-                    email: user.email,
-                    name: name,
-                    status: 0,
-                    role: 'user',
-                    createdAt: new Date().toISOString(),
-                    updatedAt: new Date().toISOString(),
-                }).then(() => {
-                    router.push('/auth/login');
-                }).catch((error) => {
-                    console.error("Error writing document: ", error);
-                });
+            const response = await axios.post('/api/v1/auth/register', {
+                name,
+                email,
+                password,
+                role: 'user'
             });
+
+            if (response.data.success) {
+                await Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: 'Registration successful! Please login.'
+                });
+                router.push('/auth/login');
+            }
         } catch (error) {
-            console.error("Error creating user:", error);
+            await Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: error.response?.data?.error || 'Registration failed'
+            });
         }
     }
     return (
