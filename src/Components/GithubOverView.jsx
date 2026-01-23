@@ -1,38 +1,35 @@
 "use client";
 import { getListDataFromDatabase } from "@/Helper/DatabaseHelper";
 import { fetchGithubData, getGithubProfileData } from "@/Helper/GitDataFatchHelper";
-import { db } from "@/lib/firebase";
-import {doc, setDoc } from "firebase/firestore";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { ProgressBar } from "react-bootstrap";
 
 function GithubOverView() {
   const [gitdata, setGitData] = useState({});
 
-  //get data from firebase
+  //get data from API
   const getMyData = async () => {
-    const data = await getListDataFromDatabase("github_profile_data");
-    setGitData(data[0]);
+    const data = await getListDataFromDatabase("github");
+    setGitData(data);
   };
 
   const handleGithubRefresh = async () => {
     const publicRepos = await getGithubProfileData();
     const total_stars = await fetchGithubData();
-    return setDoc(doc(db, "github_profile_data", "hasibul442"), {
-      id: "hasibul442",
-      username: "hasibul442",
-      public_repos: publicRepos.public_repos,
-      total_stars: total_stars,
-      followers: publicRepos.followers,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    })
-      .then(() => {
-        console.log("GitHub data updated successfully.");
-      })
-      .catch((error) => {
-        console.error("Error updating GitHub data:", error);
+
+    try {
+      await axios.post("/api/v1/github", {
+        username: "hasibul442",
+        public_repos: publicRepos.public_repos,
+        total_stars: total_stars,
+        followers: publicRepos.followers,
       });
+      console.log("GitHub data updated successfully.");
+      getMyData(); // Refresh data
+    } catch (error) {
+      console.error("Error updating GitHub data:", error);
+    }
   };
 
   useEffect(() => {
@@ -54,12 +51,12 @@ function GithubOverView() {
                     Total Public Repositories
                   </span>
                   <span className="ms-auto text-sm font-weight-bold">
-                    {gitdata.public_repos}
+                    {gitdata?.public_repos}
                   </span>
                 </div>
                 <div>
                   <ProgressBar
-                    now={gitdata.public_repos}
+                    now={gitdata?.public_repos}
                     variant="success"
                     animated
                     max={100}
