@@ -1,20 +1,42 @@
 'use client'
-import { auth } from '@/lib/firebase';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import axios from 'axios';
 import Cookies from 'js-cookie';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
+import Swal from 'sweetalert2';
 
 function Page() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const router = useRouter();
 
 	const handleLogin = async () => {
-		const userCredential = await signInWithEmailAndPassword(auth, email, password);
-		const token = await userCredential.user.getIdToken();
+		try {
+			const response = await axios.post('/api/v1/auth/login', {
+				email,
+				password
+			});
 
-		// Save token to cookie
-		Cookies.set("token", token, { expires: 1 }); // 1 day
+			if (response.data.success) {
+				// Save user data to cookie
+				Cookies.set('user', JSON.stringify(response.data.data), { expires: 1 });
+
+				await Swal.fire({
+					icon: 'success',
+					title: 'Success',
+					text: 'Login successful!'
+				});
+
+				router.push('/admin');
+			}
+		} catch (error) {
+			await Swal.fire({
+				icon: 'error',
+				title: 'Error',
+				text: error.response?.data?.error || 'Login failed'
+			});
+		}
 	};
 
 	return (
