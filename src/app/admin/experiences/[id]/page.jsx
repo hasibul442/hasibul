@@ -1,72 +1,74 @@
 "use client";
-import { removespace } from "@/Helper/Helper";
-import { db } from "@/lib/firebase";
-import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
+import axios from "axios";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
 function Page() {
-  const [orgname, setOrgName] = useState("");
-  const [position, setPosition] = useState("");
+  const [company, setCompany] = useState("");
+  const [title, setTitle] = useState("");
+  const [location, setLocation] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [current, setCurrent] = useState(false);
   const [description, setDescription] = useState("");
-  const [status, setStatus] = useState(1);
+  const [technologies, setTechnologies] = useState("");
   const router = useRouter();
   const params = useParams();
 
   const getExperiencesData = async () => {
-    const querySnapshot = await getDoc(doc(db, "experiences", params?.id));
-    if (querySnapshot.exists()) {
-      const data = querySnapshot.data();
-      setOrgName(data.org_name);
-      setPosition(data.position);
-      setStartDate(data.start_date ? new Date(data.start_date).toISOString().split('T')[0] : "");
-      setEndDate(data.end_date ? new Date(data.end_date).toISOString().split('T')[0] : "");
-      setDescription(data.description);
-      setStatus(data.status);
-    } else {
-      console.log("No such document!");
+    try {
+      const response = await axios.get(`/api/v1/exprience?id=${params?.id}`);
+      if (response.data.success) {
+        const data = response.data.data;
+        setCompany(data.company || "");
+        setTitle(data.title || "");
+        setLocation(data.location || "");
+        setStartDate(data.startDate ? new Date(data.startDate).toISOString().split('T')[0] : "");
+        setEndDate(data.endDate ? new Date(data.endDate).toISOString().split('T')[0] : "");
+        setCurrent(data.current || false);
+        setDescription(data.description || "");
+        setTechnologies(data.technologies ? data.technologies.join(", ") : "");
+      }
+    } catch (error) {
+      console.error("Error fetching experience:", error);
     }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    //Validation add
-    // console.log(endDate);
-    const sanitizedOrgName = removespace(orgname);
-    const sanitizedPosition = removespace(position);
-    return setDoc(doc(db, "experiences", `${sanitizedOrgName}-${sanitizedPosition}`), {
-      id: `${sanitizedOrgName}-${sanitizedPosition}`,
-      org_name: orgname,
-      position: position,
-      start_date: new Date(startDate).toISOString(),
-      end_date: endDate ? new Date(endDate).toISOString() : null,
-      status: status,
-      description: description,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    }).then(() => {
-      Swal.fire({
-        title: "Success!",
-        text: "Experience created successfully.",
-        icon: "success",
-        showConfirmButton: false,
-        timer: 1500
-      }).then(() => {
-        router.push("/admin/experiences");
-        setOrgName("");
-        setPosition("");
-        setStartDate("");
-        setEndDate("");
-        setDescription("");
+    try {
+      const response = await axios.put(`/api/v1/exprience?id=${params?.id}`, {
+        company,
+        title,
+        location,
+        startDate: new Date(startDate).toISOString(),
+        endDate: endDate ? new Date(endDate).toISOString() : null,
+        current,
+        description,
+        technologies: technologies.split(",").map(t => t.trim()),
       });
-    }).catch((error) => {
-      console.error("Error creating experience:", error);
-    });
+
+      if (response.data.success) {
+        await Swal.fire({
+          title: "Success!",
+          text: "Experience updated successfully.",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        router.push("/admin/experiences");
+      }
+    } catch (error) {
+      console.error("Error updating experience:", error);
+      await Swal.fire({
+        title: "Error!",
+        text: error.response?.data?.error || "Failed to update experience",
+        icon: "error"
+      });
+    }
   };
 
   useEffect(() => {
@@ -87,10 +89,10 @@ function Page() {
                     <input
                       type="text"
                       className="form-control"
-                      placeholder="Organization Name"
-                      aria-label="Organization Name"
-                      value={orgname}
-                      onChange={(e) => setOrgName(e.target.value)}
+                      placeholder="Company Name"
+                      aria-label="Company Name"
+                      value={company}
+                      onChange={(e) => setCompany(e.target.value)}
                     />
                   </div>
                 </div>
@@ -100,10 +102,23 @@ function Page() {
                     <input
                       type="text"
                       className="form-control"
-                      placeholder="Position"
-                      aria-label="Position"
-                      value={position}
-                      onChange={(e) => setPosition(e.target.value)}
+                      placeholder="Title/Position"
+                      aria-label="Title"
+                      value={title}
+                      onChange={(e) => setTitle(e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                <div className="col-md-6">
+                  <div className="mb-3">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Location"
+                      aria-label="Location"
+                      value={location}
+                      onChange={(e) => setLocation(e.target.value)}
                     />
                   </div>
                 </div>
@@ -130,16 +145,36 @@ function Page() {
                       aria-label="End Date"
                       value={endDate}
                       onChange={(e) => setEndDate(e.target.value)}
+                      disabled={current}
                     />
+                  </div>
+                </div>
+
+                <div className="col-md-6">
+                  <div className="mb-3 form-check">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      id="currentCheck"
+                      checked={current}
+                      onChange={(e) => setCurrent(e.target.checked)}
+                    />
+                    <label className="form-check-label" htmlFor="currentCheck">
+                      Currently working here
+                    </label>
                   </div>
                 </div>
 
                 <div className="col-md-12">
                   <div className="mb-3">
-                    <select className="form-control" value={status} onChange={(e) => setStatus(Number(e.target.value))}>
-                      <option value="1">Active</option>
-                      <option value="0">Inactive</option>
-                    </select>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Technologies (comma separated)"
+                      aria-label="Technologies"
+                      value={technologies}
+                      onChange={(e) => setTechnologies(e.target.value)}
+                    />
                   </div>
                 </div>
 
@@ -164,7 +199,7 @@ function Page() {
                   Back
                 </Link>
                 <button className="btn btn-primary me-2" onClick={handleSubmit}>
-                  Create Experience
+                  Update Experience
                 </button>
               </div>
             </div>
