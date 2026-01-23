@@ -400,11 +400,6 @@ section .container {
   font-family: 'JetBrains Mono', monospace;
 }
 
-.section-title h2::before {
-  content: "// ";
-  color: var(--text-muted);
-}
-
 .section-title h2::after {
   content: "";
   width: 100px;
