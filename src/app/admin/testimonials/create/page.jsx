@@ -4,13 +4,14 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
+import { fileToBase64 } from "@/Helper/Helper";
 
 function Page() {
 	const [name, setName] = useState("");
 	const [company, setCompany] = useState("");
 	const [position, setPosition] = useState("");
 	const [testimonial, setTestimonial] = useState("");
-	const [avatar, setAvatar] = useState("");
+	const [avatarFile, setAvatarFile] = useState(null);
 	const [rating, setRating] = useState(5);
 
 	const router = useRouter();
@@ -19,12 +20,15 @@ function Page() {
 		e.preventDefault();
 
 		try {
+			// Convert avatar file to base64 if present
+			const avatarBase64 = avatarFile ? await fileToBase64(avatarFile) : null;
+
 			const response = await axios.post("/api/v1/testimonial", {
 				name,
 				company,
 				position,
 				testimonial,
-				avatar,
+				avatar: avatarBase64,
 				rating: parseInt(rating)
 			});
 
@@ -100,16 +104,20 @@ function Page() {
 								<div className="col-md-6">
 									<div className="mb-3">
 										<input
-											type="url"
+											type="file"
 											className="form-control"
-											placeholder="Avatar URL"
-											aria-label="Avatar URL"
-											value={avatar}
-											onChange={(e) => setAvatar(e.target.value)}
+											placeholder="Profile Picture (Optional)"
+											aria-label="Avatar"
+											accept="image/*"
+											onChange={(e) => setAvatarFile(e.target.files[0] || null)}
 										/>
+										{avatarFile && (
+											<small className="text-muted d-block mt-1">
+												Selected: {avatarFile.name}
+											</small>
+										)}
 									</div>
-								</div>
-
+								</div>								
 								<div className="col-md-6">
 									<div className="mb-3">
 										<input

@@ -25869,7 +25869,7 @@ html {
 
 .table td,
 .table th {
-  white-space: nowrap;
+  /* white-space: nowrap; */
 }
 
 .table.align-items-center td,

@@ -35,6 +35,10 @@ const TestimonialSchema = new mongoose.Schema(
             type: Number,
             default: 0,
         },
+        is_show: {
+            type: Boolean,
+            default: true,
+        },
     },
     {
         timestamps: true,

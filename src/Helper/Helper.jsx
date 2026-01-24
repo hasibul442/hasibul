@@ -1,5 +1,5 @@
 export function removespace(stringData) {
-    return stringData.replace(/\s+/g, "-");
+  return stringData.replace(/\s+/g, "-");
 }
 
 export function calculateDateDifference(startDate, endDate) {
@@ -27,4 +27,18 @@ export function calculateDateDifference(startDate, endDate) {
   if (days > 0) parts.push(`${days} day${days > 1 ? 's' : ''}`);
 
   return parts.join(', ');
+}
+
+export async function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    if (!file) {
+      resolve(null);
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
 }
