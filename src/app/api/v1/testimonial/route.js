@@ -9,6 +9,7 @@ export async function GET(request) {
 
         const { searchParams } = new URL(request.url);
         const id = searchParams.get('id');
+        const is_show = searchParams.get('status') || null;
 
         if (id) {
             const testimonial = await Testimonial.findById(id);
@@ -21,7 +22,12 @@ export async function GET(request) {
             return NextResponse.json({ success: true, data: testimonial });
         }
 
-        const testimonials = await Testimonial.find({}).sort({ order: 1, createdAt: -1 });
+        const filter = {};
+        if (is_show !== null) {
+            filter.is_show = is_show === 'true';
+        }
+
+        const testimonials = await Testimonial.find(filter).sort({ order: 1, createdAt: -1 });
         return NextResponse.json({ success: true, data: testimonials });
     } catch (error) {
         return NextResponse.json(
