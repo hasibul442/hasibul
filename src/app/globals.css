@@ -12,3 +12,32 @@ NEXT_PUBLIC_FIREBASE_DATABASE_URL=https://hasibulhasan-d62d8-default-rtdb.fireba
 NEXT_PUBLIC_FIREBASE_PROJECT_ID=hasibulhasan-d62d8
 NEXT_PUBLIC_FIREBASE_CLIENT_EMAIL=firebase-adminsdk-qob42@hasibulhasan-d62d8.iam.gserviceaccount.com
 NEXT_PUBLIC_FIREBASE_PRIVATE_KEY="*/
+
+/* Quill Editor Styles */
+.quill {
+    background-color: white;
+    border-radius: 8px;
+}
+
+.ql-container {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background-color: white;
+    min-height: 250px;
+}
+
+.ql-toolbar {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    background-color: #f8f9fa;
+}
+
+.ql-editor {
+    min-height: 250px;
+    font-size: 14px;
+}
+
+.ql-editor.ql-blank::before {
+    font-style: normal;
+    color: #adb5bd;
+}
