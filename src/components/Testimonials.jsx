@@ -1,83 +1,145 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { Autoplay, Pagination, EffectCards } from "swiper/modules";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "swiper/css";
+import "swiper/css/effect-cards";
+import "swiper/css/pagination";
+import styles from "./testimonials.module.css";
 
 function Testimonials() {
-  const data = [
-    {
-      id: 1,
-      name: "Zawadul Kawum",
-      position: "Head of Development",
-      company: "Nexdecade Technology Pvt. Ltd.",
-      image: "assets/img/testimonials/testimonials-1.jpg",
-      testimonial:
-        "I highly recommend Hasibul as an exceptional project member. His programming and engineering skills are outstanding, and his dedication to every task is commendable. Hasibul consistently delivers high-quality work, showing great problem-solving abilities and an eagerness to learn and improve. His positive attitude and collaborative nature make him a valuable asset to any team. I have full confidence in his ability to excel in any project and believe he will continue to achieve great success in his career. Keep up the fantastic work, Hasibul!",
-    },
-    {
-      id: 2,
-      name: "Pranto Kumar",
-      position: "Full Stack Software Developer",
-      company: "",
-      image: "assets/img/testimonials/testimonials-2.jpg",
-      testimonial:
-        "I highly recommend Mohammad Hasibul Hasan. Their exceptional skills, dedication, and positive attitude make them an invaluable asset. They consistently deliver outstanding results, demonstrate strong teamwork, and excel in challenging environments. Mohammad Hasibul Hasan is a top-tier professional who will undoubtedly contribute significantly to any team or project.",
-    },
-    {
-      id: 3,
-      name: "Sarthok Biswas",
-      position: "Data Analyst",
-      company: "CV - Christian Vision",
-      image: "assets/img/testimonials/sarthok.jpeg",
-      testimonial:
-        "I had the pleasure of studying alongside Mohammad Hasibul Hasan at university and later collaborating with him as a freelance co-worker. As a developer, Hasibul consistently impressed me with his technical expertise, problem-solving skills, and dedication to delivering high-quality work. His ability to tackle complex projects with creativity and precision makes him an outstanding professional in the field. I highly recommend Hasibul for any development role.",
-    },
-    {
-      id: 4,
-      name: "Nahid Eraz",
-      position: "UI/UX Designer | Front-end Web Developer",
-      company: "",
-      image: "assets/img/testimonials/eraz.jpeg",
-      testimonial:
-        "I am pleased to recommend Mohammad Hasibul Hasan, who I had the privilege of studying with. During our time as classmates, Hasibul consistently demonstrated outstanding skills in programming, always solving complex problems with ease. His remarkable ability to quickly grasp and apply concepts allowed him to excel in both coursework and collaborative projects. Now as a Team Lead at Adventure Dhaka Limited, Hasibul has clearly taken his talents to the next level. His leadership skills, combined with his deep technical expertise, make him an invaluable asset to any team. I am confident that Hasibul’s dedication and innovative mindset will continue to drive success in all his endeavors.",
-    },
-  ];
+  const [testimonials, setTestimonials] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fatchTestimonials = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(
+        "https://adminhasibulhasan.vercel.app/api/v1/testimonial"
+      );
+      const data = await response.json();
+      setTestimonials(data?.data);
+    } catch (error) {
+      console.error("Error fetching testimonials:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fatchTestimonials();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className={styles.testimonialsWrapper}>
+        <div className={styles.swiperContainer} style={{ margin: '0 auto', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <SkeletonTheme baseColor="#ffffff1a" highlightColor="#ffffff33">
+            <div className={styles.testimonialCard}>
+              <div className={styles.decorativeCircleTop}></div>
+              <div className={styles.decorativeCircleBottom}></div>
+
+              <div className={styles.profileSection}>
+                <div className="row justify-content-center">
+                  <div className="col-sm-4 d-flex justify-content-center">
+                    <Skeleton circle width={100} height={100} />
+                  </div>
+                  <div className="col-sm-8">
+                    <Skeleton width="70%" height={22} style={{ marginBottom: '8px' }} />
+                    <Skeleton width="90%" height={14} style={{ marginBottom: '5px' }} />
+                    <Skeleton width="80%" height={14} style={{ marginBottom: '10px' }} />
+                    <Skeleton width={120} height={18} />
+                  </div>
+                </div>
+              </div>
+
+              <div className={styles.testimonialTextWrapper}>
+                <Skeleton count={4} height={12} style={{ marginBottom: '8px' }} />
+              </div>
+
+              <div className={styles.verificationBadge}>
+                <Skeleton circle width={40} height={40} />
+              </div>
+            </div>
+          </SkeletonTheme>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <>
+    <div className={styles.testimonialsWrapper}>
       <Swiper
-        spaceBetween={50}
-        slidesPerView={1}
+        effect={"cards"}
+        grabCursor={true}
         centeredSlides={true}
+        slidesPerView={"auto"}
         autoplay={{
-          delay: 2500,
+          delay: 4000,
           disableOnInteraction: false,
         }}
-        modules={[Autoplay]}
+        pagination={{
+          clickable: true,
+          dynamicBullets: true,
+        }}
+        modules={[Autoplay, Pagination, EffectCards]}
+        className={styles.swiperContainer}
       >
-        {data.map((item) => (
-          <SwiperSlide>
-            <div className="testimonial-item" key={item.id}>
-              <p>
-                <i className="bx bxs-quote-alt-left quote-icon-left"></i>
-                {item?.testimonial}
-                <i className="bx bxs-quote-alt-right quote-icon-right"></i>
-              </p>
-              <img
-                src={item?.image}
-                className="testimonial-img"
-                alt=""
-              />
-              <h3>
-                {item?.name}
-              </h3>
-              <h4>
-                {item?.position} <br />
-                {item?.company || ""}
-              </h4>
+        {testimonials.map((item) => (
+          <SwiperSlide key={item._id} className={styles.testimonialCard}>
+            {/* Decorative Elements */}
+            <div className={styles.decorativeCircleTop}></div>
+            <div className={styles.decorativeCircleBottom}></div>
+
+            {/* Profile Section */}
+            <div className={styles.profileSection}>
+              <div className="row">
+                <div className="col-sm-4">
+                  <div className={styles.profileImageWrapper}>
+                    <img
+                      src={item.avatar}
+                      alt={item.name}
+                      className={styles.profileImage}
+                    />
+                  </div>
+                </div>
+                <div className="col-sm-8">
+                  <h3 className={styles.profileName}>{item.name}</h3>
+                  <p className={styles.profilePosition}>{item.position}</p>
+                  {/* {item.company && ( */}
+                    <p className={`${styles.profileCompany} p-0 m-0`}>
+                      {item?.company}
+                    </p>
+                  {/* )} */}
+
+                  {/* Star Rating */}
+                  <div className>
+                    {[...Array(item.rating)].map((_, index) => (
+                      <i
+                        key={index}
+                        className={`ri-star-fill ${styles.starIcon}`}
+                      ></i>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Testimonial Text */}
+            <div className={styles.testimonialTextWrapper}>
+              <p className={styles.testimonialText}>{item.testimonial}</p>
+            </div>
+
+            {/* Verification Badge */}
+            <div className={styles.verificationBadge}>
+              <i
+                className={`ri-verified-badge-fill ${styles.verificationIcon}`}
+              ></i>
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
-    </>
+    </div>
   );
 }
 
