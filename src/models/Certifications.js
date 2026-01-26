@@ -31,6 +31,10 @@ const CertificationSchema = new mongoose.Schema(
             type: String,
             trim: true,
         },
+        image : {
+            type: String,
+            trim: true,
+        },
         status: {
             type: Boolean,
             default: false,
