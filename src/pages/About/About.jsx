@@ -1,6 +1,7 @@
 import React from "react";
 import TopBar2 from "../NavBar/TopBar2";
 import style from "./about.module.css";
+import interestsStyle from "./interests.module.css";
 import Skill from "../../components/Skill";
 import Animation from "../../components/Animation";
 import Testimonials from "../../components/Testimonials";
@@ -14,10 +15,10 @@ function About() {
       </div>
       <div
         className="page-wrapper grid-background"
-        style={{ minHeight: "100vh", paddingTop: "80px" }}
+        style={{ minHeight: "100vh"}}
       >
-        <div id="about" className="about mt-5">
-          <div className="container">
+        <div id="about" className="about">
+          <div className="container" id="about-me">
             <div className="row pt-5 align-items-center">
               <div className="col-lg-6 content fade-in-up">
                 <div className={style.section_title}>
@@ -74,7 +75,7 @@ function About() {
           </div>
 
           {/* Skills Section */}
-          <div className="skills container mt-5 pt-5">
+          <div className="skills container mt-3 pt-5" id="skills">
             <div className={`${style.section_title} fade-in-up`}>
               <h2>Skills / Tech Stack</h2>
             </div>
@@ -84,101 +85,101 @@ function About() {
           </div>
 
           {/* Interests Section */}
-          <div className="interests container mt-5 pt-4">
+          <div className="interests container mt-3 pt-4" id="interests">
             <div className={`${style.section_title} fade-in-up`}>
               <h2>Interests</h2>
             </div>
 
-            <div className="row g-4">
+            <div className={interestsStyle.interestsGrid}>
               <div
-                className="col-lg-3 col-md-4 col-6 fade-in-up"
+                className={`${interestsStyle.interestCard} fade-in-up`}
                 style={{ animationDelay: "0.1s" }}
               >
-                <div className="interest-box">
-                  <i className="ri-store-line" style={{ color: "#ffa657" }}></i>
-                  <h3>Gadget</h3>
+                <div className={interestsStyle.iconWrapper}>
+                  <i className={`ri-store-line ${interestsStyle.interestIcon}`} style={{ color: "#FFA657" }}></i>
                 </div>
+                <h3 className={interestsStyle.interestTitle}>Gadget</h3>
               </div>
               <div
-                className="col-lg-3 col-md-4 col-6 fade-in-up"
+                className={`${interestsStyle.interestCard} fade-in-up`}
                 style={{ animationDelay: "0.15s" }}
               >
-                <div className="interest-box">
+                <div className={interestsStyle.iconWrapper}>
                   <i
-                    className="ri-bar-chart-box-line"
-                    style={{ color: "#58a6ff" }}
+                    className={`ri-bar-chart-box-line ${interestsStyle.interestIcon}`}
+                    style={{ color: "#58A6FF" }}
                   ></i>
-                  <h3>New Technology</h3>
                 </div>
+                <h3 className={interestsStyle.interestTitle}>New Technology</h3>
               </div>
               <div
-                className="col-lg-3 col-md-4 col-6 fade-in-up"
+                className={`${interestsStyle.interestCard} fade-in-up`}
                 style={{ animationDelay: "0.2s" }}
               >
-                <div className="interest-box">
-                  <i className="ri-cpu-line" style={{ color: "#7ee787" }}></i>
-                  <h3>Arduino</h3>
+                <div className={interestsStyle.iconWrapper}>
+                  <i className={`ri-cpu-line ${interestsStyle.interestIcon}`} style={{ color: "#7EE787" }}></i>
                 </div>
+                <h3 className={interestsStyle.interestTitle}>Arduino</h3>
               </div>
               <div
-                className="col-lg-3 col-md-4 col-6 fade-in-up"
+                className={`${interestsStyle.interestCard} fade-in-up`}
                 style={{ animationDelay: "0.25s" }}
               >
-                <div className="interest-box">
-                  <i className="ri-robot-line" style={{ color: "#d2a8ff" }}></i>
-                  <h3>AI</h3>
+                <div className={interestsStyle.iconWrapper}>
+                  <i className={`ri-robot-line ${interestsStyle.interestIcon}`} style={{ color: "#D2A8FF" }}></i>
                 </div>
+                <h3 className={interestsStyle.interestTitle}>AI</h3>
               </div>
               <div
-                className="col-lg-3 col-md-4 col-6 fade-in-up"
+                className={`${interestsStyle.interestCard} fade-in-up`}
                 style={{ animationDelay: "0.3s" }}
               >
-                <div className="interest-box">
-                  <i className="ri-cloud-line" style={{ color: "#79c0ff" }}></i>
-                  <h3>Cloud Computing</h3>
+                <div className={interestsStyle.iconWrapper}>
+                  <i className={`ri-cloud-line ${interestsStyle.interestIcon}`} style={{ color: "#79C0FF" }}></i>
                 </div>
+                <h3 className={interestsStyle.interestTitle}>Cloud Computing</h3>
               </div>
               <div
-                className="col-lg-3 col-md-4 col-6 fade-in-up"
+                className={`${interestsStyle.interestCard} fade-in-up`}
                 style={{ animationDelay: "0.35s" }}
               >
-                <div className="interest-box">
+                <div className={interestsStyle.iconWrapper}>
                   <i
-                    className="ri-translate-2"
-                    style={{ color: "#ffa657" }}
+                    className={`ri-translate-2 ${interestsStyle.interestIcon}`}
+                    style={{ color: "#FFA657" }}
                   ></i>
-                  <h3>NLP</h3>
                 </div>
+                <h3 className={interestsStyle.interestTitle}>NLP</h3>
               </div>
               <div
-                className="col-lg-3 col-md-4 col-6 fade-in-up"
+                className={`${interestsStyle.interestCard} fade-in-up`}
                 style={{ animationDelay: "0.4s" }}
               >
-                <div className="interest-box">
+                <div className={interestsStyle.iconWrapper}>
                   <i
-                    className="ri-git-branch-line"
-                    style={{ color: "#7ee787" }}
+                    className={`ri-git-branch-line ${interestsStyle.interestIcon}`}
+                    style={{ color: "#7EE787" }}
                   ></i>
-                  <h3>DevOps</h3>
                 </div>
+                <h3 className={interestsStyle.interestTitle}>DevOps</h3>
               </div>
               <div
-                className="col-lg-3 col-md-4 col-6 fade-in-up"
+                className={`${interestsStyle.interestCard} fade-in-up`}
                 style={{ animationDelay: "0.45s" }}
               >
-                <div className="interest-box">
+                <div className={interestsStyle.iconWrapper}>
                   <i
-                    className="ri-music-2-line"
-                    style={{ color: "#ff7b72" }}
+                    className={`ri-music-2-line ${interestsStyle.interestIcon}`}
+                    style={{ color: "#FF7B72" }}
                   ></i>
-                  <h3>Music</h3>
                 </div>
+                <h3 className={interestsStyle.interestTitle}>Music</h3>
               </div>
             </div>
           </div>
 
           {/* Testimonials Section */}
-          <div className="testimonials container mt-5 pt-4 pb-5">
+          <div className="testimonials container mt-3 pt-4 pb-5" id="testimonials">
             <div className={`${style.section_title} fade-in-up`}>
               <h2>Testimonials</h2>
             </div>
