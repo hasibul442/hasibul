@@ -2,7 +2,7 @@
   background: rgba(13, 17, 23, 0.95);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid #30363d;
+  border-bottom: 1px solid #30363D;
   height: 70px;
   width: 100%;
   position: fixed;
@@ -34,7 +34,7 @@
   font-family: 'JetBrains Mono', monospace;
   font-size: 13px;
   font-weight: 500;
-  color: #8b949e;
+  color: #8B949E;
   white-space: nowrap;
   transition: all 0.3s ease;
   padding: 8px 16px;
@@ -56,7 +56,7 @@
   height: 100%;
   top: 0;
   left: 0;
-  background: linear-gradient(135deg, #58a6ff 0%, #d2a8ff 100%);
+  background: linear-gradient(135deg, #58A6FF 0%, #D2A8FF 100%);
   opacity: 0;
   transition: all 0.3s ease;
   z-index: -1;
@@ -73,5 +73,49 @@
 .navbar1 ul .active,
 .navbar1 ul .active:focus,
 .navbar1 ul li:hover>a {
-  color: #0d1117;
+  color: #0D1117;
+}
+
+/* Dropdown Menu Styles */
+.dropdownMenu {
+  border-radius: 8px;
+  padding: 8px 0;
+  margin-top: 8px;
+  min-width: 200px;
+}
+
+.dropdownMenu.darkTheme {
+  background-color: #0D1117;
+  border: 1px solid #30363D;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.dropdownMenu.lightTheme {
+  background-color: #FFFFFF;
+  border: 1px solid #D0D7DE;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.dropdownItem {
+  padding: 8px 20px;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.darkTheme .dropdownItem {
+  color: #8B949E;
+}
+
+.darkTheme .dropdownItem:hover {
+  background-color: #161B22;
+  color: #fff;
+}
+
+.lightTheme .dropdownItem {
+  color: #24292F;
+}
+
+.lightTheme .dropdownItem:hover {
+  background-color: #F6F8FA;
+  color: #0969DA;
 }
