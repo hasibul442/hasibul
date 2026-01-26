@@ -2,24 +2,18 @@ import React from "react";
 import { BiLogoSpringBoot } from "react-icons/bi";
 import { DiJqueryLogo } from "react-icons/di";
 import {
-  FaBirthdayCake,
   FaBootstrap,
   FaCss3Alt,
   FaDatabase,
-  FaEnvelope,
-  FaFigma,
   FaGit,
   FaHtml5,
   FaJava,
   FaLaravel,
-  FaPhoneSquare,
   FaPhp,
   FaPython,
   FaReact,
-  FaWhatsapp,
 } from "react-icons/fa";
-import { FaLocationDot } from "react-icons/fa6";
-import { SiAdobexd, SiFirebase, SiMysql, SiNextdotjs, SiMongodb } from "react-icons/si";
+import { SiFirebase, SiMysql, SiNextdotjs, SiMongodb } from "react-icons/si";
 import { TbApi, TbBrandJavascript } from "react-icons/tb";
 
 import style from './component.module.css'
@@ -31,25 +25,25 @@ function Skill() {
       id: 1,
       title: "HTML",
       value: 90,
-      icon: <FaHtml5 size={40} color="#e34c26" />,
+      icon: <FaHtml5 size={40} color="#E34C26" />,
     },
     {
       id: 2,
       title: "CSS",
       value: 90,
-      icon: <FaCss3Alt size={40} color="#2965f1" />,
+      icon: <FaCss3Alt size={40} color="#2965F1" />,
     },
     {
       id: 4,
       title: "JavaScript",
       value: 80,
-      icon: <TbBrandJavascript size={40} color="#f0db4f" />,
+      icon: <TbBrandJavascript size={40} color="#F0DB4F" />,
     },
     {
       id: 3,
       title: "Bootstrap",
       value: 90,
-      icon: <FaBootstrap size={40} color="#ff0000" />,
+      icon: <FaBootstrap size={40} color="#FF0000" />,
     },
     {
       id: 5,
@@ -166,7 +160,7 @@ function Skill() {
         >
           <div className={style.skill_planet}>
             {skill.icon}
-            <span className={style.skill_name}>{skill.title}</span>
+            {/* <span className={style.skill_name}>{skill.title}</span> */}
           </div>
         </div>
       );
