@@ -42,7 +42,7 @@ const TestimonialSchema = new mongoose.Schema(
         },
         is_show: {
             type: Boolean,
-            default: true,
+            default: false,
         },
     },
     {
