@@ -12,6 +12,11 @@ const TestimonialSchema = new mongoose.Schema(
             required: [true, 'Please provide a position'],
             trim: true,
         },
+        email : {
+            type: String,
+            required: [true, 'Please provide an email'],
+            trim: true,
+        },
         company: {
             type: String,
             trim: true,
