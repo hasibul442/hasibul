@@ -27,15 +27,15 @@ function Contact() {
     {
       icon: <FaEnvelope />,
       title: "Email",
-      value: "hasibul442@gmail.com",
-      link: "mailto:hasibul442@gmail.com",
+      value: "hasibulhasan442@gmail.com",
+      link: "mailto:hasibulhasan442@gmail.com",
       color: "#58a6ff"
     },
     {
       icon: <FaPhone />,
       title: "Phone",
-      value: "+880 1XXX-XXXXXX",
-      link: "tel:+8801234567890",
+      value: "+880 1311210119",
+      link: "tel:+8801311210119",
       color: "#7ee787"
     },
     {

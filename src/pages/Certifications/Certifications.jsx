@@ -6,11 +6,11 @@ function Certifications() {
   const certifications = [
     {
       id: 1,
-      title: "AWS Certified Solutions Architect",
-      issuer: "Amazon Web Services",
+      title: "Version Control with Git",
+      issuer: "Atlassian",
       date: "2023",
       image: "/assets/img/certifications/cert1.jpg",
-      credentialUrl: "#",
+      credentialUrl: "https://coursera.org/share/55b7fe0fd0cafcc82e1b1726338a0517",
     },
     {
       id: 2,
