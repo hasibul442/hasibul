@@ -12,6 +12,8 @@ import Portfolio from "./pages/Portfolio/Portfolio";
 import Contact from "./pages/Contact/Contact";
 import Blog from "./pages/Blog/Blog";
 import Experience from "./pages/Experience/Experience";
+import Certifications from "./pages/Certifications/Certifications";
+import TestimonialForm from "./pages/TestimonialForm/TestimonialForm";
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
           {/* <Route path="/services" element={<Service />} /> */}
           <Route path="/experience" element={<Experience />} />
           <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/certifications" element={<Certifications />} />
+          <Route path="/testimonial" element={<TestimonialForm />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/blogs" element={<Blog />} />
         </Routes>
