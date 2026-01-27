@@ -1,5 +1,5 @@
 "use client";
-import { getListDataFromDatabase } from '@/Helper/DatabaseHelper';
+import { deleteDataFromDatabase, getListDataFromDatabase } from '@/Helper/DatabaseHelper';
 import Link from 'next/link';
 import React, { use, useEffect, useState } from 'react'
 import { MdDelete, MdModeEdit, MdVisibility, MdClose } from 'react-icons/md';
@@ -142,7 +142,7 @@ function Page() {
                               className="btn btn-sm bg-gradient-danger flex-grow-1"
                               data-toggle="tooltip"
                               data-original-title="Delete"
-                            // onClick={() => deleteTestimonial(item._id)}
+                            onClick={() => deleteDataFromDatabase("testimonial", item._id)}
                             >
                               <MdDelete size={15} className="me-1" />
                               Delete
