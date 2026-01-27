@@ -52,7 +52,7 @@ function Certifications() {
                     alt={cert.title}
                     className={styles.certImage}
                     onError={(e) => {
-                      e.target.src = "https://via.placeholder.com/300x200?text=Certificate";
+                      e.target.src = "assets/img/default-fallback-image.png";
                     }}
                   />
                   <div className={styles.certOverlay}>
