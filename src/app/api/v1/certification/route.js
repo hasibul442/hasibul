@@ -9,6 +9,7 @@ export async function GET(request) {
 
         const { searchParams } = new URL(request.url);
         const id = searchParams.get('id');
+        const status = searchParams.get('status') || null;
 
         if (id) {
             const certification = await Certification.findById(id);
@@ -21,7 +22,7 @@ export async function GET(request) {
             return NextResponse.json({ success: true, data: certification });
         }
 
-        const certifications = await Certification.find({}).sort({ issueDate: -1 });
+        const certifications = await Certification.find(status ? { status } : {}).sort({ issueDate: -1 });
         return NextResponse.json({ success: true, data: certifications });
     } catch (error) {
         return NextResponse.json(
