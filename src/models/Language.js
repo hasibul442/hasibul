@@ -7,6 +7,10 @@ const LanguageSchema = new mongoose.Schema(
             required: [true, 'Please provide a language name'],
             trim: true,
         },
+        version: {
+            type: String,
+            trim: true,
+        },
     },
     {
         timestamps: true,
