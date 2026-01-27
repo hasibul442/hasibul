@@ -8,6 +8,7 @@ function CreateLanguageModal({ isOpen, onClose, onSuccess }) {
     const [formData, setFormData] = useState({
         name: '',
         version: '',
+        type: 'language',
     });
     const [submitting, setSubmitting] = useState(false);
 
@@ -35,34 +36,40 @@ function CreateLanguageModal({ isOpen, onClose, onSuccess }) {
             const result = await response.json();
 
             if (result.success) {
-                Swal.fire(
-                    'Success!',
-                    'Language created successfully.',
-                    'success'
-                );
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Language created successfully.',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
                 setFormData({ name: '' });
                 onClose();
                 onSuccess();
             } else {
-                Swal.fire(
-                    'Error!',
-                    result.error || 'Failed to create',
-                    'error'
-                );
+                Swal.fire({
+                    title: 'Error!',
+                    text: result.error || 'Failed to create',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             }
         } catch (error) {
-            Swal.fire(
-                'Error!',
-                error.message,
-                'error'
-            );
+            Swal.fire({
+                title: 'Error!',
+                text: error.message,
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 1500
+            });
         } finally {
             setSubmitting(false);
         }
     };
 
     const handleClose = () => {
-        setFormData({ name: '', version: '' });
+        setFormData({ name: '', version: '', type: 'language' });
         onClose();
     };
 
@@ -108,6 +115,18 @@ function CreateLanguageModal({ isOpen, onClose, onSuccess }) {
                                     onChange={handleChange}
                                     placeholder="e.g., 1.0, 2.5"
                                 />
+                            </div>
+                            <div className="mb-3">
+                                <label className="form-label">Type</label>
+                                <select
+                                    className="form-control"
+                                    name="type"
+                                    value={formData.type}
+                                    onChange={handleChange}
+                                >
+                                    <option value="language">Language</option>
+                                    <option value="tool">Tool</option>
+                                </select>
                             </div>
                         </form>
                     </div>

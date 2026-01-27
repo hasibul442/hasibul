@@ -59,24 +59,30 @@ function Page() {
 
             if (resultData.success) {
                 setLanguages(languages.filter((lang) => lang._id !== id));
-                Swal.fire(
-                    'Deleted!',
-                    'Language deleted successfully.',
-                    'success'
-                );
+                Swal.fire({
+                    title: 'Deleted!',
+                    text: 'Language deleted successfully.',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             } else {
-                Swal.fire(
-                    'Error!',
-                    resultData.error || 'Failed to delete',
-                    'error'
-                );
+                Swal.fire({
+                    title: 'Error!',
+                    text: resultData.error || 'Failed to delete',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             }
         } catch (error) {
-            Swal.fire(
-                'Error!',
-                error.message,
-                'error'
-            );
+            Swal.fire({
+                title: 'Error!',
+                text: error.message,
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 1500
+            });
         }
     };
 
@@ -106,6 +112,7 @@ function Page() {
                                         <tr>
                                             <th>Name</th>
                                             <th>Version</th>
+                                            <th>Type</th>
                                             <th>Created At</th>
                                             <th>Actions</th>
                                         </tr>
@@ -116,6 +123,11 @@ function Page() {
                                                 <tr key={language._id}>
                                                     <td>{language.name}</td>
                                                     <td>{language.version || '-'}</td>
+                                                    <td>
+                                                        <span className={`badge ${language.type === 'tool' ? 'bg-info' : 'bg-primary'}`}>
+                                                            {language.type || 'language'}
+                                                        </span>
+                                                    </td>
                                                     <td>
                                                         {new Date(language.createdAt).toLocaleDateString()}
                                                     </td>
@@ -140,7 +152,7 @@ function Page() {
                                             ))
                                         ) : (
                                             <tr>
-                                                <td colSpan="4" className="text-center">
+                                                <td colSpan="5" className="text-center">
                                                     No languages found
                                                 </td>
                                             </tr>

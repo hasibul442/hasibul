@@ -7,6 +7,7 @@ function EditLanguageModal({ isOpen, languageId, onClose, onSuccess }) {
     const [formData, setFormData] = useState({
         name: '',
         version: '',
+        type: 'language',
     });
     const [loading, setLoading] = useState(false);
     const [submitting, setSubmitting] = useState(false);
@@ -26,18 +27,22 @@ function EditLanguageModal({ isOpen, languageId, onClose, onSuccess }) {
             if (result.success) {
                 setFormData(result.data);
             } else {
-                Swal.fire(
-                    'Error!',
-                    result.error || 'Failed to fetch language',
-                    'error'
-                );
+                Swal.fire({
+                    title: 'Error!',
+                    text: result.error || 'Failed to fetch language',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             }
         } catch (error) {
-            Swal.fire(
-                'Error!',
-                error.message,
-                'error'
-            );
+            Swal.fire({
+                title: 'Error!',
+                text: error.message,
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 1500
+            });
         } finally {
             setLoading(false);
         }
@@ -67,26 +72,32 @@ function EditLanguageModal({ isOpen, languageId, onClose, onSuccess }) {
             const result = await response.json();
 
             if (result.success) {
-                Swal.fire(
-                    'Success!',
-                    'Language updated successfully.',
-                    'success'
-                );
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Language updated successfully.',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
                 onClose();
                 onSuccess();
             } else {
-                Swal.fire(
-                    'Error!',
-                    result.error || 'Failed to update',
-                    'error'
-                );
+                Swal.fire({
+                    title: 'Error!',
+                    text: result.error || 'Failed to update',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             }
         } catch (error) {
-            Swal.fire(
-                'Error!',
-                error.message,
-                'error'
-            );
+            Swal.fire({
+                title: 'Error!',
+                text: error.message,
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 1500
+            });
         } finally {
             setSubmitting(false);
         }
@@ -137,6 +148,18 @@ function EditLanguageModal({ isOpen, languageId, onClose, onSuccess }) {
                                         onChange={handleChange}
                                         placeholder="e.g., 1.0, 2.5"
                                     />
+                                </div>
+                                <div className="mb-3">
+                                    <label className="form-label">Type</label>
+                                    <select
+                                        className="form-control"
+                                        name="type"
+                                        value={formData.type || 'language'}
+                                        onChange={handleChange}
+                                    >
+                                        <option value="language">Language</option>
+                                        <option value="tool">Tool</option>
+                                    </select>
                                 </div>
                             </form>
                         )}
