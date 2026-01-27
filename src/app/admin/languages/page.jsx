@@ -107,31 +107,33 @@ function Page() {
                         <div className="card-body">
                             {error && <div className="alert alert-danger">{error}</div>}
                             <div className="table-responsive">
-                                <table className="table table-hover">
+                                <table className="table align-items-center mb-0">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Version</th>
-                                            <th>Type</th>
-                                            <th>Created At</th>
-                                            <th>Actions</th>
+                                            <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
+                                            <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Name</th>
+                                            <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Version</th>
+                                            <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Type</th>
+                                            <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Created At</th>
+                                            <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {languages.length > 0 ? (
-                                            languages.map((language) => (
+                                            languages.map((language, index) => (
                                                 <tr key={language._id}>
-                                                    <td>{language.name}</td>
-                                                    <td>{language.version || '-'}</td>
-                                                    <td>
-                                                        <span className={`badge ${language.type === 'tool' ? 'bg-info' : 'bg-primary'}`}>
-                                                            {language.type || 'language'}
+                                                    <td className="text-xs font-weight-bold mb-0">{index + 1}</td>
+                                                    <td className="text-xs font-weight-bold mb-0">{language.name}</td>
+                                                    <td className="text-xs font-weight-bold mb-0">{language.version || '-'}</td>
+                                                    <td className="text-xs font-weight-bold mb-0">
+                                                        <span className={`badge ${language.types === 'tool' ? 'bg-info' : 'bg-primary'}`}>
+                                                            {language.types || 'language'}
                                                         </span>
                                                     </td>
-                                                    <td>
+                                                    <td className="text-xs font-weight-bold mb-0">
                                                         {new Date(language.createdAt).toLocaleDateString()}
                                                     </td>
-                                                    <td>
+                                                    <td className="text-xs font-weight-bold mb-0">
                                                         <button
                                                             onClick={() => {
                                                                 setEditingLanguageId(language._id);
@@ -152,7 +154,7 @@ function Page() {
                                             ))
                                         ) : (
                                             <tr>
-                                                <td colSpan="5" className="text-center">
+                                                <td colSpan="6" className="text-center text-xs font-weight-bold mb-0">
                                                     No languages found
                                                 </td>
                                             </tr>

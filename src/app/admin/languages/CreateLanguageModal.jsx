@@ -8,7 +8,7 @@ function CreateLanguageModal({ isOpen, onClose, onSuccess }) {
     const [formData, setFormData] = useState({
         name: '',
         version: '',
-        type: 'language',
+        types: '',
     });
     const [submitting, setSubmitting] = useState(false);
 
@@ -43,7 +43,7 @@ function CreateLanguageModal({ isOpen, onClose, onSuccess }) {
                     showConfirmButton: false,
                     timer: 1500
                 });
-                setFormData({ name: '' });
+                setFormData({ name: '', version: '', types: '' });
                 onClose();
                 onSuccess();
             } else {
@@ -69,7 +69,7 @@ function CreateLanguageModal({ isOpen, onClose, onSuccess }) {
     };
 
     const handleClose = () => {
-        setFormData({ name: '', version: '', type: 'language' });
+        setFormData({ name: '', version: '', types: '' });
         onClose();
     };
 
@@ -120,8 +120,8 @@ function CreateLanguageModal({ isOpen, onClose, onSuccess }) {
                                 <label className="form-label">Type</label>
                                 <select
                                     className="form-control"
-                                    name="type"
-                                    value={formData.type}
+                                    name="types"
+                                    value={formData.types}
                                     onChange={handleChange}
                                 >
                                     <option value="language">Language</option>

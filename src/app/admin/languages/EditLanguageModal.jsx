@@ -7,7 +7,7 @@ function EditLanguageModal({ isOpen, languageId, onClose, onSuccess }) {
     const [formData, setFormData] = useState({
         name: '',
         version: '',
-        type: 'language',
+        types: '',
     });
     const [loading, setLoading] = useState(false);
     const [submitting, setSubmitting] = useState(false);
@@ -153,8 +153,8 @@ function EditLanguageModal({ isOpen, languageId, onClose, onSuccess }) {
                                     <label className="form-label">Type</label>
                                     <select
                                         className="form-control"
-                                        name="type"
-                                        value={formData.type || 'language'}
+                                        name="types"
+                                        value={formData.types || 'language'}
                                         onChange={handleChange}
                                     >
                                         <option value="language">Language</option>

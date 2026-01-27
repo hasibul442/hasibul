@@ -9,11 +9,9 @@ const LanguageSchema = new mongoose.Schema(
         },
         version: {
             type: String,
-            trim: true,
         },
         types: {
             type: String,
-            trim: true,
         },
     },
     {
