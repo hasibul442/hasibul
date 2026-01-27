@@ -1,43 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TopBar2 from "../NavBar/TopBar2";
 import styles from "./certifications.module.css";
 
 function Certifications() {
-  const certifications = [
-    {
-      id: 1,
-      title: "Version Control with Git",
-      issuer: "Atlassian",
-      date: "2023",
-      image: "/assets/img/certifications/cert1.jpg",
-      credentialUrl: "https://coursera.org/share/55b7fe0fd0cafcc82e1b1726338a0517",
-    },
-    {
-      id: 2,
-      title: "Professional Scrum Master I",
-      issuer: "Scrum.org",
-      date: "2022",
-      image: "/assets/img/certifications/cert2.jpg",
-      credentialUrl: "#",
-    },
-    {
-      id: 3,
-      title: "MongoDB Certified Developer",
-      issuer: "MongoDB University",
-      date: "2023",
-      image: "/assets/img/certifications/cert3.jpg",
-      credentialUrl: "#",
-    },
-    {
-      id: 4,
-      title: "Docker Certified Associate",
-      issuer: "Docker Inc",
-      date: "2022",
-      image: "/assets/img/certifications/cert4.jpg",
-      credentialUrl: "#",
-    },
-  ];
+  const [certifications, setCertifications] = useState([]);
+  const [loading, setLoading] = useState(true);
 
+  const fatchCertifications = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(
+        "https://adminhasibulhasan.vercel.app/api/v1/certification?status=true"
+      );
+      const data = await response.json();
+      setCertifications(data?.data);
+    } catch (error) {
+      console.error("Error fetching certifications:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fatchCertifications();
+  }, []);
   return (
     <>
       <TopBar2 />
@@ -56,13 +42,13 @@ function Certifications() {
           <div className={styles.certificationsGrid}>
             {certifications.map((cert, index) => (
               <div
-                key={cert.id}
+                key={cert._id}
                 className={`${styles.certCard} fade-in-up`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className={styles.certImageWrapper}>
                   <img
-                    src={cert.image}
+                    src={cert?.image || "assets/img/default-fallback-image.png"}
                     alt={cert.title}
                     className={styles.certImage}
                     onError={(e) => {
@@ -79,10 +65,10 @@ function Certifications() {
                     <i className="ri-building-line"></i> {cert.issuer}
                   </p>
                   <p className={styles.certDate}>
-                    <i className="ri-calendar-line"></i> {cert.date}
+                    <i className="ri-calendar-line"></i> {new Date(cert.issueDate).toISOString().split('T')[0]}
                   </p>
                   <a
-                    href={cert.credentialUrl}
+                    href={cert.credentialURL}
                     className={styles.certLink}
                     target="_blank"
                     rel="noopener noreferrer"

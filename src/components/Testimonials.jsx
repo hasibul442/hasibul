@@ -15,7 +15,7 @@ function Testimonials() {
     try {
       setLoading(true);
       const response = await fetch(
-        "https://adminhasibulhasan.vercel.app/api/v1/testimonial"
+        "https://adminhasibulhasan.vercel.app/api/v1/testimonial?status=true"
       );
       const data = await response.json();
       setTestimonials(data?.data);
