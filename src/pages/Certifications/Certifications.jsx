@@ -73,7 +73,7 @@ function Certifications() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    View Credential
+                    View
                     <i className="ri-external-link-line"></i>
                   </a>
                 </div>

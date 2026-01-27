@@ -106,7 +106,7 @@
 }
 
 .certTitle {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--text-primary, #C9D1D9);
   margin-bottom: 12px;
@@ -175,6 +175,6 @@
   }
 
   .certTitle {
-    font-size: 18px;
+    font-size: 14px;
   }
 }
