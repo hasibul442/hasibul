@@ -113,7 +113,7 @@ function Testimonials() {
                   {/* )} */}
 
                   {/* Star Rating */}
-                  <div className>
+                  <div className="">
                     {[...Array(item.rating)].map((_, index) => (
                       <i
                         key={index}
