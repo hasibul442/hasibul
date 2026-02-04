@@ -9,9 +9,11 @@ import Swal from 'sweetalert2';
 function Page() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [loading, setLoading] = useState(false);
 	const router = useRouter();
 
 	const handleLogin = async () => {
+		setLoading(true);
 		try {
 			const response = await axios.post('/api/v1/auth/login', {
 				email,
@@ -25,7 +27,9 @@ function Page() {
 				await Swal.fire({
 					icon: 'success',
 					title: 'Success',
-					text: 'Login successful!'
+					text: 'Login successful!',
+					showConfirmButton: false,
+					timer: 1500
 				});
 
 				router.push('/admin');
@@ -34,8 +38,12 @@ function Page() {
 			await Swal.fire({
 				icon: 'error',
 				title: 'Error',
-				text: error.response?.data?.error || 'Login failed'
+				text: error.response?.data?.error || 'Login failed',
+				showConfirmButton: false,
+				timer: 2000
 			});
+		} finally {
+			setLoading(false);
 		}
 	};
 
@@ -81,7 +89,21 @@ function Page() {
 													<label className="form-check-label" htmlFor="rememberMe">Remember me</label>
 												</div> */}
 												<div className="text-center">
-													<button type="button" className="btn bg-gradient-info w-100 mt-4 mb-0" onClick={handleLogin}>Sign in</button>
+													<button
+														type="button"
+														className="btn bg-gradient-info w-100 mt-4 mb-0"
+														onClick={handleLogin}
+														disabled={loading}
+													>
+														{loading ? (
+															<>
+																<span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+																Signing in...
+															</>
+														) : (
+															'Sign in'
+														)}
+													</button>
 												</div>
 											</form>
 										</div>
