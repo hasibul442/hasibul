@@ -1,10 +1,12 @@
 "use client";
 import React from "react";
-import { usePathname } from "next/navigation";
-import { FaAlignJustify } from "react-icons/fa6";
+import { usePathname, useRouter } from "next/navigation";
+import Cookies from "js-cookie";
+import Swal from "sweetalert2";
 
 function Navbar() {
   const pathname = usePathname() || "";
+  const router = useRouter();
   const segments = pathname.split("/").filter(Boolean);
   const crumbs = segments.map((segment, idx) => {
     const href = "/" + segments.slice(0, idx + 1).join("/");
@@ -14,6 +16,20 @@ function Navbar() {
     return { href, label };
   });
   const lastLabel = crumbs.length ? crumbs[crumbs.length - 1].label : "Dashboard";
+
+  const handleSignOut = async () => {
+    Cookies.remove('user');
+
+    await Swal.fire({
+      icon: 'success',
+      title: 'Signed Out',
+      text: 'You have been successfully signed out!',
+      showConfirmButton: false,
+      timer: 1500
+    });
+
+    router.push('/auth/login');
+  };
 
   return (
     <>
@@ -60,8 +76,12 @@ function Navbar() {
               <li className="nav-item d-flex align-items-center">
                 <a
                   href="#"
-                  onClick={(e) => e.preventDefault()}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleSignOut();
+                  }}
                   className="nav-link text-body font-weight-bold px-0"
+                  style={{ cursor: 'pointer' }}
                 >
                   <i className="fa fa-user me-sm-1"></i>
                   <span className="d-sm-inline d-none">Sign Out</span>
