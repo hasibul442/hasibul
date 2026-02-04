@@ -195,7 +195,7 @@ function Page() {
                           <td className="align-middle">
                             <Link
                               className="btn btn-sm bg-gradient-info"
-                              href={`/admin/projects/${project.id}`}
+                              href={`/admin/projects/${project._id}`}
                             >
                               <MdModeEdit size={15} />
                             </Link>
@@ -203,7 +203,7 @@ function Page() {
                               className="btn btn-sm bg-gradient-danger ms-2"
                               data-toggle="tooltip"
                               data-original-title="Delete"
-                              onClick={() => deleteProject(project.id)}
+                              onClick={() => deleteProject(project._id)}
                             >
                               <MdDelete size={15} />
                             </button>
