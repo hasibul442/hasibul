@@ -20,7 +20,7 @@ function Page() {
     e.preventDefault();
 
     try {
-      const response = await axios.post("/api/v1/exprience", {
+      const response = await axios.post("/api/v1/experience", {
         company,
         title,
         location,

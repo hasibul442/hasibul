@@ -13,7 +13,7 @@ function Page() {
   const [experiences, setExperiences] = useState([]);
 
   const getExperiences = async () => {
-    const data = await getListDataFromDatabase("experiences");
+    const data = await getListDataFromDatabase("experience");
     const sortedData = data.sort((a, b) => new Date(b.start_date) - new Date(a.start_date));
     setExperiences(sortedData);
   };
@@ -77,73 +77,17 @@ function Page() {
                 </div>
               </div>
             </div>
-            <div className="card-body px-0 pt-0 pb-2">
-              <div className="table-responsive p-0">
-                <table className="table align-items-center mb-0">
-                  <thead>
-                    <tr>
-                      <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        #
-                      </th>
-                      <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                        Organization Name and Position
-                      </th>
-                      <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Time Period
-                      </th>
-                      <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Total Duration
-                      </th>
-                      <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Status
-                      </th>
-                      <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Add Time
-                      </th>
-                      <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Update Time
-                      </th>
-                      <th className="text-secondary opacity-7"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {experiences.length > 0 ? (
-                      experiences.map((experience, index) => (
-                        <tr key={experience.id}>
-                          <td>
-                            <p className="text-xs font-weight-bold mb-0 text-center">
-                              {index + 1}
-                            </p>
-                          </td>
-                          <td>
-                            <p className="text-xs font-weight-bold mb-0">
-                              {experience.org_name}
-                            </p>
-                            <p className="text-xs text-secondary mb-0">
-                              {experience.position}
-                            </p>
-                          </td>
-                          <td className="align-middle text-center">
-                            <span className="text-secondary text-xs font-weight-bold">
-                              {new Date(
-                                experience.start_date
-                              ).toLocaleDateString()}{" "}
-                              -{" "}
-                              {experience.end_date
-                                ? new Date(experience.end_date).toLocaleDateString()
-                                : "Present"
-                              }
+            <div className="card-body px-3 pt-0 pb-2">
+              <div className="row">
+                {experiences.length > 0 ? (
+                  experiences.map((experience, index) => (
+                    <div key={experience._id} className="col-md-6 col-lg-4 mb-4">
+                      <div className="card h-100">
+                        <div className="card-body">
+                          <div className="d-flex justify-content-between align-items-start mb-3">
+                            <span className="badge badge-sm bg-gradient-dark">
+                              #{index + 1}
                             </span>
-                          </td>
-                          <td className="align-middle text-center">
-                            <span className="text-secondary text-xs font-weight-bold">
-                              {calculateDateDifference(
-                                experience?.start_date,
-                                experience?.end_date || new Date().toISOString()
-                              )}
-                            </span>
-                          </td>
-                          <td className="align-middle text-center text-sm">
                             {experience.status === 1 ? (
                               <span className="badge badge-sm bg-gradient-success">
                                 Active
@@ -153,22 +97,52 @@ function Page() {
                                 Inactive
                               </span>
                             )}
-                          </td>
-                          <td className="align-middle text-center">
-                            <span className="text-secondary text-xs font-weight-bold">
-                              {new Date(
-                                experience.createdAt
-                              ).toLocaleDateString()}
-                            </span>
-                          </td>
-                          <td className="align-middle text-center">
-                            <span className="text-secondary text-xs font-weight-bold">
-                              {new Date(
-                                experience.updatedAt
-                              ).toLocaleDateString()}
-                            </span>
-                          </td>
-                          <td className="align-middle">
+                          </div>
+
+                          <h6 className="mb-2 text-sm font-weight-bold">
+                            {experience.company}
+                          </h6>
+                          <p className="text-xs text-secondary mb-3">
+                            {experience.title}
+                          </p>
+
+                          <div className="mb-2">
+                            <p className="text-xs text-secondary mb-1">
+                              <strong>Period:</strong>
+                            </p>
+                            <p className="text-xs mb-0">
+                              {new Date(experience.startDate).toLocaleDateString()} - {experience.endDate ? new Date(experience.endDate).toLocaleDateString() : "Present"}
+                            </p>
+                          </div>
+
+                          <div className="mb-2">
+                            <p className="text-xs text-secondary mb-1">
+                              <strong>Duration:</strong>
+                            </p>
+                            <p className="text-xs mb-0">
+                              {calculateDateDifference(
+                                experience?.start_date,
+                                experience?.end_date || new Date().toISOString()
+                              )}
+                            </p>
+                          </div>
+
+                          <div className="mb-3">
+                            <p className="text-xs text-secondary mb-1">
+                              <strong>Created:</strong> {new Date(experience.createdAt).toLocaleDateString()}
+                            </p>
+                            <p className="text-xs text-secondary mb-0">
+                              <strong>Updated:</strong> {new Date(experience.updatedAt).toLocaleDateString()}
+                            </p>
+                          </div>
+
+                          <div className="d-flex gap-2 mt-3">
+                            <Link
+                              className="btn btn-sm bg-gradient-primary flex-fill"
+                              href={`/admin/experiences/${experience.id}`}
+                            >
+                              Details
+                            </Link>
                             <Link
                               className="btn btn-sm bg-gradient-info"
                               href={`/admin/experiences/${experience.id}`}
@@ -176,25 +150,21 @@ function Page() {
                               <MdModeEdit size={15} />
                             </Link>
                             <button
-                              className="btn btn-sm bg-gradient-danger ms-2"
-                              data-toggle="tooltip"
-                              data-original-title="Delete"
+                              className="btn btn-sm bg-gradient-danger"
                               onClick={() => deleteExperience(experience.id)}
                             >
                               <MdDelete size={15} />
                             </button>
-                          </td>
-                        </tr>
-                      ))
-                    ) : (
-                      <tr>
-                        <td colSpan="8" className="text-center py-4">
-                          <p className="text-secondary mb-0">No data available</p>
-                        </td>
-                      </tr>
-                    )}
-                  </tbody>
-                </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="col-12 text-center py-5">
+                    <p className="text-secondary mb-0">No data available</p>
+                  </div>
+                )}
               </div>
             </div>
           </div>
