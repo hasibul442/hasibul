@@ -1,6 +1,7 @@
 import connectDB from '@/lib/mongodb';
 import Testimonial from '@/models/Testimonial';
 import { NextResponse } from 'next/server';
+import { uploadToCloudinary, deleteFromCloudinary } from '@/lib/cloudinary';
 
 // GET all testimonials or single testimonial by ID
 export async function GET(request) {
@@ -43,7 +44,18 @@ export async function POST(request) {
         await connectDB();
 
         const body = await request.json();
-        const testimonial = await Testimonial.create(body);
+        const testimonialData = { ...body };
+
+        // Upload base64 avatar to Cloudinary if provided
+        if (body.avatar && body.avatar.startsWith('data:image')) {
+            // Convert base64 to buffer
+            const base64Data = body.avatar.replace(/^data:image\/\w+;base64,/, '');
+            const buffer = Buffer.from(base64Data, 'base64');
+            const avatarUrl = await uploadToCloudinary(buffer, 'portfolio/testimonials');
+            testimonialData.avatar = avatarUrl;
+        }
+
+        const testimonial = await Testimonial.create(testimonialData);
 
         return NextResponse.json(
             { success: true, data: testimonial },
@@ -73,17 +85,36 @@ export async function PUT(request) {
         }
 
         const body = await request.json();
-        const testimonial = await Testimonial.findByIdAndUpdate(id, body, {
-            new: true,
-            runValidators: true,
-        });
+        const testimonialData = { ...body };
 
-        if (!testimonial) {
+        // Get existing testimonial to check for old avatar
+        const existingTestimonial = await Testimonial.findById(id);
+        if (!existingTestimonial) {
             return NextResponse.json(
                 { success: false, error: 'Testimonial not found' },
                 { status: 404 }
             );
         }
+
+        // Upload new base64 avatar to Cloudinary if provided
+        if (body.avatar && body.avatar.startsWith('data:image')) {
+            // Convert base64 to buffer
+            const base64Data = body.avatar.replace(/^data:image\/\w+;base64,/, '');
+            const buffer = Buffer.from(base64Data, 'base64');
+            const avatarUrl = await uploadToCloudinary(buffer, 'portfolio/testimonials');
+            
+            // Delete old avatar from Cloudinary
+            if (existingTestimonial.avatar) {
+                await deleteFromCloudinary(existingTestimonial.avatar);
+            }
+            
+            testimonialData.avatar = avatarUrl;
+        }
+
+        const testimonial = await Testimonial.findByIdAndUpdate(id, testimonialData, {
+            new: true,
+            runValidators: true,
+        });
 
         return NextResponse.json({ success: true, data: testimonial });
     } catch (error) {
@@ -109,7 +140,7 @@ export async function DELETE(request) {
             );
         }
 
-        const testimonial = await Testimonial.findByIdAndDelete(id);
+        const testimonial = await Testimonial.findById(id);
 
         if (!testimonial) {
             return NextResponse.json(
@@ -117,6 +148,13 @@ export async function DELETE(request) {
                 { status: 404 }
             );
         }
+
+        // Delete avatar from Cloudinary
+        if (testimonial.avatar) {
+            await deleteFromCloudinary(testimonial.avatar);
+        }
+
+        await Testimonial.findByIdAndDelete(id);
 
         return NextResponse.json({ success: true, data: {} });
     } catch (error) {
