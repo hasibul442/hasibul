@@ -5,7 +5,9 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import { fileToBase64 } from "@/Helper/Helper";
-import ReactQuill from "react-quill-new";
+import dynamic from "next/dynamic";
+
+const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 
 function Page() {
     const [title, setTitle] = useState("");
