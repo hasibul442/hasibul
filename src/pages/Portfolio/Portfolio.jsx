@@ -1,84 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TopBar2 from "../NavBar/TopBar2";
-import { FaGithub, FaExternalLinkAlt, FaLaravel, FaReact, FaNodeJs, FaDatabase } from 'react-icons/fa';
-import { SiNextdotjs, SiMongodb, SiMysql, SiFirebase } from 'react-icons/si';
+import { FaGithub, FaExternalLinkAlt, FaInfoCircle } from 'react-icons/fa';
+import ProjectDetailsModal from './ProjectDetailsModal';
+import styles from './portfolio.module.css';
 
 function Portfolio() {
-  const [filter, setFilter] = useState('all');
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const projects = [
-    {
-      id: 1,
-      title: "Flight Booking System",
-      category: "fullstack",
-      description: "A comprehensive flight booking platform with NDC API integration",
-      tech: ["Laravel", "React", "MySQL"],
-      image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=500",
-      github: "#",
-      live: "#"
-    },
-    {
-      id: 2,
-      title: "E-Commerce Platform",
-      category: "fullstack",
-      description: "Full-featured e-commerce solution with payment gateway integration",
-      tech: ["Next.js", "Node.js", "MongoDB"],
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500",
-      github: "#",
-      live: "#"
-    },
-    {
-      id: 3,
-      title: "Document Management System",
-      category: "backend",
-      description: "Enterprise document management for Bangladesh Bridge Authority",
-      tech: ["Laravel", "MySQL", "Vue.js"],
-      image: "https://images.unsplash.com/photo-1544396821-4dd40b938ad3?w=500",
-      github: "#",
-      live: "#"
-    },
-    {
-      id: 4,
-      title: "OTT Platform Backend",
-      category: "backend",
-      description: "Scalable backend for streaming platform with subscription management",
-      tech: ["Laravel", "Redis", "MySQL"],
-      image: "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=500",
-      github: "#",
-      live: "#"
-    },
-    {
-      id: 5,
-      title: "Ride Sharing API",
-      category: "api",
-      description: "Real-time ride matching and tracking API system",
-      tech: ["Node.js", "Socket.io", "MongoDB"],
-      image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=500",
-      github: "#",
-      live: "#"
-    },
-    {
-      id: 6,
-      title: "Laboratory Management",
-      category: "fullstack",
-      description: "Complete lab management solution with inventory tracking",
-      tech: ["Laravel", "React", "MySQL"],
-      image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=500",
-      github: "#",
-      live: "#"
+  const fatchProjects = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(
+        "https://adminhasibulhasan.vercel.app/api/v1/project?status=true"
+      );
+      const data = await response.json();
+      setProjects(data?.data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Failed to fetch projects:", error);
+      setLoading(false);
     }
-  ];
+  }
 
-  const filteredProjects = filter === 'all'
-    ? projects
-    : projects.filter(p => p.category === filter);
+  const openModal = (project) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
 
-  const filters = [
-    { key: 'all', label: 'All Projects' },
-    { key: 'fullstack', label: 'Full Stack' },
-    { key: 'backend', label: 'Backend' },
-    { key: 'api', label: 'API' }
-  ];
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedProject(null);
+  };
+
+  useEffect(() => {
+    fatchProjects();
+  }, []);
 
   return (
     <>
@@ -96,97 +55,111 @@ function Portfolio() {
               A collection of projects showcasing my skills and experience
             </p>
           </div>
-
-          {/* Filter Buttons */}
-          <div className="d-flex justify-content-center flex-wrap gap-2 mb-5 fade-in-up" style={{ animationDelay: '0.2s' }}>
-            {filters.map(f => (
-              <button
-                key={f.key}
-                onClick={() => setFilter(f.key)}
-                className={filter === f.key ? 'btn-primary-dev' : 'btn-outline-dev'}
-                style={{ padding: '10px 20px', fontSize: '14px' }}
-              >
-                {f.label}
-              </button>
-            ))}
-          </div>
-
           {/* Projects Grid */}
           <div className="row g-4">
-            {filteredProjects.map((project, index) => (
+            {projects.map((project, index) => (
               <div
-                key={project.id}
+                key={project?._id}
                 className="col-lg-4 col-md-6 fade-in-up"
                 style={{ animationDelay: `${0.1 * index}s` }}
               >
-                <div className="dev-card h-100" style={{ overflow: 'hidden' }}>
-                  {/* Project Image */}
-                  <div style={{
-                    position: 'relative',
-                    height: '200px',
-                    overflow: 'hidden'
-                  }}>
+                <div className={`${styles.projectCard} h-100`}>
+                  {/* Project Image with Overlay */}
+                  <div className={styles.projectImageContainer} onClick={() => openModal(project)}>
                     <img
-                      src={project.image}
-                      alt={project.title}
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        filter: 'brightness(0.7)'
-                      }}
+                      className={styles.projectImage}
+                      src={project?.image}
+                      alt={project?.title}
                     />
-                    <div style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      bottom: 0,
-                      background: 'linear-gradient(to top, var(--bg-card) 0%, transparent 100%)'
-                    }}></div>
+                    <div className={styles.gradientOverlay}></div>
+                    <div className={styles.darkOverlay}></div>
+                    
+                    {/* Category Badge */}
+                    {project?.category && (
+                      <div className={styles.categoryBadge}>
+                        {project.category}
+                      </div>
+                    )}
+
+                    {/* Info Icon */}
+                    <div className={styles.infoIcon}>
+                      <FaInfoCircle />
+                    </div>
                   </div>
 
                   {/* Project Content */}
-                  <div className="p-4">
-                    <h4 style={{
-                      color: 'var(--text-primary)',
-                      fontSize: '18px',
-                      fontWeight: '600',
-                      marginBottom: '8px'
-                    }}>
-                      {project.title}
+                  <div className={styles.projectContent}>
+                    {/* Title */}
+                    <h4 className={styles.projectTitle}>
+                      {project?.title}
                     </h4>
-                    <p style={{
-                      color: 'var(--text-secondary)',
-                      fontSize: '14px',
-                      marginBottom: '16px'
-                    }}>
-                      {project.description}
+
+                    {/* Description */}
+                    <p className={styles.projectDescription}>
+                      {project?.description}
                     </p>
 
                     {/* Tech Stack */}
-                    <div className="d-flex flex-wrap gap-2 mb-3">
-                      {project.tech.map((tech, i) => (
-                        <span key={i} className="skill-tag" style={{ padding: '4px 12px', fontSize: '12px' }}>
+                    <div className={styles.techStack}>
+                      {project?.technologies?.slice(0, 3).map((tech, i) => (
+                        <span key={i} className={styles.techTag}>
                           {tech}
                         </span>
                       ))}
+                      {project?.technologies?.length > 3 && (
+                        <span className={styles.techTagMore}>
+                          +{project.technologies.length - 3}
+                        </span>
+                      )}
                     </div>
 
-                    {/* Links */}
-                    <div className="d-flex gap-3">
-                      <a href={project.github} className="social-icon" style={{ width: '40px', height: '40px', fontSize: '16px' }}>
-                        <FaGithub />
-                      </a>
-                      <a href={project.live} className="social-icon" style={{ width: '40px', height: '40px', fontSize: '16px' }}>
-                        <FaExternalLinkAlt />
-                      </a>
+                    {/* Action Buttons */}
+                    <div className={styles.actionButtons}>
+                      <button
+                        onClick={() => openModal(project)}
+                        className={styles.detailsButton}
+                      >
+                        <FaInfoCircle /> Details
+                      </button>
+                      
+                      {project?.githubUrl && (
+                        <a
+                          href={project?.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          title="View Source Code"
+                          className={styles.iconButton}
+                        >
+                          <FaGithub />
+                        </a>
+                      )}
+                      
+                      {project?.liveUrl && (
+                        <a
+                          href={project?.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          title="Visit Live Project"
+                          className={styles.liveButton}
+                        >
+                          <FaExternalLinkAlt />
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>
               </div>
             ))}
           </div>
+
+          {/* Project Details Modal */}
+          <ProjectDetailsModal 
+            show={isModalOpen}
+            onHide={closeModal}
+            project={selectedProject}
+          />
         </div>
       </div>
     </>
