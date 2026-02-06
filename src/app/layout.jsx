@@ -1,6 +1,7 @@
 
 import "./globals.css";
 import Script from 'next/script';
+import 'react-quill-new/dist/quill.snow.css';
 
 export const metadata = {
   title: "Admin Dashboard",

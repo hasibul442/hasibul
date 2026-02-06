@@ -5,6 +5,7 @@ import { useRouter, useParams } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import { fileToBase64 } from "@/Helper/Helper";
+import ReactQuill from "react-quill-new";
 
 function Page() {
     const [title, setTitle] = useState("");
@@ -152,13 +153,19 @@ function Page() {
                                 <div className="col-md-12">
                                     <div className="mb-3">
                                         <label className="form-label">Long Description</label>
-                                        <textarea
+                                        {/* <textarea
                                             className="form-control"
                                             placeholder="Write detailed description here..."
                                             aria-label="Long Description"
                                             rows="10"
                                             value={longDescription}
                                             onChange={(e) => setLongDescription(e.target.value)}
+                                        /> */}
+                                        <ReactQuill
+                                            theme="snow"
+                                            value={longDescription}
+                                            onChange={setLongDescription}
+                                            placeholder="Write detailed description here..."
                                         />
                                     </div>
                                 </div>
