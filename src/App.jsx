@@ -14,27 +14,37 @@ import Blog from "./pages/Blog/Blog";
 import Experience from "./pages/Experience/Experience";
 import Certifications from "./pages/Certifications/Certifications";
 import TestimonialForm from "./pages/TestimonialForm/TestimonialForm";
+import useVisitorTracking from "./hooks/useVisitorTracking";
+
+function AppContent() {
+  // Track visitor on route changes
+  useVisitorTracking();
+
+  return (
+    <>
+      {/* <Header /> */}
+      <Routes>
+        <Route path="*" element={<Home />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/resume" element={<Resume />} />
+        {/* <Route path="/services" element={<Service />} /> */}
+        <Route path="/experience" element={<Experience />} />
+        <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/certifications" element={<Certifications />} />
+        <Route path="/testimonial" element={<TestimonialForm />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/blogs" element={<Blog />} />
+      </Routes>
+    </>
+  );
+}
 
 function App() {
   return (
-    <>
-      <Router>
-        {/* <Header /> */}
-        <Routes>
-          <Route path="*" element={<Home />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/resume" element={<Resume />} />
-          {/* <Route path="/services" element={<Service />} /> */}
-          <Route path="/experience" element={<Experience />} />
-          <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/certifications" element={<Certifications />} />
-          <Route path="/testimonial" element={<TestimonialForm />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/blogs" element={<Blog />} />
-        </Routes>
-      </Router>
-    </>
+    <Router>
+      <AppContent />
+    </Router>
   );
 }
 
