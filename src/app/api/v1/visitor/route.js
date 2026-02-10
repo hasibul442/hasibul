@@ -69,11 +69,47 @@ export async function POST(request) {
     }
 }
 
-// GET - Get visitor statistics
+// GET - Get visitor statistics and list
 export async function GET(request) {
     try {
         await connectDB();
 
+        const { searchParams } = new URL(request.url);
+        const type = searchParams.get('type') || 'stats'; // 'stats' or 'list'
+        const page = parseInt(searchParams.get('page')) || 1;
+        const limit = parseInt(searchParams.get('limit')) || 10;
+        const sortBy = searchParams.get('sortBy') || 'lastVisit';
+        const order = searchParams.get('order') || 'desc';
+
+        // If requesting visitor list
+        if (type === 'list') {
+            const skip = (page - 1) * limit;
+            const sortOrder = order === 'asc' ? 1 : -1;
+
+            const visitors = await Visitor.find()
+                .sort({ [sortBy]: sortOrder })
+                .skip(skip)
+                .limit(limit)
+                .select('-__v')
+                .lean();
+
+            const total = await Visitor.countDocuments();
+
+            return NextResponse.json({
+                success: true,
+                data: {
+                    visitors,
+                    pagination: {
+                        page,
+                        limit,
+                        total,
+                        totalPages: Math.ceil(total / limit)
+                    }
+                }
+            }, { status: 200 });
+        }
+
+        // Default: return statistics
         // Get total unique visitors
         const totalVisitors = await Visitor.countDocuments();
 
@@ -112,6 +148,13 @@ export async function GET(request) {
         // Get average visits per visitor
         const avgVisits = totalVisitors > 0 ? (totalVisits / totalVisitors).toFixed(2) : 0;
 
+        // Get recent visitors for preview
+        const recentVisitors = await Visitor.find()
+            .sort({ lastVisit: -1 })
+            .limit(5)
+            .select('visitorId visitCount firstVisit lastVisit ipAddress')
+            .lean();
+
         return NextResponse.json({
             success: true,
             data: {
@@ -120,7 +163,8 @@ export async function GET(request) {
                 visitorsToday: visitorsToday,
                 visitorsThisWeek: visitorsThisWeek,
                 visitorsThisMonth: visitorsThisMonth,
-                averageVisitsPerVisitor: parseFloat(avgVisits)
+                averageVisitsPerVisitor: parseFloat(avgVisits),
+                recentVisitors: recentVisitors
             }
         }, { status: 200 });
 
