@@ -21,6 +21,10 @@ export async function POST(request) {
         const forwarded = request.headers.get('x-forwarded-for');
         const ipAddress = forwarded ? forwarded.split(',')[0] : request.headers.get('x-real-ip') || 'unknown';
         const userAgent = request.headers.get('user-agent') || 'unknown';
+        const fullVisitorData = {
+            headers: Object.fromEntries(request.headers.entries()),
+            body
+        };
 
         // Find existing visitor or create new one
         let visitor = await Visitor.findOne({ visitorId });
@@ -31,6 +35,7 @@ export async function POST(request) {
             visitor.lastVisit = new Date();
             visitor.ipAddress = ipAddress;
             visitor.userAgent = userAgent;
+            visitor.fullVisitorData = fullVisitorData;
             visitor.visits.push({
                 timestamp: new Date(),
                 page: page || '/',
@@ -48,7 +53,8 @@ export async function POST(request) {
                     timestamp: new Date(),
                     page: page || '/',
                     referrer: referrer || 'direct'
-                }]
+                }],
+                fullVisitorData: fullVisitorData
             });
         }
 
