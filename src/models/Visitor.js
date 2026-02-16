@@ -37,7 +37,10 @@ const VisitorSchema = new mongoose.Schema(
             referrer: {
                 type: String,
             }
-        }]
+        }],
+        fullVisitorData: {
+            type: mongoose.Schema.Types.Mixed,
+        },
     },
     {
         timestamps: true,
